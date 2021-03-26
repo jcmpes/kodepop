@@ -1,10 +1,19 @@
 import { getAds } from '../../api/adverts'
 
-const allAds = getAds;
-console.log(allAds)
+const items = getAds()
+
 const AdsPage = () => {
     return(
-        <div className="adsPage">{allAds}</div>
+        <div className="adsPage">
+            <ul>
+                {items.map(ad => (
+                    <li key={ad.id}>
+                        <img src={process.env.REACT_APP_API_BASE_URL, ad.photo} />
+                        {ad.name}
+                    </li>
+                ))}
+            </ul>
+        </div>
     )
 }
 
