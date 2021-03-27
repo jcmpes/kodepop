@@ -1,6 +1,7 @@
 import React from 'react';
 import { getAds } from '../../api/adverts';
-import './AdsPage.css'
+
+import adsPageStyle from './AdsPage.module.css'
 
 let allAds = []
 getAds().then((response) => allAds = response)
@@ -15,7 +16,7 @@ const AdsPage = () => {
 
     const items = ads.map(item => (
         <li key={item.id} onClick={e => alert("Contruyendo enlace")}>
-            <div className='ad-wrapper'>
+            <div className={adsPageStyle['ad-wrapper']}>
                 <img src={item.photo} />
                 <h2>{item.name}</h2>
             </div>
