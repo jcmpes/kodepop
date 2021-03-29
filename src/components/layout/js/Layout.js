@@ -4,10 +4,10 @@ import Footer from './Footer'
 import '../css/Layout.css'
 
 
-function Layout({ title, children }) {
+function Layout({ title, children, ...props }) {
     return (
         <div className="layout">
-            <Header className="header" />
+            <Header className="header" {...props} />
                 <main className="main">
                     <h1 className="title">{title}</h1>
                     <section className="content">{children}</section>

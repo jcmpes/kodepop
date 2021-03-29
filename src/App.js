@@ -9,6 +9,7 @@ function App() {
   const [user, setUser] = React.useState(null)
 
   const handleLogin = userId => setUser(userId)
+  const handleLogout = () => setUser(null)
   
   return (
     <div className="App">
@@ -16,7 +17,7 @@ function App() {
       
       { user == null ? 
         <LoginPage onLogin={handleLogin} /> :
-        <Layout title={title}>
+        <Layout title={title} onLogout={handleLogout}>
           <AdsPage setTitle={setTitle}/>
         </Layout>
       }
