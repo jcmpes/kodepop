@@ -16,9 +16,12 @@ function Emojis() {
     const [emoji, setEmoji] = React.useState(chooseUnrepeatedRandom(emojis.length, emojis[0]))
 
     React.useEffect(() => {
-        setInterval(() => {            
+        const interval = setInterval(() => {            
             setEmoji(chooseUnrepeatedRandom(emojis.length, emoji))
         }, 2100)
+        return () => {
+            clearInterval(interval);
+        }
     }, [])
 
     return (

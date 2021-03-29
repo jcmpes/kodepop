@@ -1,0 +1,19 @@
+.login-container {
+    background-color: aliceblue;
+}
+
+.login-page {
+    height: 100%;
+}
+
+.login-pane {
+    background-color: aliceblue;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+

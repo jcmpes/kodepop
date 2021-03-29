@@ -19,7 +19,7 @@ const AdsPage = ({ setTitle }) => {
     }, [])
 
     const items = ads.map(item => (
-        <article key={item.id}>
+        <article key={item.id} style={{ padding: '.75rem' }}>
             <Card className={adsPageStyle['ad-card']}>
                 <Card.Img 
                     variant="top"
@@ -33,7 +33,6 @@ const AdsPage = ({ setTitle }) => {
                     <div 
                         className="tags" 
                         style={{ 
-                            display: 'flex',
                             fontSize: '.8rem',
                             marginRight: '5px',
                             backgroundColor: item.sale === true ? '#02c853' : '#ffeb3c',

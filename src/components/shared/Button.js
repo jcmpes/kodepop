@@ -15,7 +15,7 @@ const Button = styled.button`
     text-decoration: none;
     transition: background-color 0.25s;
     cursor: pointer;
-    background-color: ${props => props.variant === 'primary' ? 'white' : secondaryColor };
+    background-color: ${props => props.variant === 'primary' ? 'white' : accentColor };
     font-weight: bold;
 
     &:hover {
@@ -23,6 +23,10 @@ const Button = styled.button`
             props.variant === 'primary' ?
             accentColor : 'rgba(240, 219, 79, .7)'
         }
+    }
+
+    &:focus {
+        outline: none;
     }
 `;
 
