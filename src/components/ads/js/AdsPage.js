@@ -7,10 +7,13 @@ let allAds = []
 getAds().then((response) => allAds = response)
 
 // Component to load ads
-const AdsPage = () => {
+const AdsPage = ({ setTitle }) => {
     const [ads, setAds] = React.useState(allAds)
 
     React.useEffect(() => {
+        // Set the page title
+        setTitle('AdsPage')
+        // Load ads
         getAds().then(setAds)
     }, [])
 
