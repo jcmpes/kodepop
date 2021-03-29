@@ -4,12 +4,17 @@ import { login } from '../../../api/auth'
 
 import '../css/LoginPage.css'
 
-function LoginPage() {
+function LoginPage({ onLogin }) {
+
+    const handleSubmit = async credentials => {
+        await login(credentials)
+        onLogin(credentials.email)
+    }
 
     return (
         <div className="login-page">
             <Container className='login-container'>
-                <LoginForm onSubmit={login}></LoginForm>
+                <LoginForm onSubmit={handleSubmit}></LoginForm>
             </Container>
         </div>
     )

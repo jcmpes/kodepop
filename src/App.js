@@ -6,14 +6,20 @@ import { LoginPage } from './components/auth'
 
 function App() {
   const [title, setTitle] = React.useState('Anuncios')
+  const [user, setUser] = React.useState(null)
 
+  const handleLogin = userId => setUser(userId)
+  
   return (
     <div className="App">
       {/* <Button variant="primary" children="Log in"/> */}
-      {/* <Layout title={title}>
-        <AdsPage setTitle={setTitle}/>
-      </Layout> */}
-      <LoginPage />
+      
+      { user == null ? 
+        <LoginPage onLogin={handleLogin} /> :
+        <Layout title={title}>
+          <AdsPage setTitle={setTitle}/>
+        </Layout>
+      }
     </div>
   );
 };
