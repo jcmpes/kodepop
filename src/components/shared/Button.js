@@ -20,7 +20,7 @@ const Button = styled.button`
 
     &:hover {
         background-color: ${props =>
-            props.variant == 'primary' ?
+            props.variant === 'primary' ?
             accentColor : 'rgba(240, 219, 79, .7)'
         }
     }

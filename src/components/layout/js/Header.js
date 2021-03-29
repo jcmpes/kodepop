@@ -1,8 +1,8 @@
 import React from 'react';
-import { Button, Emojis } from '../shared'
+import { Button, Emojis } from '../../shared'
 
 
-import './Header.css'
+import '../css/Header.css'
 
 function Header() {
     return (
