@@ -1,12 +1,14 @@
 import './App.css';
 import AdsPage from './components/ads/AdsPage'
-import Button from './components/shared/Button'
+import Layout from './components'
 
 function App() {
   return (
     <div className="App">
-      <Button variant="primary" children="Log in"/>
-      <AdsPage />
+      {/* <Button variant="primary" children="Log in"/> */}
+      <Layout>
+        <AdsPage />
+      </Layout>
     </div>
   );
 };
