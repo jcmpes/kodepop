@@ -6,7 +6,7 @@ import '../css/Layout.css'
 
 function Layout({ title, children }) {
     return (
-        <div className="Layout">
+        <div className="layout">
             <Header className="header" />
                 <main className="main">
                     <h1 className="title">{title}</h1>

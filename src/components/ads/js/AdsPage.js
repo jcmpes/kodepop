@@ -1,5 +1,6 @@
 import React from 'react';
 import { getAds } from '../../../api/adverts';
+import Card from 'react-bootstrap/Card'
 
 import adsPageStyle from '../css/AdsPage.module.css'
 
@@ -18,23 +19,51 @@ const AdsPage = ({ setTitle }) => {
     }, [])
 
     const items = ads.map(item => (
-        <li key={item.id} onClick={e => alert("Contruyendo enlace")}>
-            <div className={adsPageStyle['ad-wrapper']}>
-                <img 
+        <article key={item.id}>
+            <Card className={adsPageStyle['ad-card']}>
+                <Card.Img 
+                    variant="top"
+                    style={{ borderRadius: '1.1rem' }}
                     src={item.photo} 
                     alt={item.name + ( item.sale ? ' en venta' : ' se busca' )}
                 />
-                <h2>{item.price} €</h2>
-                <h2>{item.name}</h2>
-            </div>
-        </li>
+                <Card.Body style={{ padding: '1rem 1rem' }}>
+                    <div style={{ fontSize: "2rem" }}>{item.price}€</div>
+                    <Card.Title style={{ fontSize: "1.5rem", marginBottom: "1rem" }}>{item.name}</Card.Title>
+                    <div 
+                        className="tags" 
+                        style={{ 
+                            display: 'flex',
+                            fontSize: '.8rem',
+                            marginRight: '5px',
+                            backgroundColor: item.sale === true ? '#02c853' : '#ffeb3c',
+                            display: 'inline-flex',
+                            padding: '.2rem .4rem',
+                            borderRadius: '5px',
+                        }}
+                    >
+                        { item.sale ? 'Venta' : 'Compra'}
+                    </div>
+                </Card.Body>
+            </Card>
+        </article>
+        // <li key={item.id} onClick={e => alert("Contruyendo enlace")}>
+        //     <div className={adsPageStyle['ad-wrapper']}>
+        //         <img 
+        //             src={item.photo} 
+        //             alt={item.name + ( item.sale ? ' en venta' : ' se busca' )}
+        //         />
+        //         <h2>{item.price} €</h2>
+        //         <h2>{item.name}</h2>
+        //     </div>
+        // </li>
     ));
 
     return(
-        <div className="adsPage">
-            <ul>
+        <div className="ads-page">
+            <div className="ads-wrapper"style={{ display: 'flex', flexWrap: 'wrap' }}>
                 {items}
-            </ul>
+            </div>
         </div>
     )
 }
