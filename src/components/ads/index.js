@@ -1,1 +1,1 @@
-export { default } from './AdsPage'
+export { default as AdsPage } from './js'

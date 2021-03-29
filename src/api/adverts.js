@@ -1,4 +1,3 @@
-import client from './client';
 
 export const getAds = async() => ([
     {
