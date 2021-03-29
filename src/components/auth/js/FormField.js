@@ -1,6 +1,6 @@
 import '../css/FormField.css'
 
-function FormField({label, handleInput, ...props}) {
+function FormField({label, ...props}) {
     return (
         <div>
             <input 
