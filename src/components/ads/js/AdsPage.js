@@ -4,12 +4,12 @@ import Card from 'react-bootstrap/Card'
 
 import adsPageStyle from '../css/AdsPage.module.css'
 
-let allAds = []
-getAds().then((response) => allAds = response)
+// let allAds = []
+// getAds().then((response) => allAds = response)
 
 // Component to load ads
 const AdsPage = ({ setTitle }) => {
-    const [ads, setAds] = React.useState(allAds)
+    const [ads, setAds] = React.useState([])
 
     React.useEffect(() => {
         // Set the page title

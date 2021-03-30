@@ -23,7 +23,7 @@ function LoginPage({ onLogin }) {
 
     return (
         <div className="login-page">
-            {error && <div className="login-error" style={{ backgroundColor: 'coral' }}>{error.message}</div>}
+            {error && <div className="login-error" style={{ backgroundColor: 'coral', padding: '1rem' }}>{error.message}</div>}
             <Container className='login-container'>
                 <LoginForm onSubmit={handleSubmit} loading={loading}></LoginForm>
             </Container>
