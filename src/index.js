@@ -1,12 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { configureClient } from './api/client';
+
+import './index.css';
+
+const accessToken = localStorage.getItem('auth');
+if(accessToken) {
+  configureClient({ accessToken })
+}
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App existingToken={!!accessToken}/>
   </React.StrictMode>,
   document.getElementById('root')
 );

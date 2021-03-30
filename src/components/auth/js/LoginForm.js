@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Button from '../../shared/Button';
 import FormField from './FormField';
 import { Spinner } from '../../shared';
@@ -63,6 +64,11 @@ function LoginForm({ onSubmit, loading }) {
             </div>
         </React.Fragment>
     )
+}
+
+LoginForm.propTypes = {
+    onSubmit: PropTypes.func.isRequired,
+    loading: PropTypes.bool.isRequired
 }
 
 export default LoginForm;

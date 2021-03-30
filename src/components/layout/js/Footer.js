@@ -1,6 +1,6 @@
-function Footer() {
+function Footer({ className }) {
     return (
-        <footer>Juan Carlos Marcos</footer>
+        <footer className={className}>Juan Carlos Marcos</footer>
     )
 }
 

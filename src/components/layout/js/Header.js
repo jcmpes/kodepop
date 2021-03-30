@@ -1,4 +1,5 @@
 import React from 'react';
+import T from 'prop-types';
 import { Button, Emojis } from '../../shared'
 
 
@@ -18,6 +19,10 @@ function Header({ onLogout }) {
             </nav>
         </header>
     )
+}
+
+Header.propTypes = {
+    onLogout: T.func.isRequired
 }
 
 export default Header

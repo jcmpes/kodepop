@@ -12,13 +12,6 @@ li {
   list-style: none;
 }
 
-h2 {
-  flex: 1;
-  text-align: left;
-  margin-left: 1rem;
-}
-
 img {
-  flex: 0 0 auto;
-  max-width: 400px;
+  max-width: 300px;
 }

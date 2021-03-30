@@ -1,17 +1,26 @@
-import React from 'react'
-import AdsPage from './components/ads/js/AdsPage'
-import Layout from './components/layout'
-import { LoginPage } from './components/auth'
+import React from 'react';
+import { clearSession } from './api/client';
+import AdsPage from './components/ads/js/AdsPage';
+import Layout from './components/layout';
+import { LoginPage } from './components/auth';
 
 import './App.css';
 
-function App() {
+function App({ existingToken }) {
   const [title, setTitle] = React.useState('Anuncios')
   const [user, setUser] = React.useState(null)
 
   const handleLogin = userId => setUser(userId)
-  const handleLogout = () => setUser(null)
-  
+  const handleLogout = () => {
+    setUser(null);
+    clearSession();
+  }
+  React.useEffect(() => {
+    if (existingToken) {
+      setUser(localStorage.getItem('user'))
+    }
+  })
+
   return (
     <div className="App">      
       { user == null ? 

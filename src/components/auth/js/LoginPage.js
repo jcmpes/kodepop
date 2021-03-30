@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import LoginForm from './LoginForm';
 import Container from './Container';
 import { login } from '../../../api/auth';
@@ -17,7 +18,7 @@ function LoginPage({ onLogin }) {
             setLoading(false)
         } catch (error) {
             setLoading(false)
-            setError(error)
+            // setError(error)
         }
     }
 
@@ -29,6 +30,10 @@ function LoginPage({ onLogin }) {
             </Container>
         </div>
     )
+}
+
+LoginPage.propTypes = {
+    onLogin: PropTypes.func.isRequired
 }
 
 export default LoginPage;

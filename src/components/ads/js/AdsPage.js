@@ -1,4 +1,5 @@
 import React from 'react';
+import T from 'prop-types';
 import { getAds } from '../../../api/adverts';
 import Card from 'react-bootstrap/Card'
 
@@ -65,6 +66,10 @@ const AdsPage = ({ setTitle }) => {
             </div>
         </div>
     )
+}
+
+AdsPage.propTypes = {
+    setTitle: T.func.isRequired
 }
 
 export default AdsPage
