@@ -1,8 +1,9 @@
 import React from 'react'
-import './App.css';
 import AdsPage from './components/ads/js/AdsPage'
 import Layout from './components/layout'
 import { LoginPage } from './components/auth'
+
+import './App.css';
 
 function App() {
   const [title, setTitle] = React.useState('Anuncios')
@@ -12,9 +13,7 @@ function App() {
   const handleLogout = () => setUser(null)
   
   return (
-    <div className="App">
-      {/* <Button variant="primary" children="Log in"/> */}
-      
+    <div className="App">      
       { user == null ? 
         <LoginPage onLogin={handleLogin} /> :
         <Layout title={title} onLogout={handleLogout}>

@@ -24,7 +24,7 @@ const AdsPage = ({ setTitle }) => {
                 <Card.Img 
                     variant="top"
                     style={{ borderRadius: '1.1rem' }}
-                    src={item.photo} 
+                    src={`${process.env.REACT_APP_API_BASE_URL}${item.photo}`} 
                     alt={item.name + ( item.sale ? ' en venta' : ' se busca' )}
                 />
                 <Card.Body style={{ padding: '1rem 1rem' }}>

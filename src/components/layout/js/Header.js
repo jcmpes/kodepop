@@ -4,7 +4,7 @@ import { Button, Emojis } from '../../shared'
 
 import '../css/Header.css'
 
-function Header({ ...props }) {
+function Header({ onLogout }) {
     return (
         <header className="header">
             <nav className="header-nav">
@@ -12,7 +12,7 @@ function Header({ ...props }) {
                     <Emojis className="header-emojis"/>
                     kodepop
                 </div>
-                <Button variant="" className="header-btn" onClick={props.onLogout}>
+                <Button variant="" className="header-btn" onClick={onLogout}>
                     Log Out
                 </Button>
             </nav>

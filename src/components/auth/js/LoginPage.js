@@ -1,14 +1,19 @@
 import LoginForm from './LoginForm';
 import Container from './Container';
 import { login } from '../../../api/auth'
+import { configureClient } from '../../../api/client'
 
 import '../css/LoginPage.css'
 
 function LoginPage({ onLogin }) {
 
     const handleSubmit = async credentials => {
-        await login(credentials)
-        onLogin(credentials.email)
+        try {
+            await login(credentials);
+            onLogin(credentials.email);
+        } catch (error) {
+            
+        }
     }
 
     return (
