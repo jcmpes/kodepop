@@ -17,6 +17,7 @@ const Button = styled.button`
     cursor: pointer;
     background-color: ${props => props.variant === 'primary' ? 'white' : accentColor };
     font-weight: bold;
+    white-space: nowrap;
 
     &:hover {
         background-color: ${props =>

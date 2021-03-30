@@ -1,10 +1,11 @@
 import React from 'react';
 import Button from '../../shared/Button';
 import FormField from './FormField';
+import { Spinner } from '../../shared';
 
 import '../css/LoginForm.css'
 
-function LoginForm({ onSubmit }) {
+function LoginForm({ onSubmit, loading }) {
 
     // Create a state to handle credentials submit and view
     const [credentials, setCredentials] = React.useState({
@@ -28,31 +29,38 @@ function LoginForm({ onSubmit }) {
 
     return (
         <React.Fragment>
-            <h1 className="form-title">Log In</h1>
-            <form className="login-form" onSubmit={handleSubmit}>
-                <FormField 
-                    name="email"
-                    label="Email"
-                    type="text"
-                    className="login-form-field"
-                    value={credentials.email}
-                    onChange={handleInputChange}
-                />
-                <FormField 
-                    name="password"
-                    label="Password"
-                    type="password"
-                    className="login-form-field"
-                    value={credentials.password}
-                    onChange={handleInputChange}
-                />
-                <Button
-                    type="submit"
-                    variant="highlight"
-                    className="login-form-submit"
-                    disabled={!credentials.email || !credentials.password}
-                >Submit</Button>
-            </form>
+            <h1 className="form-title">
+                {loading ? 'Logging in...' : 'Log In' }
+            </h1>
+            <div>
+                {loading ? <Spinner /> : 
+                    <form className="login-form" onSubmit={handleSubmit}>
+                        <FormField 
+                            name="email"
+                            label="Email"
+                            type="text"
+                            className="login-form-field"
+                            value={credentials.email}
+                            onChange={handleInputChange}
+                        />
+                        <FormField 
+                            name="password"
+                            label="Password"
+                            type="password"
+                            className="login-form-field"
+                            value={credentials.password}
+                            onChange={handleInputChange}
+                        />
+                        <Button
+                            type="submit"
+                            variant="highlight"
+                            className="login-form-submit"
+                            style={{ fontSize: '1.2rem' }}
+                            disabled={!credentials.email || !credentials.password || loading}
+                        >Submit</Button>
+                    </form>
+                }
+            </div>
         </React.Fragment>
     )
 }
