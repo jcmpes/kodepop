@@ -1,4 +1,5 @@
 import axios from 'axios';
+import storage from '../utils/storage';
 
 const client = axios.create({ baseURL: process.env.REACT_APP_API_BASE_URL });
 
@@ -37,7 +38,8 @@ export const configureClient = ({ accessToken }) => {
 }
 
 export const clearSession = () => {
-    localStorage.removeItem('auth')
+    storage.remove('auth');
+    storage.remove('user');
 }
 
 export default client

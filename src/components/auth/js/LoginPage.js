@@ -10,15 +10,15 @@ function LoginPage({ onLogin }) {
     const [loading, setLoading] = React.useState(false)
     const [error, setError] = React.useState(null)
 
-    const handleSubmit = async credentials => {
+    const handleSubmit = async (credentials, remember) => {
         try {
             setLoading(true)
-            await login(credentials);
+            await login(credentials, remember);
             onLogin(credentials.email);
-            setLoading(false)
+            setLoading(false);
         } catch (error) {
-            setLoading(false)
-            // setError(error)
+            setLoading(false);
+            setError(error);
         }
     }
 

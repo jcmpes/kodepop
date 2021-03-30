@@ -1,16 +1,17 @@
-import client, { configureClient } from './client'
+import client, { configureClient } from './client';
+import storage from '../utils/storage';
 
-export const login = credentials => {
+export const login = (credentials, remember) => {
     return client
         .post('/api/auth/login', credentials)
         .then(data => {
-            configureClient(data);
-            localStorage.setItem('auth',  data.accessToken);
-            localStorage.setItem('user',  credentials.email);
+            configureClient(data)
+            storage.set('auth', data.accessToken, remember);
+            storage.set('user', credentials.email, remember);
         })
 }
 
 export const logout = () => {
     configureClient();
-    localStorage.clear();
+    storage.clear();
 }

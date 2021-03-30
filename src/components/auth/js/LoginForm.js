@@ -14,6 +14,8 @@ function LoginForm({ onSubmit, loading }) {
         password: ''
     })
 
+    const [remember, setRemember] = React.useState(true)
+
     const handleInputChange = e => {
         setCredentials(oldCredentials => {
             return {
@@ -22,10 +24,14 @@ function LoginForm({ onSubmit, loading }) {
             }
         })
     }
-    
+
+    const handleCheckboxChange = e => {
+        setRemember(e.target.checked);
+    }
+
     const handleSubmit = e => {
-        e.preventDefault()
-        onSubmit(credentials)
+        e.preventDefault();
+        onSubmit(credentials, remember);
     }
 
     return (
@@ -38,7 +44,7 @@ function LoginForm({ onSubmit, loading }) {
                     <form className="login-form" onSubmit={handleSubmit}>
                         <FormField 
                             name="email"
-                            label="Email"
+                            placeholder="Email"
                             type="text"
                             className="login-form-field"
                             value={credentials.email}
@@ -46,11 +52,18 @@ function LoginForm({ onSubmit, loading }) {
                         />
                         <FormField 
                             name="password"
-                            label="Password"
+                            placeholder="Password"
                             type="password"
                             className="login-form-field"
                             value={credentials.password}
                             onChange={handleInputChange}
+                        />
+                        <FormField
+                            name="remember"
+                            label="Remember Me"
+                            type="checkbox"
+                            checked={remember}
+                            onClick={handleCheckboxChange}
                         />
                         <Button
                             type="submit"

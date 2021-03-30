@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import storage from './utils/storage'
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { configureClient } from './api/client';
 
 import './index.css';
 
-const accessToken = localStorage.getItem('auth');
+const accessToken = storage.get('auth');
 if(accessToken) {
   configureClient({ accessToken })
 }

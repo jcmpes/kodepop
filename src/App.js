@@ -1,4 +1,5 @@
 import React from 'react';
+import storage from './utils/storage'
 import { clearSession } from './api/client';
 import AdsPage from './components/ads/js/AdsPage';
 import Layout from './components/layout';
@@ -15,11 +16,12 @@ function App({ existingToken }) {
     setUser(null);
     clearSession();
   }
+  
   React.useEffect(() => {
     if (existingToken) {
-      setUser(localStorage.getItem('user'))
+      setUser(storage.get('user'))
     }
-  })
+  }, [])
 
   return (
     <div className="App">      

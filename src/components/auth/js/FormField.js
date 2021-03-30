@@ -1,13 +1,14 @@
 import '../css/FormField.css'
 
-function FormField({label, ...props}) {
+function FormField({placeholder, label, ...props}) {
     return (
         <div>
             <input 
                 className='form-field-input'
-                placeholder={label}
+                placeholder={placeholder}
                 {...props}
             />
+            { label ? label : null}
         </div>
     )
 }
