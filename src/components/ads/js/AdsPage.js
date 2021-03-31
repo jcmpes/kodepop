@@ -24,7 +24,12 @@ const AdsPage = ({ setTitle }) => {
             <Card className={adsPageStyle['ad-card']}>
                 <Card.Img 
                     variant="top"
-                    style={{ borderRadius: '1.1rem' }}
+                    style={{ 
+                        borderTopLeftRadius: '1.1rem', 
+                        borderTopRightRadius: '1.1rem', 
+                        minHeight: '200px', 
+                        objectFit: 'cover' 
+                    }}
                     src={`${process.env.REACT_APP_API_BASE_URL}${item.photo}`} 
                     alt={item.name + ( item.sale ? ' en venta' : ' se busca' )}
                 />
@@ -61,7 +66,7 @@ const AdsPage = ({ setTitle }) => {
 
     return(
         <div className="ads-page">
-            <div className="ads-wrapper"style={{ display: 'flex', flexWrap: 'wrap' }}>
+            <div className="ads-wrapper"style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
                 {items}
             </div>
         </div>
