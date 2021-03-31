@@ -28,6 +28,8 @@ function App({ existingToken }) {
     }
   }, [])
 
+  const DetailContext = React.createContext()
+
   return (
     <div className="App">
       <Router>
@@ -39,9 +41,19 @@ function App({ existingToken }) {
             }      
           </Route>
           <Route path="/listing/:id">
-            {routerProps => <DetailPage {...routerProps} />}
-          </Route>
+            {
+              routerProps =>
+                <DetailContext.Provider value={routerProps}>
+                  <Layout title={title} onLogout={handleLogout}>
+                    <DetailContext.Consumer>
+                      {value => <DetailPage value={value} setTitle={setTitle}/>}
 
+                    </DetailContext.Consumer>
+                  </Layout>
+              
+                </DetailContext.Provider>
+            }
+          </Route>
           <Route exact path="/">
             { user ?
               <Layout title={title} onLogout={handleLogout}>
