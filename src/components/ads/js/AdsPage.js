@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import T from 'prop-types';
 import { getAds } from '../../../api/adverts';
 import Card from 'react-bootstrap/Card'
@@ -21,36 +22,38 @@ const AdsPage = ({ setTitle }) => {
 
     const items = ads.map(item => (
         <article key={item.id} style={{ padding: '.75rem' }}>
-            <Card className={adsPageStyle['ad-card']}>
-                <Card.Img 
-                    variant="top"
-                    style={{ 
-                        borderTopLeftRadius: '1.1rem', 
-                        borderTopRightRadius: '1.1rem', 
-                        minHeight: '200px', 
-                        objectFit: 'cover' 
-                    }}
-                    src={`${process.env.REACT_APP_API_BASE_URL}${item.photo}`} 
-                    alt={item.name + ( item.sale ? ' en venta' : ' se busca' )}
-                />
-                <Card.Body style={{ padding: '1rem 1rem' }}>
-                    <div style={{ fontSize: "2rem" }}>{item.price}€</div>
-                    <Card.Title style={{ fontSize: "1.5rem", marginBottom: "1rem" }}>{item.name}</Card.Title>
-                    <div 
-                        className="tags" 
+            <Link to={`/listing/${item.id}`}>
+                <Card className={adsPageStyle['ad-card']}>
+                    <Card.Img 
+                        variant="top"
                         style={{ 
-                            fontSize: '.8rem',
-                            marginRight: '5px',
-                            backgroundColor: item.sale === true ? '#02c853' : '#ffeb3c',
-                            display: 'inline-flex',
-                            padding: '.2rem .4rem',
-                            borderRadius: '5px',
+                            borderTopLeftRadius: '1.1rem', 
+                            borderTopRightRadius: '1.1rem', 
+                            minHeight: '200px', 
+                            objectFit: 'cover' 
                         }}
-                    >
-                        { item.sale ? 'Venta' : 'Compra'}
-                    </div>
-                </Card.Body>
-            </Card>
+                        src={`${process.env.REACT_APP_API_BASE_URL}${item.photo}`} 
+                        alt={item.name + ( item.sale ? ' en venta' : ' se busca' )}
+                        />
+                    <Card.Body style={{ padding: '1rem 1rem' }}>
+                        <div style={{ fontSize: "2rem" }}>{item.price}€</div>
+                        <Card.Title style={{ fontSize: "1.5rem", marginBottom: "1rem" }}>{item.name}</Card.Title>
+                        <div 
+                            className="tags" 
+                            style={{ 
+                                fontSize: '.8rem',
+                                marginRight: '5px',
+                                backgroundColor: item.sale === true ? '#02c853' : '#ffeb3c',
+                                display: 'inline-flex',
+                                padding: '.2rem .4rem',
+                                borderRadius: '5px',
+                            }}
+                            >
+                            { item.sale ? 'Venta' : 'Compra'}
+                        </div>
+                    </Card.Body>
+                </Card>
+            </Link>
         </article>
         // <li key={item.id} onClick={e => alert("Contruyendo enlace")}>
         //     <div className={adsPageStyle['ad-wrapper']}>

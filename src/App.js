@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import storage from './utils/storage'
 import { clearSession } from './api/client';
-import AdsPage from './components/ads/js/AdsPage';
+import { AdsPage, DetailPage } from './components/ads';
 import Layout from './components/layout';
 import { LoginPage } from './components/auth';
 
@@ -37,6 +37,9 @@ function App({ existingToken }) {
               user ? <Redirect to="/" /> :
               <LoginPage onLogin={handleLogin} />
             }      
+          </Route>
+          <Route path="/listing/:id">
+            {routerProps => <DetailPage {...routerProps} />}
           </Route>
 
           <Route exact path="/">

@@ -1,1 +1,2 @@
-export { default as AdsPage } from './js'
+export { AdsPage } from './js'
+export { DetailPage } from './js'
