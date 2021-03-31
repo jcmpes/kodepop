@@ -63,7 +63,7 @@ function LoginForm({ onSubmit, loading }) {
                             label="Remember Me"
                             type="checkbox"
                             checked={remember}
-                            onClick={handleCheckboxChange}
+                            onChange={handleCheckboxChange}
                         />
                         <Button
                             type="submit"

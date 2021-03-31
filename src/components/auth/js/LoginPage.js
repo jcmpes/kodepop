@@ -14,8 +14,8 @@ function LoginPage({ onLogin }) {
         try {
             setLoading(true)
             await login(credentials, remember);
-            onLogin(credentials.email);
             setLoading(false);
+            onLogin(credentials.email);
         } catch (error) {
             setLoading(false);
             setError(error);
