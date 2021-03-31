@@ -7,18 +7,30 @@ import { login } from '../../../api/auth';
 import '../css/LoginPage.css';
 
 function LoginPage({ onLogin }) {
+    const [credentials, setCredentials] = React.useState({
+        email: '',
+        password: ''
+    })
+    const [remember, setRemember] = React.useState(true)
     const [loading, setLoading] = React.useState(false)
     const [error, setError] = React.useState(null)
+    const loggedRef = React.useRef(false)
+
+    React.useEffect(() => {
+        if(loggedRef.current === true) {
+            onLogin(credentials.email);
+        }
+    }, [onLogin, loggedRef.current, credentials.email])
 
     const handleSubmit = async (credentials, remember) => {
         try {
             setLoading(true)
             await login(credentials, remember);
-            setLoading(false);
-            onLogin(credentials.email);
+            loggedRef.current = true;
         } catch (error) {
-            setLoading(false);
             setError(error);
+        } finally {
+            setLoading(false);
         }
     }
 
@@ -26,7 +38,7 @@ function LoginPage({ onLogin }) {
         <div className="login-page">
             {error && <div className="login-error" style={{ backgroundColor: 'coral', padding: '1rem' }}>{error.message}</div>}
             <Container className='login-container'>
-                <LoginForm onSubmit={handleSubmit} loading={loading}></LoginForm>
+                <LoginForm onSubmit={handleSubmit} loading={loading} credentials={credentials} setCredentials={setCredentials} remember={remember} setRemember={setRemember}></LoginForm>
             </Container>
         </div>
     )

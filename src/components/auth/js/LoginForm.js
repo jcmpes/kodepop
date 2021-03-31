@@ -6,15 +6,10 @@ import { Spinner } from '../../shared';
 
 import '../css/LoginForm.css'
 
-function LoginForm({ onSubmit, loading }) {
+function LoginForm({ onSubmit, loading, credentials, setCredentials, remember, setRemember }) {
+    
 
-    // Create a state to handle credentials submit and view
-    const [credentials, setCredentials] = React.useState({
-        email: '',
-        password: ''
-    })
-
-    const [remember, setRemember] = React.useState(true)
+    
 
     const handleInputChange = e => {
         setCredentials(oldCredentials => {
