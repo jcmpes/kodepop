@@ -52,6 +52,7 @@ function LoginForm({ onSubmit, loading, credentials, setCredentials, remember, s
                         />
                         <FormField
                             name="remember"
+                            id="remember"
                             label="Remember Me"
                             type="checkbox"
                             checked={remember}
