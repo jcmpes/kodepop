@@ -7,9 +7,6 @@ import { Spinner } from '../../shared';
 import '../css/LoginForm.css'
 
 function LoginForm({ onSubmit, loading, credentials, setCredentials, remember, setRemember }) {
-    
-
-    
 
     const handleInputChange = e => {
         setCredentials(oldCredentials => {
