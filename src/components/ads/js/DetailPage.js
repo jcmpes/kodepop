@@ -1,7 +1,8 @@
 import React from 'react';
-import { getDetail } from '../../../api/adverts' 
+import { Redirect } from 'react-router-dom';
+import { getDetail } from '../../../api/adverts';
 
-
+import detailPageStyle from '../css/DetailPage.module.css';
 
 function DetailPage ({ setTitle, value }) {
     const [listing, setListing] = React.useState({photo: ''})
@@ -13,7 +14,9 @@ function DetailPage ({ setTitle, value }) {
             const obj = await getDetail(value.match.params.id)
             return(obj)
         } catch (error) {
-            
+            if (error.statusCode === 404) {
+                value.history.replace('/404')
+            }
         }
     }
 
@@ -24,16 +27,23 @@ function DetailPage ({ setTitle, value }) {
     }, [])
 
     return(
-        <div className="full-width">
-            <div className="column-image">
-                <div className="image-container">
+        <div className={detailPageStyle["grid"]}>
+            <div className={detailPageStyle["column-image"]}>
+                {listing ? 
+                <div className={detailPageStyle["image-container"]}>
                     <img src={process.env.REACT_APP_API_BASE_URL + listing.photo} />
                 </div>          
+                : <div></div>
+                }
             </div>
-            <div className="column-details">
-                <div className="price-container">{listing.price}€</div>
-                <div className="title-container"><h1>{listing.name}</h1></div>
-            </div>
+            {listing ?
+                <div className={detailPageStyle["column-details"]}>
+                
+                    <div className={detailPageStyle["price-container"]}>{listing.price}€</div>
+                    <div className={detailPageStyle["title-container"]}><h1>{listing.name}</h1></div>
+                </div>
+            : <div></div>
+            }
         </div>
             
     )
