@@ -11,12 +11,15 @@ function DetailPage ({ setTitle, value }) {
 
     const handleListingLoad = async () => {
         try {
+            setLoading(true)
             const obj = await getDetail(value.match.params.id)
             return(obj)
         } catch (error) {
             if (error.statusCode === 404) {
                 value.history.replace('/404')
             }
+        } finally {
+            setLoading(false)
         }
     }
 
@@ -29,21 +32,25 @@ function DetailPage ({ setTitle, value }) {
     return(
         <div className={detailPageStyle["grid"]}>
             <div className={detailPageStyle["column-image"]}>
-                {listing ? 
                 <div className={detailPageStyle["image-container"]}>
+                    {!loading ? 
                     <img src={process.env.REACT_APP_API_BASE_URL + listing.photo} />
+                    : <div className={detailPageStyle["image-loading"]}></div>
+                    }
                 </div>          
-                : <div></div>
-                }
             </div>
-            {listing ?
                 <div className={detailPageStyle["column-details"]}>
-                
-                    <div className={detailPageStyle["price-container"]}>{listing.price}€</div>
-                    <div className={detailPageStyle["title-container"]}><h1>{listing.name}</h1></div>
+                    {!loading ?
+                        <React.Fragment>
+                            <div className={detailPageStyle["price-container"]}>{listing.price}</div>
+                            <div className={detailPageStyle["title-container"]}><h1>{listing.name}</h1></div>
+                        </React.Fragment>
+                    : <React.Fragment>
+                        <div className={detailPageStyle["price-loading"]}></div>
+                        <div className={detailPageStyle["title-loading"]}></div>
+                    </React.Fragment> 
+                    }
                 </div>
-            : <div></div>
-            }
         </div>
             
     )
