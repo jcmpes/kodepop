@@ -3,7 +3,6 @@ import React from 'react';
 import './SelectField.css'
 
 function SelectField({ placeholder, options, ...props }) {
-    const [myOptions, setMyOptions] = React.useState(options)
 
     return (
         <div>
@@ -12,7 +11,6 @@ function SelectField({ placeholder, options, ...props }) {
                 placeholder={placeholder}
                 {...props}
             >
-                {console.log(myOptions)}
                 {options.map(element => {
                     return (<option value={element.value}>{element.name}</option>)
                     

@@ -7,7 +7,8 @@ function NewListingForm() {
     const [formFields, setFormFields] = React.useState({
         title: '',
         price: '',
-        sale: true
+        sale: true,
+        category: ''
     })
 
     const handleInputChange = e => {
@@ -42,6 +43,33 @@ function NewListingForm() {
                         {
                             name: "Compra",
                             value: false
+                        }
+                    ]}
+                />
+                <SelectField 
+                    name="category"
+                    placeholder="Category"
+                    type="select"
+                    id={newListingFormStyle["select-category"]}
+                    className={newListingFormStyle["new-listing-form-field"]}
+                    value={formFields.category}
+                    onChange={handleInputChange}
+                    options={[
+                        {
+                            name: "Lifestyle",
+                            value: "lifestyle"
+                        },
+                        {
+                            name: "Mobile",
+                            value: "mobile"
+                        },
+                        {
+                            name: "Motor",
+                            value: "motor"
+                        },
+                        {
+                            name: "Work",
+                            value: "work"
                         }
                     ]}
                 />
