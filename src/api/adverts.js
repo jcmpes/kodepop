@@ -12,7 +12,7 @@ export const getDetail = async id => {
 }
 
 export const newListing = details => {
-    const url = `${process.env.REACT_APP_API_BASE_URL}/api/v1/`
+    const url = `${process.env.REACT_APP_API_BASE_URL}/api/v1/adverts`
 }
 
 // ([

@@ -5,17 +5,19 @@ import newListingFormStyle from '../css/NewListingForm.module.css'
 
 function NewListingForm() {
     const [formFields, setFormFields] = React.useState({
-        title: '',
+        name: '',
         price: '',
         sale: true,
-        tags: ''
+        tags: []
     })
 
     const handleInputChange = e => {
         setFormFields(oldValues => {
-            return {
-                ...oldValues,
-                [e.target.name]: e.target.value
+            if (e.target.name === 'tags') {
+                return {
+                    ...oldValues,
+                    [e.target.name]: e.target.value
+                }
             }
         })
     }
@@ -68,14 +70,15 @@ function NewListingForm() {
                     options={saleOptions}
                 />
                 <SelectField 
-                    name="category"
+                    name="tags"
                     placeholder="Category"
                     type="select"
                     id={newListingFormStyle["select-category"]}
                     className={newListingFormStyle["new-listing-form-field"]}
-                    value={formFields.category}
+                    value={formFields.tags}
                     onChange={handleInputChange}
                     options={categoryOptions}
+                    multiple
                 />
                 <FormField 
                     name="title"
