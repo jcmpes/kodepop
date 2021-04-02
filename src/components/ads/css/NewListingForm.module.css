@@ -1,0 +1,32 @@
+.container {
+    background: #ffc600;
+    height: 350px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.new-listing-form {
+    width: 100%;
+
+}
+
+.new-listing-form-field {
+    height: 2.5rem;
+    width: 80%;
+    margin-bottom: 1rem;
+    font-family: 'Helvetiva neue', Helvetica, Arial, sans-serif;
+    font-size: 1.6rem;
+    font-weight: 200;
+    border: 10px solid #f7f7f7;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.12), inset 0 0 2px rgba(0, 0, 0, 0.19);
+    border-radius: 5px;
+    padding: .2rem 1rem;
+}
+
+#select-sale {
+    height: 3.8rem;
+}

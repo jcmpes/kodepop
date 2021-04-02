@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import storage from './utils/storage'
 import { clearSession } from './api/client';
-import { AdsPage, DetailPage } from './components/ads';
+import { AdsPage, DetailPage, NewListingPage } from './components/ads';
 import Layout from './components/layout';
 import { LoginPage } from './components/auth';
 
@@ -40,6 +40,7 @@ function App({ existingToken }) {
               <LoginPage onLogin={handleLogin} />
             }      
           </Route>
+          <Route path="/new-listing" component={NewListingPage} />
           <Route path="/listing/:id">
             {
               routerProps =>

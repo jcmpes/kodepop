@@ -1,4 +1,5 @@
-import 
+import NewListingForm from './NewListingForm'
+
 
 const NewListingPage = () => {
 
