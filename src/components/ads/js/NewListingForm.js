@@ -8,7 +8,7 @@ function NewListingForm() {
         title: '',
         price: '',
         sale: true,
-        category: ''
+        tags: ''
     })
 
     const handleInputChange = e => {
@@ -24,6 +24,36 @@ function NewListingForm() {
         e.preventDefault();
     }
 
+    const saleOptions = [
+        {
+            name: "Venta",
+            value: true
+        },
+        {
+            name: "Compra",
+            value: false
+        }
+    ]
+
+    const categoryOptions = [
+        {
+            name: "Lifestyle",
+            value: "lifestyle"
+        },
+        {
+            name: "Mobile",
+            value: "mobile"
+        },
+        {
+            name: "Motor",
+            value: "motor"
+        },
+        {
+            name: "Work",
+            value: "work"
+        }
+    ]
+
     return (
         <div className={newListingFormStyle["container"]}>
             <form className={newListingFormStyle["new-listing-form"]} onSubmit={handleSubmit}>
@@ -35,16 +65,7 @@ function NewListingForm() {
                     className={newListingFormStyle["new-listing-form-field"]}
                     value={formFields.sale}
                     onChange={handleInputChange}
-                    options={[
-                        {
-                            name: "Venta",
-                            value: true
-                        },
-                        {
-                            name: "Compra",
-                            value: false
-                        }
-                    ]}
+                    options={saleOptions}
                 />
                 <SelectField 
                     name="category"
@@ -54,24 +75,7 @@ function NewListingForm() {
                     className={newListingFormStyle["new-listing-form-field"]}
                     value={formFields.category}
                     onChange={handleInputChange}
-                    options={[
-                        {
-                            name: "Lifestyle",
-                            value: "lifestyle"
-                        },
-                        {
-                            name: "Mobile",
-                            value: "mobile"
-                        },
-                        {
-                            name: "Motor",
-                            value: "motor"
-                        },
-                        {
-                            name: "Work",
-                            value: "work"
-                        }
-                    ]}
+                    options={categoryOptions}
                 />
                 <FormField 
                     name="title"
