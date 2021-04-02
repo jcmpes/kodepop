@@ -8,7 +8,7 @@ function FormField({placeholder, label, ...props}) {
                 placeholder={placeholder}
                 {...props}
             />
-            { label ? <label for="remember"> {label}</label> : null}
+            { label ? <label htmlFor="remember"> {label}</label> : null}
         </div>
     )
 }

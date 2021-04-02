@@ -5,6 +5,7 @@ import { getAds } from '../../../api/adverts';
 import Card from 'react-bootstrap/Card'
 
 import adsPageStyle from '../css/AdsPage.module.css'
+import EmptyPage from './EmptyPage';
 
 // let allAds = []
 // getAds().then((response) => allAds = response)
@@ -69,9 +70,11 @@ const AdsPage = ({ setTitle }) => {
 
     return(
         <div className="ads-page">
-            <div className="ads-wrapper"style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
-                {items}
-            </div>
+            { (ads.length === 0) ? <EmptyPage /> :
+                <div className="ads-wrapper"style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+                    {items}
+                </div>
+            }
         </div>
     )
 }

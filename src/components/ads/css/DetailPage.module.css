@@ -20,12 +20,13 @@
 }
 
 .column-details > .price-container {
-    font-size: 2.3rem;
+    font-size: 2.7rem;
     font-weight: 700;
 }
 
-.column-details > .price-container::after {
-    content: ' €';
+.column-details > .title-container > h1 {
+    font-size: 2rem;
+    font-weight: 500;
 }
 
 /* Loading placeholder (based on https://codepen.io/aji/pen/evMKWN) ============ */
@@ -39,7 +40,7 @@
 }
 
 .column-image > .image-container > .image-loading {
-    height: 300px;
+    height: calc(100vw/4);
 }
 
 .image-loading,

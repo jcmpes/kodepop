@@ -42,7 +42,7 @@ function DetailPage ({ setTitle, value }) {
                 <div className={detailPageStyle["column-details"]}>
                     {!loading ?
                         <React.Fragment>
-                            <div className={detailPageStyle["price-container"]}>{listing.price}</div>
+                            <div className={detailPageStyle["price-container"]}>{listing.price} €</div>
                             <div className={detailPageStyle["title-container"]}><h1>{listing.name}</h1></div>
                         </React.Fragment>
                     : <React.Fragment>
