@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from '../../shared/Button';
-import FormField from './FormField';
-import { Spinner } from '../../shared';
+import { Spinner, Button, FormField } from '../../shared';
 
 import '../css/LoginForm.css'
 

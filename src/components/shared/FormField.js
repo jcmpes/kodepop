@@ -1,6 +1,6 @@
-import '../css/FormField.css'
+import './FormField.css'
 
-function FormField({placeholder, label, ...props}) {
+function FormField({ placeholder, label, ...props }) {
     return (
         <div>
             <input 
@@ -13,4 +13,4 @@ function FormField({placeholder, label, ...props}) {
     )
 }
 
-export default FormField
+export default FormField;
