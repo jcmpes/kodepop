@@ -7,7 +7,7 @@ import newListingFormStyle from '../css/NewListingForm.module.css'
 function NewListingForm() {
     const [formFields, setFormFields] = React.useState({
         name: '',
-        price: 0,
+        price: '',
         sale: true,
         tags: []
     })
@@ -40,9 +40,7 @@ function NewListingForm() {
             }
         }
         
-        console.log('New tags', newArr)
-
-        // Definde tags as the  new array
+        // Definde tags as the new array
         setFormFields(oldValues => {
             return {
                 ...oldValues,

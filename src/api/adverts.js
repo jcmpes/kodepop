@@ -13,11 +13,7 @@ export const getDetail = async id => {
 
 export const newListing = details => {
     const url = `${process.env.REACT_APP_API_BASE_URL}/api/v1/adverts`;
-    return client.post(url, details, {
-        headers: {
-            'Content-Type': 'multipart/form-data'
-        }
-    })
+    return client.post(url, details)
 }
 
 // ([
