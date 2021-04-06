@@ -13,7 +13,7 @@ function SelectField({ placeholder, options, multiple, ...props }) {
                 {...props}
             >
                 {options.map(element => {
-                    return (<option value={element.value}>{element.name}</option>)
+                    return (<option key={element.name} value={element.value}>{element.name}</option>)
                     
                 })}
             </select>
