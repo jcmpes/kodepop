@@ -4,13 +4,15 @@ import { newListing } from '../../../api/adverts';
 
 import newListingFormStyle from '../css/NewListingForm.module.css'
 
-function NewListingForm() {
+function NewListingForm({ routerProps }) {
     const [formFields, setFormFields] = React.useState({
         name: '',
         price: '',
         sale: true,
         tags: []
     })
+
+    console.log(routerProps)
 
     const handleInputChange = e => {
         setFormFields(oldValues => {
@@ -52,6 +54,7 @@ function NewListingForm() {
     const handleSubmit = e => {
         e.preventDefault();
         newListing(formFields)
+            .then(res => routerProps.history.push(`/listing/${res.id}`))
     }
 
     const saleOptions = [

@@ -11,7 +11,7 @@ export const getDetail = async id => {
     return client.get(url);
 }
 
-export const newListing = details => {
+export const newListing = async details => {
     const url = `${process.env.REACT_APP_API_BASE_URL}/api/v1/adverts`;
     return client.post(url, details)
 }

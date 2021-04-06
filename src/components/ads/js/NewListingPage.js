@@ -1,12 +1,12 @@
 import NewListingForm from './NewListingForm'
 
 
-const NewListingPage = () => {
+const NewListingPage = ({ routerProps }) => {
 
 
 
     return (
-        <NewListingForm></NewListingForm>
+        <NewListingForm routerProps={routerProps}></NewListingForm>
     )
 }
 
