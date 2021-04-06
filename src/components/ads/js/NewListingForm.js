@@ -1,12 +1,13 @@
 import React from 'react';
 import { Button, FormField, SelectField } from "../../shared";
+import { newListing } from '../../../api/adverts';
 
 import newListingFormStyle from '../css/NewListingForm.module.css'
 
 function NewListingForm() {
     const [formFields, setFormFields] = React.useState({
         name: '',
-        price: '',
+        price: 0,
         sale: true,
         tags: []
     })
@@ -20,8 +21,39 @@ function NewListingForm() {
         })
     }
 
+    const handleMultiselectChange = e => {
+        // Define tag to add and new temp. array
+        const newTag = e.target.value
+        const newArr = formFields.tags
+
+        // Check if it exists in the array
+        // Add item if not in the array
+        if (!newArr.some(item => item === newTag) ) {
+            newArr.push(newTag)
+        } else {
+            // Remove item if it exists
+            for (let i = 0; i < newArr.length; i++) {
+                if (newArr[i] === newTag) {
+                    newArr.splice(i, 1);
+                    return;
+                } 
+            }
+        }
+        
+        console.log('New tags', newArr)
+
+        // Definde tags as the  new array
+        setFormFields(oldValues => {
+            return {
+                ...oldValues,
+                tags: newArr
+            }
+        })
+    }
+
     const handleSubmit = e => {
         e.preventDefault();
+        newListing(formFields)
     }
 
     const saleOptions = [
@@ -74,7 +106,7 @@ function NewListingForm() {
                     id={newListingFormStyle["select-category"]}
                     className={newListingFormStyle["new-listing-form-field"]}
                     value={formFields.tags}
-                    onChange={handleInputChange}
+                    onChange={handleMultiselectChange}
                     options={categoryOptions}
                     multiple
                 />
