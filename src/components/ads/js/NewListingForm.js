@@ -9,8 +9,9 @@ function NewListingForm({ routerProps }) {
         name: '',
         price: '',
         sale: true,
-        tags: []
+        tags: [],
     })
+    const [image, setImage] = React.useState(null)
 
     console.log(routerProps)
 
@@ -53,8 +54,15 @@ function NewListingForm({ routerProps }) {
 
     const handleSubmit = e => {
         e.preventDefault();
-        newListing(formFields)
+        const formData = new FormData();
+        formData.append('name', formFields.name)
+        formData.append('price', formFields.price)
+        formData.append('sale', formFields.sale)
+        formData.append('tags', formFields.tags)
+        formData.append('photo', image)
+        newListing(formData)
             .then(res => routerProps.history.push(`/listing/${res.id}`))
+            .catch(err => console.log(err))
     }
 
     const saleOptions = [
@@ -126,6 +134,12 @@ function NewListingForm({ routerProps }) {
                     className={newListingFormStyle["new-listing-form-field"]}
                     value={formFields.price}
                     onChange={handleInputChange}
+                />
+                <FormField
+                    name="photo"
+                    placeholder="Upload an Image"
+                    type="file"
+                    onChange={e => setImage(e.target.files[0])}
                 />
                 <Button 
                     type="submit"
