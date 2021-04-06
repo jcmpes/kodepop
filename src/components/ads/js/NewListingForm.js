@@ -13,11 +13,9 @@ function NewListingForm() {
 
     const handleInputChange = e => {
         setFormFields(oldValues => {
-            if (e.target.name === 'tags') {
-                return {
-                    ...oldValues,
-                    [e.target.name]: e.target.value
-                }
+            return {
+                ...oldValues,
+                [e.target.name]: e.target.value
             }
         })
     }
@@ -81,7 +79,7 @@ function NewListingForm() {
                     multiple
                 />
                 <FormField 
-                    name="title"
+                    name="name"
                     placeholder="What's it?"
                     type="text"
                     className={newListingFormStyle["new-listing-form-field"]}
