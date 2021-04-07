@@ -11,7 +11,7 @@ import EmptyPage from './EmptyPage';
 // getAds().then((response) => allAds = response)
 
 // Component to load ads
-const AdsPage = ({ setTitle }) => {
+const AdsPage = ({ setTitle, ...props }) => {
     const [ads, setAds] = React.useState([])
 
     React.useEffect(() => {

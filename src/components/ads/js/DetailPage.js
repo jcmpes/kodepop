@@ -34,9 +34,11 @@ function DetailPage ({ setTitle, value }) {
             {/*=== Listing Image ===*/}
             <div className={detailPageStyle["column-image"]}>
                 <div className={detailPageStyle["image-container"]}>
-                    {!loading ? !listing.photo ? <p style={{ fontSize: '8rem', marginTop: '10px' }}>🎁</p> :
-                    <img src={process.env.REACT_APP_API_BASE_URL + listing.photo} />
-                    : <div className={detailPageStyle["image-loading"]}></div>
+                    {!loading ? 
+                        !listing.photo ?
+                            <p style={{ fontSize: '8rem', marginTop: '10px' }}>🎁</p>
+                            : <img src={process.env.REACT_APP_API_BASE_URL + listing.photo} />
+                        : <div className={detailPageStyle["image-loading"]}></div>
                     }
                 </div>          
             </div>

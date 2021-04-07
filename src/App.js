@@ -11,6 +11,7 @@ import './App.css';
 function App({ existingToken }) {
   const [title, setTitle] = React.useState('Anuncios')
   const [user, setUser] = React.useState(null)
+  const [searchParams, setSearchParams] = React.useState('')
 
   const handleLogin = userId => {
     setUser(userId);
@@ -28,7 +29,7 @@ function App({ existingToken }) {
     }
   }, [])
 
-  const DetailContext = React.createContext()
+  const DetailContext = React.createContext();
 
   return (
     <div className="App">
@@ -48,7 +49,6 @@ function App({ existingToken }) {
                   <Layout title={title} onLogout={handleLogout}>
                     <DetailContext.Consumer>
                       {value => <DetailPage value={value} setTitle={setTitle}/>}
-
                     </DetailContext.Consumer>
                   </Layout>
               
@@ -56,9 +56,14 @@ function App({ existingToken }) {
             }
           </PrivateRoute>
           <PrivateRoute user={user} exact path="/">
-              <Layout title={title} onLogout={handleLogout}>
-                <AdsPage setTitle={setTitle}/>
-              </Layout>
+            <Layout
+              searchParams={searchParams}
+              setSearchParams={setSearchParams}
+              title={title}
+              onLogout={handleLogout}
+            >
+              <AdsPage setTitle={setTitle} />
+            </Layout>
           </PrivateRoute>
           <Route path="/404">
             <div>404 Not Found</div>

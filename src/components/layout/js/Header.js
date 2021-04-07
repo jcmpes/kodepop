@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import T from 'prop-types';
-import { Button, Emojis } from '../../shared'
-
+import { Button, Emojis, Search } from '../../shared';
 
 import '../css/Header.css'
 
@@ -16,6 +15,9 @@ function Header({ onLogout }) {
                         kodepop
                     </div>
                 </Link>
+                <div>
+                    <Search />
+                </div>
                 <Button variant="" className="header-btn" onClick={onLogout}>
                     Log Out
                 </Button>

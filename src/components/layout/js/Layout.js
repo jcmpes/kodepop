@@ -1,18 +1,19 @@
 import React from 'react';
 import T from 'prop-types';
-import Header from './Header'
-import Footer from './Footer'
+import Header from './Header';
+import Footer from './Footer';
+import { Section } from '../../shared'
 
 import '../css/Layout.css'
 
 
-function Layout({ title, children, ...props }) {
+function Layout({ title, children, searchParams, setSearchParams, ...props }) {
     return (
         <div className="layout">
             <Header className="header" {...props} />
                 <main className="main">
                     <h1 className="title">{title}</h1>
-                    <section className="content">{children}</section>
+                    <Section className="content" {...props}>{children}</Section>
                 </main>
             <Footer className="footer" />
         </div>
