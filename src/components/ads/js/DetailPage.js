@@ -4,30 +4,36 @@ import { getDetail } from '../../../api/adverts';
 
 import detailPageStyle from '../css/DetailPage.module.css';
 
-function DetailPage ({ setTitle, value }) {
+function DetailPage ({ setTitle, value, searchParams }) {
     const [listing, setListing] = React.useState({photo: ''})
     const [loading, setLoading] = React.useState(true)
     const [error, setError] = React.useState(null)
 
     const handleListingLoad = async () => {
         try {
-            setLoading(true)
-            const obj = await getDetail(value.match.params.id)
-            return(obj)
+            setLoading(true);
+            const obj = await getDetail(value.match.params.id);
+            return(obj);
         } catch (error) {
             if (error.statusCode === 404) {
-                value.history.replace('/404')
+                value.history.replace('/404');
             }
         } finally {
-            setLoading(false)
+            setLoading(false);
         }
     }
 
     React.useEffect(() => {
         // Load listing
-        handleListingLoad().then(obj => setListing(obj))
-        setTitle(`Detalle`)
+        handleListingLoad().then(obj => setListing(obj));
+        setTitle(`Detalle`);
     }, [])
+
+    // React.useEffect(() => {
+    //     if (searchParams != '') {
+    //       value.history.push('/');
+    //     }
+    //   }, [searchParams])
 
     return(
         <div className={detailPageStyle["grid"]}>
@@ -56,7 +62,7 @@ function DetailPage ({ setTitle, value }) {
                 }
             </div>
         </div>
-            
+        
     )
 }
 

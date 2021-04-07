@@ -29,6 +29,8 @@ function App({ existingToken }) {
     }
   }, [])
 
+  
+
   const DetailContext = React.createContext();
 
   return (
@@ -46,9 +48,14 @@ function App({ existingToken }) {
             {
               routerProps =>
                 <DetailContext.Provider value={routerProps}>
-                  <Layout title={title} onLogout={handleLogout}>
+                  <Layout 
+                    searchParams={searchParams}
+                    setSearchParams={setSearchParams}
+                    title={title}
+                    onLogout={handleLogout}
+                  >
                     <DetailContext.Consumer>
-                      {value => <DetailPage value={value} setTitle={setTitle}/>}
+                      {value => <DetailPage value={value} setTitle={setTitle} searchParams={searchParams}/>}
                     </DetailContext.Consumer>
                   </Layout>
               
