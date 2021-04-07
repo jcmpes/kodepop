@@ -1,13 +1,12 @@
 import React from 'react';
 import FormField from './FormField';
 
-function Search() {
+function Search({ searchParams, setSearchParams }) {
 
-    const [searchValue, setSearchValue] = React.useState('')
 
     const handleSearchField = e => {
-        setSearchValue(e.value)
-        console.log(e)
+        setSearchParams(e.target.value)
+        console.log(e.target.value)
     }
 
     return (
@@ -16,7 +15,7 @@ function Search() {
                 type="search"
                 placeholder="Search"
                 onChange={handleSearchField}
-                value={searchValue}
+                value={searchParams}
             />
         </form>
     )

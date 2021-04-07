@@ -7,7 +7,7 @@ import { Section } from '../../shared'
 import '../css/Layout.css'
 
 
-function Layout({ title, children, searchParams, setSearchParams, ...props }) {
+function Layout({ title, children, ...props }) {
     return (
         <div className="layout">
             <Header className="header" {...props} />

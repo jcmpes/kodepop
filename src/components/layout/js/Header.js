@@ -5,7 +5,7 @@ import { Button, Emojis, Search } from '../../shared';
 
 import '../css/Header.css'
 
-function Header({ onLogout }) {
+function Header({ onLogout, ...props }) {
     return (
         <header className="header">
             <nav className="header-nav">
@@ -16,7 +16,7 @@ function Header({ onLogout }) {
                     </div>
                 </Link>
                 <div>
-                    <Search />
+                    <Search {...props}/>
                 </div>
                 <Button variant="" className="header-btn" onClick={onLogout}>
                     Log Out

@@ -11,7 +11,7 @@ import EmptyPage from './EmptyPage';
 // getAds().then((response) => allAds = response)
 
 // Component to load ads
-const AdsPage = ({ setTitle, ...props }) => {
+const AdsPage = ({ setTitle, searchParams }) => {
     const [ads, setAds] = React.useState([])
 
     React.useEffect(() => {
@@ -20,6 +20,12 @@ const AdsPage = ({ setTitle, ...props }) => {
         // Load ads
         getAds().then(setAds)
     }, [])
+
+    React.useEffect(() => {
+        // Change ads with filtering
+        getAds().then(res => setAds(res.filter(item => item.name === searchParams)))
+
+    }, [searchParams])
 
     const items = ads.map(item => (
         <article key={item.id} style={{ padding: '.75rem' }}>
