@@ -4,7 +4,7 @@ import storage from './utils/storage'
 import { clearSession } from './api/client';
 import { AdsPage, DetailPage, NewListingPage } from './components/ads';
 import Layout from './components/layout';
-import { LoginPage } from './components/auth';
+import { LoginPage, PrivateRoute } from './components/auth';
 
 import './App.css';
 
@@ -40,8 +40,8 @@ function App({ existingToken }) {
               <LoginPage onLogin={handleLogin} />
             }      
           </Route>
-          <Route path="/new" render={routerProps => <NewListingPage routerProps={routerProps}/>}/>
-          <Route path="/listing/:id">
+          <PrivateRoute user={user} path="/new" render={routerProps => <NewListingPage routerProps={routerProps}/>}/>
+          <PrivateRoute user={user} path="/listing/:id">
             {
               routerProps =>
                 <DetailContext.Provider value={routerProps}>
@@ -54,15 +54,12 @@ function App({ existingToken }) {
               
                 </DetailContext.Provider>
             }
-          </Route>
-          <Route exact path="/">
-            { user ?
+          </PrivateRoute>
+          <PrivateRoute user={user} exact path="/">
               <Layout title={title} onLogout={handleLogout}>
                 <AdsPage setTitle={setTitle}/>
-              </Layout> :
-              <Redirect to='/login' />
-            }
-          </Route>
+              </Layout>
+          </PrivateRoute>
           <Route path="/404">
             <div>404 Not Found</div>
           </Route>
