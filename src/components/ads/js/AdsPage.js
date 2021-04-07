@@ -23,7 +23,7 @@ const AdsPage = ({ setTitle, searchParams }) => {
 
     React.useEffect(() => {
         // Change ads with filtering
-        getAds().then(res => setAds(res.filter(item => item.name === searchParams)))
+        getAds().then(res => setAds(res.filter(item => item.name.includes(searchParams) )))
 
     }, [searchParams])
 
