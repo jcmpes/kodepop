@@ -40,7 +40,7 @@ function App({ existingToken }) {
               <LoginPage onLogin={handleLogin} />
             }      
           </Route>
-          <Route path="/new-listing" render={routerProps => <NewListingPage routerProps={routerProps}/>}/>
+          <Route path="/new" render={routerProps => <NewListingPage routerProps={routerProps}/>}/>
           <Route path="/listing/:id">
             {
               routerProps =>

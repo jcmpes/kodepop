@@ -6,11 +6,12 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 20px;
+    padding: 60px 30px;
 }
 
 .new-listing-form {
     width: 100%;
+    padding: 1rem;
 
 }
 

@@ -1,4 +1,5 @@
-import NewListingForm from './NewListingForm'
+import NewListingForm from './NewListingForm';
+import Layout from '../../layout'
 
 
 const NewListingPage = ({ routerProps }) => {
@@ -6,7 +7,9 @@ const NewListingPage = ({ routerProps }) => {
 
 
     return (
-        <NewListingForm routerProps={routerProps}></NewListingForm>
+        <Layout title={'New Listing'}>
+            <NewListingForm style={{ marginLeft: 'auto' }} routerProps={routerProps}></NewListingForm>
+        </Layout>
     )
 }
 
