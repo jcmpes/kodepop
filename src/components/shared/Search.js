@@ -1,6 +1,8 @@
 import React from 'react';
 import FormField from './FormField';
 
+import './Search.css';
+
 function Search({ searchParams, setSearchParams }) {
 
 
@@ -10,15 +12,16 @@ function Search({ searchParams, setSearchParams }) {
     }
 
     return (
-        <form onSubmit={e => e.preventDefault()}>
+        <form className='searchForm' onSubmit={e => e.preventDefault()}>
             <FormField 
                 type="search"
+                id="search-field"
                 placeholder="Search"
                 onChange={handleSearchField}
                 value={searchParams}
             />
         </form>
     )
-}
+};
 
 export default Search;

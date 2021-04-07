@@ -1,0 +1,7 @@
+#search-field {
+    padding: .3rem .5rem;
+    border-radius: 100px;
+    border: 1px solid grey;
+    margin-top: 14px;
+    font: 1.1rem sans-serif;
+}
