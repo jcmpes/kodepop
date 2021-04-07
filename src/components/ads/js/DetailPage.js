@@ -31,26 +31,28 @@ function DetailPage ({ setTitle, value }) {
 
     return(
         <div className={detailPageStyle["grid"]}>
+            {/*=== Listing Image ===*/}
             <div className={detailPageStyle["column-image"]}>
                 <div className={detailPageStyle["image-container"]}>
-                    {!loading ? 
+                    {!loading ? !listing.photo ? <p style={{ fontSize: '8rem', marginTop: '10px' }}>🎁</p> :
                     <img src={process.env.REACT_APP_API_BASE_URL + listing.photo} />
                     : <div className={detailPageStyle["image-loading"]}></div>
                     }
                 </div>          
             </div>
-                <div className={detailPageStyle["column-details"]}>
-                    {!loading ?
-                        <React.Fragment>
-                            <div className={detailPageStyle["price-container"]}>{listing.price} €</div>
-                            <div className={detailPageStyle["title-container"]}><h1>{listing.name}</h1></div>
-                        </React.Fragment>
-                    : <React.Fragment>
-                        <div className={detailPageStyle["price-loading"]}></div>
-                        <div className={detailPageStyle["title-loading"]}></div>
-                    </React.Fragment> 
-                    }
-                </div>
+            {/*=== Listing Details ===*/}
+            <div className={detailPageStyle["column-details"]}>
+                {!loading ?
+                    <React.Fragment>
+                        <div className={detailPageStyle["price-container"]}>{listing.price} €</div>
+                        <div className={detailPageStyle["title-container"]}><h1>{listing.name}</h1></div>
+                    </React.Fragment>
+                : <React.Fragment>
+                    <div className={detailPageStyle["price-loading"]}></div>
+                    <div className={detailPageStyle["title-loading"]}></div>
+                </React.Fragment> 
+                }
+            </div>
         </div>
             
     )
