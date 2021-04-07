@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import T from 'prop-types';
 import { getAds } from '../../../api/adverts';
-import Card from 'react-bootstrap/Card'
+import Card from 'react-bootstrap/Card';
 
 import adsPageStyle from '../css/AdsPage.module.css'
 import EmptyPage from './EmptyPage';
@@ -25,7 +25,7 @@ const AdsPage = ({ setTitle }) => {
         <article key={item.id} style={{ padding: '.75rem' }}>
             <Link to={`/listing/${item.id}`}>
                 <Card className={adsPageStyle['ad-card']}>
-                    <Card.Img 
+                    {/* <Card.Img 
                         variant="top"
                         style={{ 
                             borderTopLeftRadius: '1.1rem', 
@@ -35,7 +35,7 @@ const AdsPage = ({ setTitle }) => {
                         }}
                         src={`${process.env.REACT_APP_API_BASE_URL}${item.photo}`} 
                         alt={item.name + ( item.sale ? ' en venta' : ' se busca' )}
-                        />
+                    /> */}
                     <Card.Body style={{ padding: '1rem 1rem' }}>
                         <div style={{ fontSize: "2rem" }}>{item.price}€</div>
                         <Card.Title style={{ fontSize: "1.5rem", marginBottom: "1rem" }}>{item.name}</Card.Title>
