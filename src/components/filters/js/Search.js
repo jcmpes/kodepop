@@ -1,7 +1,7 @@
 import React from 'react';
-import FormField from './FormField';
+import FormField from '../../shared/FormField';
 
-import './Search.css';
+import '../css/Search.css';
 
 function Search({ searchParams, setSearchParams, ...props }) {
 
