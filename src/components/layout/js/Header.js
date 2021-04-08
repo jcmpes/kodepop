@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import T from 'prop-types';
-import { Button, Emojis, Search } from '../../shared';
+import { Button, Emojis } from '../../shared';
+import { Search, FilterBox } from '../../filters';
 
 import '../css/Header.css'
 
@@ -15,8 +16,11 @@ function Header({ onLogout, ...props }) {
                         kodepop
                     </div>
                 </Link>
-                <div>
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     <Search {...props}/>
+                    <FilterBox />
+                </div>
+                <div>
                 </div>
                 <Button variant="" className="header-btn" onClick={onLogout}>
                     Log Out

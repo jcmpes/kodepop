@@ -1,0 +1,10 @@
+#f-btn {
+    padding: .3rem .65rem;
+    border-radius: 100px;
+    border: 1px solid grey;
+    background-color: white;
+    margin-top: 16px;
+    margin-left: 3px;
+    font: 1.1rem sans-serif;
+    cursor: pointer;
+}
