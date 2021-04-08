@@ -1,7 +1,21 @@
+.search-form {
+    border: 1px solid red;
+    display: flex;
+    flex-direction: column;
+    align-self: start;
+}
+
+.search-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+}
+
 #search-field {
     padding: .3rem .8rem;
     border-radius: 100px;
     border: 1px solid grey;
-    margin-top: 14px;
+    margin-top: .5rem;
     font: 1.1rem sans-serif;
+    height: 2rem;
 }

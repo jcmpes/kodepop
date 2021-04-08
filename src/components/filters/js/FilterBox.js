@@ -1,12 +1,18 @@
-import '../css/FilterBox.css'
+import React from 'react';
 
-const FilterBox = () => {
-    
-    return (
-        <div>
-            <p id="f-btn">F</p>
-        </div>
-    )
+import '../css/FilterBox.css';
+
+const FilterBtn = ({ filterBox }) => {
+
+
+
+    if(filterBox) {
+        return (
+            <div id="filter-box">
+                
+            </div>
+        )
+    }
 };
 
-export default FilterBox;
+export default FilterBtn;
