@@ -8,6 +8,7 @@ import '../css/Layout.css'
 
 
 function Layout({ title, children, ...props }) {
+    // const detailContext = React.useContext(DetailContext)
     return (
         <div className="layout">
             <Header className="header" {...props} />

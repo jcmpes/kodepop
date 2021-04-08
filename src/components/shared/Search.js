@@ -3,12 +3,16 @@ import FormField from './FormField';
 
 import './Search.css';
 
-function Search({ searchParams, setSearchParams }) {
+function Search({ searchParams, setSearchParams, ...props }) {
 
 
     const handleSearchField = e => {
-        setSearchParams(e.target.value)
-        console.log(e.target.value)
+        setSearchParams(e.target.value);
+        if(props.routerProps) {
+            if(props.routerProps.history.pathname !== '/') {
+                props.routerProps.history.push('/');
+            }
+        }
     }
 
     return (

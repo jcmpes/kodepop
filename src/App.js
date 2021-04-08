@@ -47,19 +47,20 @@ function App({ existingToken }) {
           <PrivateRoute user={user} path="/listing/:id">
             {
               routerProps =>
-                <DetailContext.Provider value={routerProps}>
-                  <Layout 
+                  <Layout
+                    routerProps={routerProps}
                     searchParams={searchParams}
                     setSearchParams={setSearchParams}
                     title={title}
                     onLogout={handleLogout}
                   >
+                  <DetailContext.Provider value={routerProps}>
                     <DetailContext.Consumer>
                       {value => <DetailPage value={value} setTitle={setTitle} searchParams={searchParams}/>}
                     </DetailContext.Consumer>
+                  </DetailContext.Provider>
                   </Layout>
               
-                </DetailContext.Provider>
             }
           </PrivateRoute>
           <PrivateRoute user={user} exact path="/">
