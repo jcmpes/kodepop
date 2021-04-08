@@ -2,17 +2,14 @@ import React from 'react';
 
 import '../css/FilterBox.css';
 
-const FilterBtn = ({ filterBox }) => {
+const FilterBox = ({ filterBox }) => {
 
 
-
-    if(filterBox) {
-        return (
-            <div id="filter-box">
-                
-            </div>
-        )
-    }
+    return (
+        <div className={filterBox ? "filter-box open" : "filter-box"}>
+            
+        </div>
+    )
 };
 
-export default FilterBtn;
+export default FilterBox;

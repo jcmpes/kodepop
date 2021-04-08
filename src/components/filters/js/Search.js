@@ -29,11 +29,9 @@ function Search({ searchParams, setSearchParams, ...props }) {
                     onChange={handleSearchField}
                     value={searchParams}
                 />
-                <FilterBtn filterBox setFilterBox={setFilterBox}/>
+                <FilterBtn filterBox={filterBox} setFilterBox={setFilterBox}/>
             </div>
-
-            <FilterBox filterBox className="filterbox-wrapper"/>
-
+            <FilterBox className="filterbox-wrapper" filterBox={filterBox} />
         </form>
     )
 };

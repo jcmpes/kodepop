@@ -9,6 +9,7 @@
     display: flex;
     justify-content: center;
     align-items: baseline;
+    z-index: 99;
 }
 
 #search-field {

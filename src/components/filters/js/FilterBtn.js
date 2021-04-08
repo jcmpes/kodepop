@@ -3,15 +3,15 @@ import '../css/FilterBtn.css';
 
 const FilterBtn = ({ filterBox, setFilterBox }) => {
 
-
-    function toggleFilterBox(e) {
+    const toggleFilterBox = () => {
         filterBox ? setFilterBox(false) : setFilterBox(true)
+        console.log(filterBox)
     }
     
     return (
-            <div id="f-btn" onClick={toggleFilterBox}>
-                F
-            </div>
+        <div id="f-btn" onClick={toggleFilterBox}>
+            F
+        </div>
     )
 };
 
