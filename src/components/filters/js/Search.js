@@ -9,7 +9,10 @@ function Search({ searchParams, setSearchParams, ...props }) {
     const [filterBox, setFilterBox] = React.useState(false)
 
     const handleSearchField = e => {
-        setSearchParams(e.target.value);
+        setSearchParams(oldValues => ({
+            ...oldValues,
+            name: e.target.value
+        }));
         
         // Redirect to index ot show results when search is used
         if(props.routerProps) {
@@ -27,11 +30,16 @@ function Search({ searchParams, setSearchParams, ...props }) {
                     id="search-field"
                     placeholder="Search"
                     onChange={handleSearchField}
-                    value={searchParams}
+                    value={searchParams.name}
                 />
                 <FilterBtn filterBox={filterBox} setFilterBox={setFilterBox}/>
             </div>
-            <FilterBox className="filterbox-wrapper" filterBox={filterBox} />
+            <FilterBox 
+                className="filterbox-wrapper" 
+                filterBox={filterBox} 
+                searchParams={searchParams}
+                setSearchParams={setSearchParams}
+            />
         </form>
     )
 };

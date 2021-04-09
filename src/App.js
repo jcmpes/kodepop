@@ -11,7 +11,10 @@ import './App.css';
 function App({ existingToken }) {
   const [title, setTitle] = React.useState('Anuncios')
   const [user, setUser] = React.useState(null)
-  const [searchParams, setSearchParams] = React.useState('')
+  const [searchParams, setSearchParams] = React.useState({
+    name: '',
+    sale: null
+  })
 
   const handleLogin = userId => {
     setUser(userId);
