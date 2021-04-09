@@ -1,16 +1,20 @@
 import { SelectField } from "../../shared";
 
 
-const SaleSelect = ({ searchParams, setSearchParams }) => {    
+const TagsSelect = ({ searchParams, setSearchParams }) => {    
 
-    const saleOptions = [
+    const tagsOptions = [
         {
-            name: "Todo",
-            value: null
+            name: "Lifestyle",
+            value: "lifestyle"
         },
         {
-            name: "Venta",
-            value: true
+            name: "Mobile",
+            value: "mobile"
+        },
+        {
+            name: "Motor",
+            value: "motor"
         },
         {
             name: "Compra",
@@ -21,7 +25,7 @@ const SaleSelect = ({ searchParams, setSearchParams }) => {
     const handleSaleChange = (e) => {
         setSearchParams(oldValues => ({
             ...oldValues,
-            sale: e.target.value === 'true' ? true : 
+            tags: e.target.value === 'true' ? true : 
                 e.target.value === 'false' ? false :
                 null
         }))
@@ -29,11 +33,11 @@ const SaleSelect = ({ searchParams, setSearchParams }) => {
 
     return (
         <SelectField 
-            options={saleOptions}
+            options={tagsOptions}
             value={searchParams.sale}
             onChange={handleSaleChange}
         />
     )
 }
 
-export default SaleSelect;
+export default TagsSelect;

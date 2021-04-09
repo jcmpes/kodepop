@@ -1,1 +1,1 @@
-export { Search, FilterBtn, FilterBox, SaleSelect } from './js'
+export { Search, FilterBtn, FilterBox, SaleSelect, TagsSelect } from './js'

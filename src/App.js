@@ -13,7 +13,8 @@ function App({ existingToken }) {
   const [user, setUser] = React.useState(null)
   const [searchParams, setSearchParams] = React.useState({
     name: '',
-    sale: null
+    sale: null,
+    tags: ''
   })
 
   const handleLogin = userId => {
@@ -46,7 +47,9 @@ function App({ existingToken }) {
               <LoginPage onLogin={handleLogin} />
             }      
           </Route>
-          <PrivateRoute user={user} path="/new" render={routerProps => <NewListingPage routerProps={routerProps}/>}/>
+          <PrivateRoute user={user} path="/new" render={routerProps => 
+            <NewListingPage searchParams={searchParams} routerProps={routerProps}/>}
+          />
           <PrivateRoute user={user} path="/listing/:id">
             {
               routerProps =>
