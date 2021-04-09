@@ -5,7 +5,6 @@ const FilterBtn = ({ filterBox, setFilterBox }) => {
 
     const toggleFilterBox = () => {
         filterBox ? setFilterBox(false) : setFilterBox(true)
-        console.log(filterBox)
     }
     
     return (

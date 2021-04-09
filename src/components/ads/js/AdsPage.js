@@ -25,12 +25,22 @@ const AdsPage = ({ setTitle, searchParams }) => {
 
     React.useEffect(() => {             
         // Change ads with filtering
-        if (searchParams.name !== '') {
-            console.log('name ha cambiado')
-            setShownAds(allAds.filter(item => 
-                item.name.includes(searchParams.name) ? 
-                    item : null
-            ))
+        if (searchParams.name !== '' || searchParams.sale !== null) {
+            console.log('CAMBIA SALE A', searchParams.sale)
+            setShownAds(allAds
+                .filter(item => item.sale === searchParams.sale ? item : console.log(item))
+            )
+                // .filter(item => 
+                //     item.name.includes(searchParams.name) ? 
+                //         item : null
+                // ))
+        // } else if (searchParams.sale !== null) {
+        //     console.log('CAMBIA SALE A', searchParams.sale)
+        //     setShownAds(allAds
+        //         .filter(item =>
+        //             item.sale == searchParams.sale ?
+        //                 item : null
+        //         ))
         } else {
             setShownAds(allAds)
         }

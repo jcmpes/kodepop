@@ -7,6 +7,10 @@ const SaleSelect = ({ searchParams, setSearchParams }) => {
     
 
     const saleOptions = [
+        // {
+        //     name: "Todo",
+        //     value: null
+        // },
         {
             name: "Venta",
             value: true
@@ -20,7 +24,7 @@ const SaleSelect = ({ searchParams, setSearchParams }) => {
     const handleSaleChange = (e) => {
         setSearchParams(oldValues => ({
             ...oldValues,
-            sale: e.target.value
+            sale: e.target.value === 'true' ? true : false
         }))
     }
 
