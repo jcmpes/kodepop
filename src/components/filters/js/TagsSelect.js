@@ -17,25 +17,23 @@ const TagsSelect = ({ searchParams, setSearchParams }) => {
             value: "motor"
         },
         {
-            name: "Compra",
-            value: false
+            name: "Work",
+            value: "work"
         }
     ]
 
-    const handleSaleChange = (e) => {
+    const handleTagsChange = (e) => {
         setSearchParams(oldValues => ({
             ...oldValues,
-            tags: e.target.value === 'true' ? true : 
-                e.target.value === 'false' ? false :
-                null
+            tags: e.target.value
         }))
     }
 
     return (
         <SelectField 
             options={tagsOptions}
-            value={searchParams.sale}
-            onChange={handleSaleChange}
+            value={searchParams.tags}
+            onChange={handleTagsChange}
         />
     )
 }

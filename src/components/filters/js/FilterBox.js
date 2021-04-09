@@ -1,5 +1,5 @@
 import React from 'react';
-import { SaleSelect } from '../../filters';
+import { SaleSelect, TagsSelect } from '../../filters';
 
 import '../css/FilterBox.css';
 
@@ -8,7 +8,8 @@ const FilterBox = ({ filterBox, ...props }) => {
 
     return (
         <div className={filterBox ? "filter-box open" : "filter-box"}>
-            <SaleSelect {...props}/>
+            <SaleSelect {...props} />
+            <TagsSelect {...props} />
         </div>
     )
 };
