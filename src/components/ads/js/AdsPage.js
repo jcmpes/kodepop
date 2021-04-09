@@ -26,9 +26,8 @@ const AdsPage = ({ setTitle, searchParams }) => {
     React.useEffect(() => {             
         // Change ads with filtering
         if (searchParams.name !== '' || searchParams.sale !== null) {
-            console.log('CAMBIA SALE A', searchParams.sale)
             setShownAds(allAds
-                .filter(item => item.sale === searchParams.sale ? item : console.log(item))
+                .filter(item => searchParams.sale === null ? item : item.sale === searchParams.sale ? item : null)
             
                 .filter(item => 
                     item.name.includes(searchParams.name) ? 
@@ -44,7 +43,7 @@ const AdsPage = ({ setTitle, searchParams }) => {
         } else {
             setShownAds(allAds)
         }
-    }, [searchParams])
+    }, [searchParams.sale, searchParams.name])
 
     const items = shownAds.map(item => (
         <article key={item.id} style={{ padding: '.75rem' }}>

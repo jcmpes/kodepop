@@ -7,7 +7,7 @@ const NewListingPage = ({ routerProps, ...props }) => {
 
 
     return (
-        <Layout title={'New Listing'} {...props}>
+        <Layout title={'New Listing'} routerProps={routerProps} {...props}>
             <NewListingForm style={{ marginLeft: 'auto' }} routerProps={routerProps}></NewListingForm>
         </Layout>
     )

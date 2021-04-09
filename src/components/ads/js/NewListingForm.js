@@ -13,8 +13,6 @@ function NewListingForm({ routerProps }) {
     })
     const [image, setImage] = React.useState(null)
 
-    console.log(routerProps)
-
     const handleInputChange = e => {
         setFormFields(oldValues => {
             return {

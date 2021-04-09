@@ -48,7 +48,7 @@ function App({ existingToken }) {
             }      
           </Route>
           <PrivateRoute user={user} path="/new" render={routerProps => 
-            <NewListingPage searchParams={searchParams} routerProps={routerProps}/>}
+            <NewListingPage searchParams={searchParams} setSearchParams={setSearchParams} routerProps={routerProps}/>}
           />
           <PrivateRoute user={user} path="/listing/:id">
             {
