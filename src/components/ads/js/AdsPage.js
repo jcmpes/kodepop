@@ -29,11 +29,11 @@ const AdsPage = ({ setTitle, searchParams }) => {
             console.log('CAMBIA SALE A', searchParams.sale)
             setShownAds(allAds
                 .filter(item => item.sale === searchParams.sale ? item : console.log(item))
-            )
-                // .filter(item => 
-                //     item.name.includes(searchParams.name) ? 
-                //         item : null
-                // ))
+            
+                .filter(item => 
+                    item.name.includes(searchParams.name) ? 
+                        item : null
+                ))
         // } else if (searchParams.sale !== null) {
         //     console.log('CAMBIA SALE A', searchParams.sale)
         //     setShownAds(allAds
