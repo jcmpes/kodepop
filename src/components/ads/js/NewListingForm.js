@@ -53,11 +53,11 @@ function NewListingForm({ routerProps }) {
     const handleSubmit = e => {
         e.preventDefault();
         const formData = new FormData();
-        formData.append('name', formFields.name)
-        formData.append('price', formFields.price)
-        formData.append('sale', formFields.sale)
-        formData.append('tags', formFields.tags)
-        formData.append('photo', image)
+        formData.append('name', formFields.name);
+        formData.append('price', formFields.price);
+        formData.append('sale', formFields.sale);
+        formData.append('tags', formFields.tags);
+        if (image) formData.append('photo', image);
         newListing(formData)
             .then(res => routerProps.history.push(`/listing/${res.id}`))
             .catch(err => console.log(err))
