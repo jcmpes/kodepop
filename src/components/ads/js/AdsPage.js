@@ -12,22 +12,31 @@ import EmptyPage from './EmptyPage';
 
 // Component to load ads
 const AdsPage = ({ setTitle, searchParams }) => {
-    const [ads, setAds] = React.useState([])
+    const [allAds, setAllAds] = React.useState([])
+    const [shownAds, setShownAds] = React.useState([])
 
     React.useEffect(() => {
         // Set the page title
         setTitle('AdsPage')
         // Load ads
-        getAds().then(setAds)
+        getAds().then(setAllAds)
+        setShownAds(allAds)
     }, [])
 
-    React.useEffect(() => {
+    React.useEffect(() => {             
         // Change ads with filtering
-        getAds().then(res => setAds(res.filter(item => item.name.includes(searchParams.name) )))
-
+        if (searchParams.name !== '') {
+            console.log('name ha cambiado')
+            setShownAds(allAds.filter(item => 
+                item.name.includes(searchParams.name) ? 
+                    item : null
+            ))
+        } else {
+            setShownAds(allAds)
+        }
     }, [searchParams])
 
-    const items = ads.map(item => (
+    const items = shownAds.map(item => (
         <article key={item.id} style={{ padding: '.75rem' }}>
             <Link to={`/listing/${item.id}`}>
                 <Card className={adsPageStyle['ad-card']}>
@@ -76,7 +85,7 @@ const AdsPage = ({ setTitle, searchParams }) => {
 
     return(
         <div className="ads-page">
-            { (ads.length === 0) ? <EmptyPage /> :
+            { (shownAds.length === 0) ? <EmptyPage /> :
                 <div className="ads-wrapper"style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
                     {items}
                 </div>
