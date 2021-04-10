@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, FormField, SelectField } from "../../shared";
 import { newListing } from '../../../api/adverts';
 
-import newListingFormStyle from '../css/NewListingForm.module.css'
+import newListingFormStyle from '../css/NewListingForm.module.css';
 
 function NewListingForm({ routerProps }) {
     const [formFields, setFormFields] = React.useState({
