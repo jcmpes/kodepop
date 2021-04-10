@@ -12,6 +12,7 @@ import EmptyPage from './EmptyPage';
 
 // Component to load ads
 const AdsPage = ({ setTitle, searchParams }) => {
+    const [MAX_PRICE, setMAX_PRICE] = React.useState(10000)
     const [allAds, setAllAds] = React.useState([])
     const [shownAds, setShownAds] = React.useState([])
 
@@ -35,6 +36,13 @@ const AdsPage = ({ setTitle, searchParams }) => {
                 .filter(item => searchParams.tags === '' ? 
                     item : item.tags.includes(searchParams.tags) ? 
                     item : null)
+                // Filtering by price range
+                .filter(item => searchParams.priceMin === 0 ? 
+                    item : item.price > searchParams.priceMin ?
+                    item : null)
+                .filter(item => searchParams.priceMax === MAX_PRICE ?
+                    item : item.price < searchParams.priceMax ?
+                    item: null)
                 // Filtering by name
                 .filter(item => 
                     item.name.toLowerCase().includes(searchParams.name.toLowerCase()) ? 

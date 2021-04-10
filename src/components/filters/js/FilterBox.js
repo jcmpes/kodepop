@@ -8,15 +8,15 @@ import '../css/FilterBox.css';
 const FilterBox = ({ filterBox, ...props }) => {
 
     const Range = createSliderWithTooltip(Slider.Range)
-
-    const priceArrayRef = React.useRef([])
+    // const [priceRange, setPriceRange] = React.useState([0, 10000])
+    const priceArrayRef = React.useRef([0, 10000])
 
     const handleRangeChange = range => {
         priceArrayRef.current = [range[0], range[1]]
-        console.log(priceArrayRef.current)
+        console.log('SET PRICE RANGE STATE:', priceArrayRef.current)
     }
 
-    React.useEffect(() => {
+    const updatePriceRange = range => {
         props.setSearchParams(oldValues => {
             return {
                 ...oldValues,
@@ -24,7 +24,20 @@ const FilterBox = ({ filterBox, ...props }) => {
                 priceMax: priceArrayRef.current[1]
             }
         })
-    }, [])
+    }
+
+    // React.useEffect(() => {
+
+    //     props.setSearchParams(oldValues => {
+    //         return {
+    //             ...oldValues,
+    //             priceMin: priceArrayRef.current[0],
+    //             priceMax: priceArrayRef.current[1]
+    //         }
+    //     })
+    //     console.log(priceArrayRef.current)
+
+    // }, [priceArrayRef.current[0], priceArrayRef.current[1]])
 
     return (
         <div className={filterBox ? "filter-box open" : "filter-box"}>
@@ -34,8 +47,13 @@ const FilterBox = ({ filterBox, ...props }) => {
                 className="slider" 
                 step={10} 
                 max={10000}
-                onChange={handleRangeChange}    
+                onChange={handleRangeChange}
+                onAfterChange={updatePriceRange}
+                allowCross={false}
+                value={priceArrayRef.current}
+                defaultValue={[0, 10000]}   
             />
+            <div>{`min:${priceArrayRef.current[0]} max:${priceArrayRef.current[1]}`}</div>
         </div>
     )
 };
