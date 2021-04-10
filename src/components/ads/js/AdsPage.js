@@ -25,14 +25,20 @@ const AdsPage = ({ setTitle, searchParams }) => {
 
     React.useEffect(() => {             
         // Change ads with filtering
-        if (searchParams.name !== '' || searchParams.sale !== null) {
+        if (searchParams.name !== '' || searchParams.sale !== null || searchParams.tags !== '') {
             setShownAds(allAds
                 // Filtering by sale type
-                .filter(item => searchParams.sale === null ? item : item.sale === searchParams.sale ? item : null)
+                .filter(item => searchParams.sale === null ? 
+                    item : item.sale === searchParams.sale ? 
+                    item : null)
+                // Filtering by tags
+                .filter(item => searchParams.tags === '' ? 
+                    item : item.tags.includes(searchParams.tags) ? 
+                    item : null)
                 // Filtering by name
                 .filter(item => 
                     item.name.toLowerCase().includes(searchParams.name.toLowerCase()) ? 
-                        item : null
+                    item : null
                 ))
         // } else if (searchParams.sale !== null) {
         //     console.log('CAMBIA SALE A', searchParams.sale)
@@ -44,7 +50,7 @@ const AdsPage = ({ setTitle, searchParams }) => {
         } else {
             setShownAds(allAds)
         }
-    }, [searchParams.sale, searchParams.name])
+    }, [searchParams.sale, searchParams.name, searchParams.tags])
 
     const items = shownAds.map(item => (
         <article key={item.id} style={{ padding: '.75rem' }}>
