@@ -21,6 +21,10 @@ const TagsSelect = ({ searchParams, setSearchParams, tags }) => {
         } else {
             const defaultTagsOptions = [
                 {
+                    name: "Categoría",
+                    value: ""
+                },
+                {
                     name: "Lifestyle",
                     value: "lifestyle"
                 },

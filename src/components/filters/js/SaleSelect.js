@@ -5,7 +5,7 @@ const SaleSelect = ({ searchParams, setSearchParams }) => {
 
     const saleOptions = [
         {
-            name: "Todo",
+            name: "Compra o Venta",
             value: null
         },
         {
