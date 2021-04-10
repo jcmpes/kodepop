@@ -2,9 +2,9 @@ import React from 'react';
 import T from 'prop-types';
 import Header from './Header';
 import Footer from './Footer';
-import { Section } from '../../shared'
+import { Section } from '../../shared';
 
-import '../css/Layout.css'
+import '../css/Layout.css';
 
 
 function Layout({ title, children, ...props }) {

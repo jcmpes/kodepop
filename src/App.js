@@ -51,8 +51,6 @@ function App({ existingToken }) {
     }
   }, [])
 
-  
-
   const DetailContext = React.createContext();
 
   return (
@@ -66,12 +64,13 @@ function App({ existingToken }) {
             }      
           </Route>
           <PrivateRoute user={user} path="/new" render={routerProps => 
-            <NewListingPage searchParams={searchParams} setSearchParams={setSearchParams} routerProps={routerProps}/>}
+            <NewListingPage tags={tags} searchParams={searchParams} setSearchParams={setSearchParams} routerProps={routerProps}/>}
           />
           <PrivateRoute user={user} path="/listing/:id">
             {
               routerProps =>
                   <Layout
+                    tags={tags}
                     routerProps={routerProps}
                     searchParams={searchParams}
                     setSearchParams={setSearchParams}
@@ -80,7 +79,7 @@ function App({ existingToken }) {
                   >
                   <DetailContext.Provider value={routerProps}>
                     <DetailContext.Consumer>
-                      {value => <DetailPage value={value} setTitle={setTitle} searchParams={searchParams}/>}
+                      {value => <DetailPage value={value} tags={tags} setTitle={setTitle} searchParams={searchParams}/>}
                     </DetailContext.Consumer>
                   </DetailContext.Provider>
                   </Layout>
@@ -89,6 +88,7 @@ function App({ existingToken }) {
           </PrivateRoute>
           <PrivateRoute user={user} exact path="/">
             <Layout
+              tags={tags}
               searchParams={searchParams}
               setSearchParams={setSearchParams}
               title={title}

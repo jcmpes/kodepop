@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import T from 'prop-types';
 import { Button, Emojis } from '../../shared';
-import { Search, FilterBtn } from '../../filters';
+import { Search } from '../../filters';
 
 import '../css/Header.css'
 
