@@ -15,7 +15,9 @@ function App({ existingToken }) {
   const [searchParams, setSearchParams] = React.useState({
     name: '',
     sale: null,
-    tags: ''
+    tags: '',
+    priceMin: 0,
+    priceMax: 10000
   })
   const [tags, setTags] = React.useState([])
 
