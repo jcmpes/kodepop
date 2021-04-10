@@ -27,10 +27,11 @@ const AdsPage = ({ setTitle, searchParams }) => {
         // Change ads with filtering
         if (searchParams.name !== '' || searchParams.sale !== null) {
             setShownAds(allAds
+                // Filtering by sale type
                 .filter(item => searchParams.sale === null ? item : item.sale === searchParams.sale ? item : null)
-            
+                // Filtering by name
                 .filter(item => 
-                    item.name.includes(searchParams.name) ? 
+                    item.name.toLowerCase().includes(searchParams.name.toLowerCase()) ? 
                         item : null
                 ))
         // } else if (searchParams.sale !== null) {
