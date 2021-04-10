@@ -96,16 +96,6 @@ const AdsPage = ({ setTitle, searchParams }) => {
                 </Card>
             </Link>
         </article>
-        // <li key={item.id} onClick={e => alert("Contruyendo enlace")}>
-        //     <div className={adsPageStyle['ad-wrapper']}>
-        //         <img 
-        //             src={item.photo} 
-        //             alt={item.name + ( item.sale ? ' en venta' : ' se busca' )}
-        //         />
-        //         <h2>{item.price} €</h2>
-        //         <h2>{item.name}</h2>
-        //     </div>
-        // </li>
     ));
 
     return(
@@ -120,7 +110,8 @@ const AdsPage = ({ setTitle, searchParams }) => {
 }
 
 AdsPage.propTypes = {
-    setTitle: T.func.isRequired
+    setTitle: T.func.isRequired,
+    searchParams: T.object.isRequired
 }
 
 export default AdsPage
