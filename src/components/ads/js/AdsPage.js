@@ -7,12 +7,9 @@ import Card from 'react-bootstrap/Card';
 import adsPageStyle from '../css/AdsPage.module.css'
 import EmptyPage from './EmptyPage';
 
-// let allAds = []
-// getAds().then((response) => allAds = response)
-
 // Component to load ads
 const AdsPage = ({ setTitle, searchParams }) => {
-    const [MAX_PRICE, setMAX_PRICE] = React.useState(10000)
+    const [MAX_PRICE, setMAX_PRICE] = React.useState(1000)
     const [allAds, setAllAds] = React.useState([])
     const [shownAds, setShownAds] = React.useState([])
 
@@ -26,7 +23,11 @@ const AdsPage = ({ setTitle, searchParams }) => {
 
     React.useEffect(() => {             
         // Change ads with filtering
-        if (searchParams.name !== '' || searchParams.sale !== null || searchParams.tags !== '') {
+        if (searchParams.name !== '' || 
+            searchParams.sale !== null || 
+            searchParams.tags !== '' ||
+            searchParams.priceMax !== MAX_PRICE ||
+            searchParams.priceMin !== 0) {
             setShownAds(allAds
                 // Filtering by sale type
                 .filter(item => searchParams.sale === null ? 
@@ -58,7 +59,7 @@ const AdsPage = ({ setTitle, searchParams }) => {
         } else {
             setShownAds(allAds)
         }
-    }, [searchParams.sale, searchParams.name, searchParams.tags])
+    }, [searchParams])
 
     const items = shownAds.map(item => (
         <article key={item.id} style={{ padding: '.75rem' }}>

@@ -9,7 +9,7 @@ const FilterBox = ({ filterBox, ...props }) => {
 
     const Range = createSliderWithTooltip(Slider.Range)
     // const [priceRange, setPriceRange] = React.useState([0, 10000])
-    const priceArrayRef = React.useRef([0, 10000])
+    const priceArrayRef = React.useRef([0, 1000])
 
     const handleRangeChange = range => {
         priceArrayRef.current = [range[0], range[1]]
@@ -46,12 +46,12 @@ const FilterBox = ({ filterBox, ...props }) => {
             <Range 
                 className="slider" 
                 step={10} 
-                max={10000}
+                max={1000}
                 onChange={handleRangeChange}
                 onAfterChange={updatePriceRange}
                 allowCross={false}
-                value={priceArrayRef.current}
-                defaultValue={[0, 10000]}   
+                value={[props.searchParams.priceMin, props.searchParams.priceMax]}
+                defaultValue={[0, 1000]}   
             />
             <div>{`min:${priceArrayRef.current[0]} max:${priceArrayRef.current[1]}`}</div>
         </div>
