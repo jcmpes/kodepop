@@ -7,10 +7,11 @@ import { configureClient } from './api/client';
 
 import './index.css';
 
+// Log user initially
 const accessToken = storage.get('auth');
 if(accessToken) {
   configureClient({ accessToken })
-}
+} 
 
 ReactDOM.render(
   <React.StrictMode>

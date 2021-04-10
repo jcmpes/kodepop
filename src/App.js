@@ -5,6 +5,7 @@ import { clearSession } from './api/client';
 import { AdsPage, DetailPage, NewListingPage } from './components/ads';
 import Layout from './components/layout';
 import { LoginPage, PrivateRoute } from './components/auth';
+import { getTags } from './api/adverts'
 
 import './App.css';
 
@@ -16,9 +17,26 @@ function App({ existingToken }) {
     sale: null,
     tags: ''
   })
+  const [tags, setTags] = React.useState([])
+
+  const saveTags = () => {
+    try {
+      // Set tags dynamically
+      getTags().then(res => setTags(res))
+    } catch (error) {
+      // Set tags by default
+      setTags([
+        "lifestyle",
+        "mobile",
+        "motor",
+        "work"
+      ])
+    }
+  }
 
   const handleLogin = userId => {
     setUser(userId);
+    saveTags();
     // history.push('/');
   }
 
