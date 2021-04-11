@@ -59,7 +59,7 @@ function NewListingForm({ routerProps }) {
         formData.append('tags', formFields.tags);
         if (image) formData.append('photo', image);
         newListing(formData)
-            .then(res => routerProps.history.push(`/listing/${res.id}`))
+            .then(res => routerProps.history.push(`/advert/${res.id}`))
             .catch(err => console.log(err))
     }
 
