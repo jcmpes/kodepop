@@ -14,7 +14,7 @@ export default class EmptyPage extends React.Component {
                     <p>Not a single listing here, fancy a new one?</p>
                 </div>
                 <div className="button-empty-page">
-                    <Link to="/new">
+                    <Link to="/advert/new">
                         <Button>New Ad</Button>
                     </Link>
                 </div>

@@ -20,7 +20,7 @@ function Header({ onLogout, ...props }) {
                 </Link>
                 <Search {...props}/>
                 <div>
-                    <Link to="/new">
+                    <Link to="/advert/new">
                         <Button
                             style={{ padding: '.47rem .49rem', marginRight: '3px' }}
                         >

@@ -72,10 +72,20 @@ function App({ existingToken }) {
               <LoginPage onLogin={handleLogin} />
             }      
           </Route>
-          <PrivateRoute user={user} path="/new" render={routerProps => 
-            <NewListingPage tags={tags} searchParams={searchParams} setSearchParams={setSearchParams} routerProps={routerProps}/>}
+          <PrivateRoute 
+            user={user}
+            path="/advert/new"
+            render={routerProps => 
+                <NewListingPage 
+                  tags={tags}
+                  searchParams={searchParams}
+                  setSearchParams={setSearchParams}
+                  routerProps={routerProps}
+                  onLogout={handleLogout}
+                />
+            }
           />
-          <PrivateRoute user={user} path="/listing/:id">
+          <PrivateRoute user={user} path="/advert/:id">
             {
               routerProps =>
                   <Layout

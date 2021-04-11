@@ -55,7 +55,7 @@ const AdsPage = ({ setTitle, searchParams }) => {
 
     const items = listings.map(item => (
         <article key={item.id} style={{ padding: '.75rem' }}>
-            <Link to={`/listing/${item.id}`}>
+            <Link to={`/advert/${item.id}`}>
                 <Card className={adsPageStyle['ad-card']}>
                     {/* Uncommnet below to show images in ads cards*/}
                     {/* <Card.Img 
