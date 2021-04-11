@@ -1,0 +1,19 @@
+.remove-listing-btn {
+    padding: .2rem;
+    width: 85%;
+    border-style: double;
+    border: 1px solid #e1a2a2;
+    opacity: .5;
+    color: black;
+    cursor: pointer;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1rem;
+}
+
+.remove-listing-btn:hover {
+    background-color: #fe1010;
+    color: white;
+    opacity: 1;
+
+}

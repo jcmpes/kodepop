@@ -1,14 +1,25 @@
 import React from 'react';
 import T from 'prop-types';
 import { Redirect } from 'react-router-dom';
-import { getDetail } from '../../../api/adverts';
+import { getDetail, deleteListing } from '../../../api/adverts';
+import RemoveListing from './RemoveListingBtn';
 
 import detailPageStyle from '../css/DetailPage.module.css';
 
 function DetailPage ({ setTitle, value }) {
-    const [listing, setListing] = React.useState({photo: ''})
-    const [loading, setLoading] = React.useState(true)
-    const [error, setError] = React.useState(null)
+    const [listing, setListing] = React.useState({photo: ''});
+    const [loading, setLoading] = React.useState(true);
+    const [error, setError] = React.useState(null);
+
+    const removeListing = () => {
+        try {
+            deleteListing(value.match.params.id).then(
+                value.history.replace('/')
+            )
+        } catch (error) {
+            setError(error)
+        }
+    }
 
     const handleListingLoad = async () => {
         try {
@@ -41,7 +52,8 @@ function DetailPage ({ setTitle, value }) {
                             : <img src={process.env.REACT_APP_API_BASE_URL + listing.photo} />
                         : <div className={detailPageStyle["image-loading"]}></div>
                     }
-                </div>          
+                </div>
+                <RemoveListing removeListing={removeListing} />
             </div>
             {/*=== Listing Details ===*/}
             <div className={detailPageStyle["column-details"]}>

@@ -20,3 +20,8 @@ export const getTags = async () => {
     const url = `${process.env.REACT_APP_API_BASE_URL}/api/v1/adverts/tags`;
     return client.get(url)
 }
+
+export const deleteListing = async id => {
+    const url = `${process.env.REACT_APP_API_BASE_URL}/api/v1/adverts/${id}`;
+    return client.delete(url)
+}

@@ -1,9 +1,6 @@
 import NewListingForm from './NewListingForm';
 import Layout from '../../layout';
 
-import newListingPageStyle from '../css/NewListingPage.module.css';
-
-
 const NewListingPage = ({ routerProps, ...props }) => {
 
 
