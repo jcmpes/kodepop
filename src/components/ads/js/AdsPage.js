@@ -58,7 +58,7 @@ const AdsPage = ({ setTitle, searchParams }) => {
         } else {
             setListings(allAds)
         }
-    }, [allAds, searchParams])
+    }, [searchParams])
 
     const items = listings.map(item => (
         <article key={item.id} style={{ padding: '.75rem' }}>
