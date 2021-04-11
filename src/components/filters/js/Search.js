@@ -1,4 +1,5 @@
 import React from 'react';
+import T from 'prop-types';
 import { FormField } from '../../shared';
 import { FilterBtn, FilterBox } from '../../filters';
 
@@ -6,7 +7,7 @@ import '../css/Search.css';
 
 function Search({ searchParams, setSearchParams, ...props }) {
 
-    const [filterBox, setFilterBox] = React.useState(false)
+    const [showFilterBox, setShowFilterBox] = React.useState(false)
 
     const handleSearchField = e => {
         setSearchParams(oldValues => ({
@@ -32,16 +33,21 @@ function Search({ searchParams, setSearchParams, ...props }) {
                     onChange={handleSearchField}
                     value={searchParams.name}
                 />
-                <FilterBtn filterBox={filterBox} setFilterBox={setFilterBox}/>
+                <FilterBtn showFilterBox={showFilterBox} setShowFilterBox={setShowFilterBox}/>
             </div>
             <FilterBox 
                 className="filterbox-wrapper" 
-                filterBox={filterBox} 
+                showFilterBox={showFilterBox} 
                 searchParams={searchParams}
                 setSearchParams={setSearchParams}
             />
         </form>
     )
 };
+
+Search.propTypes = {
+    searchParams: T.object.isRequired,
+    setSearchParams: T.func.isRequired
+}
 
 export default Search;

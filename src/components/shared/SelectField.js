@@ -1,4 +1,5 @@
 import React from 'react';
+import T from 'prop-types';
 
 import './SelectField.css'
 
@@ -23,6 +24,15 @@ function SelectField({ placeholder, options, multiple, ...props }) {
             </label>
         </div>
     )
+}
+
+SelectField.propTypes = {
+    options: T.object.isRequired
+}
+
+SelectField.defaultTypes = {
+    placeholder: '',
+    multiple: false
 }
 
 export default SelectField;

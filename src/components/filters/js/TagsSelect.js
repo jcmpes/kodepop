@@ -1,4 +1,5 @@
 import React from "react";
+import T from 'prop-types';
 import { SelectField } from "../../shared";
 
 const TagsSelect = ({ searchParams, setSearchParams, tags }) => {    
@@ -45,19 +46,17 @@ const TagsSelect = ({ searchParams, setSearchParams, tags }) => {
         } 
     };
     
+    // Fill selector with options on first render
     React.useEffect(() => {
-        console.log(tags)
         fillTagsOptions(tags, setTagsOptions);
-        console.log(tagsOptions)
-
-    }, [])
+    }, []);
 
     const handleTagsChange = (e) => {
         setSearchParams(oldValues => ({
             ...oldValues,
             tags: e.target.value
-        }))
-    }
+        }));
+    };
 
     return (
         <SelectField 
@@ -65,7 +64,12 @@ const TagsSelect = ({ searchParams, setSearchParams, tags }) => {
             value={searchParams.tags}
             onChange={handleTagsChange}
         />
-    )
-}
+    );
+};
+
+TagsSelect.propTypes = {
+    searchParams: T.object.isRequired,
+    setSearchParams: T.func.isRequired
+};
 
 export default TagsSelect;

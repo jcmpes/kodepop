@@ -1,4 +1,5 @@
 import React from 'react';
+import T from 'prop-types';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import storage from './utils/storage'
 import { clearSession } from './api/client';
@@ -10,16 +11,16 @@ import { getTags } from './api/adverts'
 import './App.css';
 
 function App({ existingToken }) {
-  const [title, setTitle] = React.useState('Anuncios')
-  const [user, setUser] = React.useState(null)
+  const [title, setTitle] = React.useState('Anuncios');
+  const [user, setUser] = React.useState(null);
   const [searchParams, setSearchParams] = React.useState({
     name: '',
     sale: null,
     tags: '',
     priceMin: 0,
     priceMax: process.env.MAX_PRICE
-  })
-  const [tags, setTags] = React.useState([])
+  });
+  const [tags, setTags] = React.useState([]);
 
   const saveTags = () => {
     try {
@@ -34,7 +35,7 @@ function App({ existingToken }) {
         "work"
       ])
     }
-  }
+  };
 
   const handleLogin = userId => {
     setUser(userId);
@@ -108,5 +109,9 @@ function App({ existingToken }) {
     </div>
   );
 };
+
+App.propTypes = {
+  existingToken: T.bool.isRequired  
+}
 
 export default App;

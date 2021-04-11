@@ -1,10 +1,11 @@
 import React from 'react';
+import T from 'prop-types';
 import '../css/FilterBtn.css';
 
-const FilterBtn = ({ filterBox, setFilterBox }) => {
+const FilterBtn = ({ showFilterBox, setShowFilterBox }) => {
 
     const toggleFilterBox = () => {
-        filterBox ? setFilterBox(false) : setFilterBox(true)
+        showFilterBox ? setShowFilterBox(false) : setShowFilterBox(true)
     }
     
     return (
@@ -13,5 +14,10 @@ const FilterBtn = ({ filterBox, setFilterBox }) => {
         </div>
     )
 };
+
+FilterBtn.propTypes = {
+    showFilterBox: T.bool.isRequired,
+    setShowFilterBox: T.func.isRequired
+}
 
 export default FilterBtn;
