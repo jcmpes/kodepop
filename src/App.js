@@ -17,7 +17,7 @@ function App({ existingToken }) {
     sale: null,
     tags: '',
     priceMin: 0,
-    priceMax: 10000
+    priceMax: process.env.MAX_PRICE
   })
   const [tags, setTags] = React.useState([])
 

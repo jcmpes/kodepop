@@ -9,26 +9,25 @@ import EmptyPage from './EmptyPage';
 
 // Component to load ads
 const AdsPage = ({ setTitle, searchParams }) => {
-    const [MAX_PRICE, setMAX_PRICE] = React.useState(1000)
     const [allAds, setAllAds] = React.useState([])
-    const [shownAds, setShownAds] = React.useState([])
+    const [listings, setListings] = React.useState([])
 
     React.useEffect(() => {
         // Set the page title
         setTitle('AdsPage')
         // Load ads
         getAds().then(setAllAds)
-        setShownAds(allAds)
-    }, [])
+        setListings(allAds)
+    }, [allAds])
 
     React.useEffect(() => {             
         // Change ads with filtering
         if (searchParams.name !== '' || 
             searchParams.sale !== null || 
             searchParams.tags !== '' ||
-            searchParams.priceMax !== MAX_PRICE ||
+            searchParams.priceMax !== process.env.MAX_PRICE ||
             searchParams.priceMin !== 0) {
-            setShownAds(allAds
+            setListings(allAds
                 // Filtering by sale type
                 .filter(item => searchParams.sale === null ? 
                     item : item.sale === searchParams.sale ? 
@@ -41,7 +40,7 @@ const AdsPage = ({ setTitle, searchParams }) => {
                 .filter(item => searchParams.priceMin === 0 ? 
                     item : item.price > searchParams.priceMin ?
                     item : null)
-                .filter(item => searchParams.priceMax === MAX_PRICE ?
+                .filter(item => searchParams.priceMax === process.env.MAX_PRICE ?
                     item : item.price < searchParams.priceMax ?
                     item: null)
                 // Filtering by name
@@ -57,11 +56,11 @@ const AdsPage = ({ setTitle, searchParams }) => {
         //                 item : null
         //         ))
         } else {
-            setShownAds(allAds)
+            setListings(allAds)
         }
-    }, [searchParams])
+    }, [allAds, searchParams])
 
-    const items = shownAds.map(item => (
+    const items = listings.map(item => (
         <article key={item.id} style={{ padding: '.75rem' }}>
             <Link to={`/listing/${item.id}`}>
                 <Card className={adsPageStyle['ad-card']}>
@@ -100,7 +99,7 @@ const AdsPage = ({ setTitle, searchParams }) => {
 
     return(
         <div className="ads-page">
-            { (shownAds.length === 0) ? <EmptyPage /> :
+            { (listings.length === 0) ? <EmptyPage /> :
                 <div className="ads-wrapper"style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
                     {items}
                 </div>
