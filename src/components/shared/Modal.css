@@ -1,0 +1,8 @@
+.modal-wrapper {
+    opacity: .1;
+    
+}
+
+.modal-wrapper.open {
+    opacity: 1;
+}

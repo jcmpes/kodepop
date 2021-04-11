@@ -2,6 +2,7 @@ import React from 'react';
 import T from 'prop-types';
 import { getDetail, deleteListing } from '../../../api/adverts';
 import RemoveListing from './RemoveListingBtn';
+import Modal from '../../shared/Modal';
 
 import detailPageStyle from '../css/DetailPage.module.css';
 
@@ -10,12 +11,15 @@ function DetailPage ({ setTitle, value }) {
     const [loading, setLoading] = React.useState(true);
     const [error, setError] = React.useState(null);
 
+    // Modal
+    const [modal, setModal] = React.useState(false);
+
     const removeListing = async () => {
         try {
-            await deleteListing(value.match.params.id)
-            value.history.replace('/')
+            await deleteListing(value.match.params.id);
+            value.history.replace('/');
         } catch (error) {
-            setError(error)
+            setError(error);
         }
     }
 
@@ -41,6 +45,12 @@ function DetailPage ({ setTitle, value }) {
 
     return(
         <div className={detailPageStyle["grid"]}>
+            <Modal 
+                modal={modal} 
+                setModal={setModal}
+                removeListing={removeListing}
+            >
+            </Modal>
             {error && <div className="delete-error" style={{ backgroundColor: 'coral', padding: '1rem' }}>{error.message}</div>}
             {/*=== Listing Image ===*/}
             <div className={detailPageStyle["column-image"]}>
@@ -52,7 +62,8 @@ function DetailPage ({ setTitle, value }) {
                         : <div className={detailPageStyle["image-loading"]}></div>
                     }
                 </div>
-                <RemoveListing removeListing={removeListing} />
+                {/*=== Delete Listing Button ===*/}
+                <RemoveListing setModal={setModal} />
             </div>
             {/*=== Listing Details ===*/}
             <div className={detailPageStyle["column-details"]}>

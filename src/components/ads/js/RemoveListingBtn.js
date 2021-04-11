@@ -1,11 +1,10 @@
-import { Redirect } from "react-router";
-
+import React from 'react';
 import removeListingBtnStyle from '../css/RemoveListingBtn.module.css';
 
-const RemoveListing = ({ removeListing }) => {
+const RemoveListing = ({ setModal }) => {
 
     const handleRemoveListing = () => {
-        removeListing();
+        setModal(true)
     }
 
     return (

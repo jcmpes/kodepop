@@ -114,7 +114,11 @@ function App({ existingToken }) {
               title={title}
               onLogout={handleLogout}
             >
-              <AdsPage searchParams={searchParams} setTitle={setTitle} />
+              <AdsPage 
+                searchParams={searchParams}
+                setTitle={setTitle}
+                onLogout={handleLogout}  
+              />
             </Layout>
           </PrivateRoute>
           <PrivateRoute exact path="/">

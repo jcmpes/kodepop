@@ -8,7 +8,7 @@ import EmptyPage from './EmptyPage';
 import adsPageStyle from '../css/AdsPage.module.css'
 
 // Component to load ads
-const AdsPage = ({ setTitle, searchParams }) => {
+const AdsPage = ({ setTitle, searchParams, onLogout }) => {
     const [allAds, setAllAds] = React.useState([])
     const [listings, setListings] = React.useState([])
     const [error, setError] = React.useState(null)
@@ -21,9 +21,8 @@ const AdsPage = ({ setTitle, searchParams }) => {
             // Set the page title
             setTitle('Anuncios')
         }).catch(error => {
-            setError(error);
-            setTitle('');
-        })
+            setError(error)}
+            )
     }, [])
 
     React.useEffect(() => {             
@@ -99,7 +98,13 @@ const AdsPage = ({ setTitle, searchParams }) => {
 
     return(
         <div className="ads-page">
-            {error ? <div className="delete-error" style={{ backgroundColor: 'coral', padding: '1rem' }}>{error.message}</div> :
+            
+            {error ? 
+                <React.Fragment>
+                    <div className="delete-error" style={{ backgroundColor: 'coral', padding: '1rem', width: '100vw'}}>{error.message}</div>
+                    <div><p>Try to <span style={{ textDecoration: 'underline', cursor: 'pointer', color: 'coral'}} onClick={onLogout}>log out</span> and log back in.</p></div>
+                </React.Fragment>
+             :
             (listings.length === 0) ? <EmptyPage /> :
                 <div className="ads-wrapper"style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
                     {items}
@@ -111,7 +116,8 @@ const AdsPage = ({ setTitle, searchParams }) => {
 
 AdsPage.propTypes = {
     setTitle: T.func.isRequired,
-    searchParams: T.object.isRequired
+    searchParams: T.object.isRequired,
+    onLogout: T.func.isRequired
 }
 
 export default AdsPage
