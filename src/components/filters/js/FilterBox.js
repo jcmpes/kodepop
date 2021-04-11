@@ -38,7 +38,7 @@ const FilterBox = ({ showFilterBox, ...props }) => {
                 value={[props.searchParams.priceMin, props.searchParams.priceMax]}
                 defaultValue={[0, 1000]}   
             />
-            <div>{`min:${priceArrayRef.current[0]} max:${priceArrayRef.current[1]}`}</div>
+            <div className="price-tags">{`Precio entre ${priceArrayRef.current[0]} y ${priceArrayRef.current[1]}€`}</div>
         </div>
     )
 };
