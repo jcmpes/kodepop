@@ -68,7 +68,7 @@ function App({ existingToken }) {
         <Switch>
           <Route path="/login">
             {() => 
-              user ? <Redirect to="/" /> :
+              user ? <Redirect to="/adverts" /> :
               <LoginPage onLogin={handleLogin} />
             }      
           </Route>
@@ -105,7 +105,7 @@ function App({ existingToken }) {
               
             }
           </PrivateRoute>
-          <PrivateRoute user={user} exact path="/">
+          <PrivateRoute user={user} exact path="/adverts">
             {error !== '' && <div className="tags-error-msg" style={{ backgroundColor: 'coral', padding: '1rem' }}>{error}</div>}
             <Layout
               tags={tags}
@@ -116,6 +116,9 @@ function App({ existingToken }) {
             >
               <AdsPage searchParams={searchParams} setTitle={setTitle} />
             </Layout>
+          </PrivateRoute>
+          <PrivateRoute exact path="/">
+            <Redirect to="/adverts" />
           </PrivateRoute>
           <Route path="/404">
             <div>404 Not Found</div>
