@@ -40,6 +40,7 @@ function Search({ searchParams, setSearchParams, ...props }) {
                 showFilterBox={showFilterBox} 
                 searchParams={searchParams}
                 setSearchParams={setSearchParams}
+                {...props}
             />
         </form>
     )

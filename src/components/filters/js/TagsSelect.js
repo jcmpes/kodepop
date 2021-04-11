@@ -14,16 +14,17 @@ const TagsSelect = ({ searchParams, setSearchParams, tags }) => {
             const loadedTags = []
             for (let i=0; i<tags.length; i++) {
                 loadedTags.push({
-                    name: tags[i],
+                    name: tags[i].charAt(0).toUpperCase() + tags[i].slice(1) ,
                     value: tags[i]
                 })
             setTagsOptions(loadedTags)
+            console.log('categorias añadidas desde estado')
             }
         } else {
             const defaultTagsOptions = [
                 {
-                    name: "Categoría",
-                    value: ""
+                    name: "Todas las categorías",
+                    value: "todas las categorías"
                 },
                 {
                     name: "Lifestyle",
@@ -43,6 +44,7 @@ const TagsSelect = ({ searchParams, setSearchParams, tags }) => {
                 }
             ]
             setTagsOptions(defaultTagsOptions)
+            console.log('categorias añadidas por defecto')
         } 
     };
     
@@ -69,7 +71,8 @@ const TagsSelect = ({ searchParams, setSearchParams, tags }) => {
 
 TagsSelect.propTypes = {
     searchParams: T.object.isRequired,
-    setSearchParams: T.func.isRequired
+    setSearchParams: T.func.isRequired,
+    tags: T.array.isRequired
 };
 
 export default TagsSelect;

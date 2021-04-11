@@ -24,7 +24,7 @@ const AdsPage = ({ setTitle, searchParams }) => {
         // Change ads with filtering
         if (searchParams.name !== '' || 
             searchParams.sale !== null || 
-            searchParams.tags !== '' ||
+            searchParams.tags !== 'todas las categorías' ||
             searchParams.priceMax !== process.env.MAX_PRICE ||
             searchParams.priceMin !== 0) {
             setListings(allAds
@@ -33,7 +33,7 @@ const AdsPage = ({ setTitle, searchParams }) => {
                     item : item.sale === searchParams.sale ? 
                     item : null)
                 // Filtering by tags
-                .filter(item => searchParams.tags === '' ? 
+                .filter(item => searchParams.tags === 'todas las categorías' ? 
                     item : item.tags.includes(searchParams.tags) ? 
                     item : null)
                 // Filtering by price range

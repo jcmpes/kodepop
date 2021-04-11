@@ -26,7 +26,12 @@ function App({ existingToken }) {
   const saveTags = () => {
     try {
       // Set tags dynamically
-      getTags().then(res => setTags(res))
+      getTags().then(res => {
+        console.log(res)
+        res.unshift('todas las categorías');
+        setTags(res)
+        console.log(tags)
+      })
     } catch (error) {
       setError('There has been a problem connecting with the server. Please log out and log in again. Thanks 🖖')
       // Set tags by default

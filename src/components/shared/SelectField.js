@@ -27,7 +27,7 @@ function SelectField({ placeholder, options, multiple, ...props }) {
 }
 
 SelectField.propTypes = {
-    options: T.object.isRequired
+    options: T.array.isRequired
 }
 
 SelectField.defaultTypes = {
