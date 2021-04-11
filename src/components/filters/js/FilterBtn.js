@@ -1,5 +1,8 @@
 import React from 'react';
 import T from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFilter } from '@fortawesome/free-solid-svg-icons';
+
 import '../css/FilterBtn.css';
 
 const FilterBtn = ({ showFilterBox, setShowFilterBox }) => {
@@ -10,7 +13,7 @@ const FilterBtn = ({ showFilterBox, setShowFilterBox }) => {
     
     return (
         <div id="f-btn" onClick={toggleFilterBox}>
-            F
+            <FontAwesomeIcon id="f-icon" icon={faFilter} />
         </div>
     )
 };

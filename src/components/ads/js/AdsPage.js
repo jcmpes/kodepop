@@ -14,7 +14,7 @@ const AdsPage = ({ setTitle, searchParams }) => {
 
     React.useEffect(() => {
         // Set the page title
-        setTitle('AdsPage')
+        setTitle('Anuncios')
         // Load ads
         getAds().then(setAllAds);
         setListings(allAds)
@@ -47,7 +47,7 @@ const AdsPage = ({ setTitle, searchParams }) => {
                 .filter(item => 
                     item.name.toLowerCase().includes(searchParams.name.toLowerCase()) ? 
                     item : null
-                ))
+                ))            
         } else {
             setListings(allAds)
         }
@@ -57,6 +57,7 @@ const AdsPage = ({ setTitle, searchParams }) => {
         <article key={item.id} style={{ padding: '.75rem' }}>
             <Link to={`/listing/${item.id}`}>
                 <Card className={adsPageStyle['ad-card']}>
+                    {/* Uncommnet below to show images in ads cards*/}
                     {/* <Card.Img 
                         variant="top"
                         style={{ 

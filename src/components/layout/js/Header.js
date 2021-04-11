@@ -23,7 +23,6 @@ function Header({ onLogout, ...props }) {
                     <Link to="/new">
                         <Button
                             style={{ padding: '.47rem .49rem', marginRight: '3px' }}
-
                         >
                             <FontAwesomeIcon icon={faPlus} />
                         </Button>
