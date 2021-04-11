@@ -78,17 +78,35 @@ const AdsPage = ({ setTitle, searchParams, onLogout }) => {
                         <div style={{ fontSize: "2rem" }}>{item.price}€</div>
                         <Card.Title style={{ fontSize: "1.5rem", marginBottom: "1rem" }}>{item.name}</Card.Title>
                         <div 
-                            className="tags" 
+                            className="tag" 
                             style={{ 
                                 fontSize: '.8rem',
-                                marginRight: '5px',
                                 backgroundColor: item.sale === true ? '#02c853' : '#ffeb3c',
                                 display: 'inline-flex',
                                 padding: '.2rem .4rem',
                                 borderRadius: '5px',
+                                marginBottom: '5px'
                             }}
                             >
                             { item.sale ? 'Venta' : 'Compra'}
+                            
+                        </div>
+                        <div className="listing-tag">
+                            {item.tags.map(tag => 
+                                <div style={{
+                                    fontSize: '.8rem',
+                                    display: 'inline-flex',
+                                    padding: '.1rem .4rem',
+                                    borderRadius: '5px',
+                                    margin: '3px',
+                                    backgroundColor: '#f5f5f5' 
+                                }}>
+                                    {tag === 'lifestyle' ? '💍' :
+                                    tag === 'motor' ? '🏎' :
+                                    tag === 'work' ? '👩‍🏫' :
+                                    tag === 'mobile' ? '📱' : null} {tag}
+                                </div>
+                            )}
                         </div>
                     </Card.Body>
                 </Card>
@@ -101,7 +119,7 @@ const AdsPage = ({ setTitle, searchParams, onLogout }) => {
             
             {error ? 
                 <React.Fragment>
-                    <div className="delete-error" style={{ backgroundColor: 'coral', padding: '1rem', width: '100vw'}}>{error.message}</div>
+                    <div className="delete-error" style={{ backgroundColor: 'coral', padding: '1rem' }}>{error.message}</div>
                     <div><p>Try to <span style={{ textDecoration: 'underline', cursor: 'pointer', color: 'coral'}} onClick={onLogout}>log out</span> and log back in.</p></div>
                 </React.Fragment>
              :
