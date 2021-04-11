@@ -16,9 +16,9 @@ function App({ existingToken }) {
   const [searchParams, setSearchParams] = React.useState({
     name: '',
     sale: null,
-    tags: '',
+    tags: 'todas las categorías',
     priceMin: 0,
-    priceMax: process.env.MAX_PRICE
+    priceMax: process.env.REACT_APP_MAX_PRICE
   });
   const [tags, setTags] = React.useState([]);
   const [error, setError] = React.useState('')

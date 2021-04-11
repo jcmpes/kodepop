@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import T from 'prop-types';
 import { getAds } from '../../../api/adverts';
 import Card from 'react-bootstrap/Card';
+import EmptyPage from './EmptyPage';
 
 import adsPageStyle from '../css/AdsPage.module.css'
-import EmptyPage from './EmptyPage';
 
 // Component to load ads
 const AdsPage = ({ setTitle, searchParams }) => {
@@ -16,16 +16,16 @@ const AdsPage = ({ setTitle, searchParams }) => {
         // Set the page title
         setTitle('AdsPage')
         // Load ads
-        getAds().then(setAllAds)
+        getAds().then(setAllAds);
         setListings(allAds)
-    }, [allAds])
+    }, [])
 
     React.useEffect(() => {             
-        // Change ads with filtering
+        // Change lisings shown with filtering
         if (searchParams.name !== '' || 
             searchParams.sale !== null || 
             searchParams.tags !== 'todas las categorías' ||
-            searchParams.priceMax !== process.env.MAX_PRICE ||
+            searchParams.priceMax !== process.env.REACT_APP_MAX_PRICE ||
             searchParams.priceMin !== 0) {
             setListings(allAds
                 // Filtering by sale type
@@ -40,7 +40,7 @@ const AdsPage = ({ setTitle, searchParams }) => {
                 .filter(item => searchParams.priceMin === 0 ? 
                     item : item.price > searchParams.priceMin ?
                     item : null)
-                .filter(item => searchParams.priceMax === process.env.MAX_PRICE ?
+                .filter(item => searchParams.priceMax === process.env.REACT_APP_MAX_PRICE ?
                     item : item.price < searchParams.priceMax ?
                     item: null)
                 // Filtering by name
@@ -48,17 +48,10 @@ const AdsPage = ({ setTitle, searchParams }) => {
                     item.name.toLowerCase().includes(searchParams.name.toLowerCase()) ? 
                     item : null
                 ))
-        // } else if (searchParams.sale !== null) {
-        //     console.log('CAMBIA SALE A', searchParams.sale)
-        //     setShownAds(allAds
-        //         .filter(item =>
-        //             item.sale == searchParams.sale ?
-        //                 item : null
-        //         ))
         } else {
             setListings(allAds)
         }
-    }, [searchParams])
+    }, [allAds, searchParams])
 
     const items = listings.map(item => (
         <article key={item.id} style={{ padding: '.75rem' }}>
