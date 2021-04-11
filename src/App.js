@@ -21,12 +21,14 @@ function App({ existingToken }) {
     priceMax: process.env.MAX_PRICE
   });
   const [tags, setTags] = React.useState([]);
+  const [error, setError] = React.useState('')
 
   const saveTags = () => {
     try {
       // Set tags dynamically
       getTags().then(res => setTags(res))
     } catch (error) {
+      setError('There has been a problem connecting with the server. Please log out and log in again. Thanks 🖖')
       // Set tags by default
       setTags([
         "lifestyle",
@@ -40,19 +42,18 @@ function App({ existingToken }) {
   const handleLogin = userId => {
     setUser(userId);
     saveTags();
-    // history.push('/');
-  }
+  };
 
   const handleLogout = () => {
     setUser(null);
     clearSession();
-  }
+  };
 
   React.useEffect(() => {
     if (existingToken) {
       setUser(storage.get('user'))
     }
-  }, [])
+  }, []);
 
   const DetailContext = React.createContext();
 
@@ -90,6 +91,7 @@ function App({ existingToken }) {
             }
           </PrivateRoute>
           <PrivateRoute user={user} exact path="/">
+            {error !== '' && <div className="tags-error-msg" style={{ backgroundColor: 'coral', padding: '1rem' }}>{error}</div>}
             <Layout
               tags={tags}
               searchParams={searchParams}
