@@ -1,10 +1,11 @@
 import React from 'react';
+import T from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import { getDetail } from '../../../api/adverts';
 
 import detailPageStyle from '../css/DetailPage.module.css';
 
-function DetailPage ({ setTitle, value, searchParams }) {
+function DetailPage ({ setTitle, value }) {
     const [listing, setListing] = React.useState({photo: ''})
     const [loading, setLoading] = React.useState(true)
     const [error, setError] = React.useState(null)
@@ -28,12 +29,6 @@ function DetailPage ({ setTitle, value, searchParams }) {
         handleListingLoad().then(obj => setListing(obj));
         setTitle(`Detalle`);
     }, [])
-
-    // React.useEffect(() => {
-    //     if (searchParams != '') {
-    //       value.history.push('/');
-    //     }
-    //   }, [searchParams])
 
     return(
         <div className={detailPageStyle["grid"]}>
@@ -66,5 +61,12 @@ function DetailPage ({ setTitle, value, searchParams }) {
     )
 }
 
+DetailPage.propTypes = {
+    setTitle: T.func.isRequired,
+    value: T.shape({ 
+        match: T.object.isRequired,
+        history: T.object.isRequired
+    })
+}
 
 export default DetailPage;
