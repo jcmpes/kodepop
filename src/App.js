@@ -96,11 +96,11 @@ function App({ existingToken }) {
                     title={title}
                     onLogout={handleLogout}
                   >
-                  <DetailContext.Provider value={routerProps}>
-                    <DetailContext.Consumer>
-                      {value => <DetailPage value={value} tags={tags} setTitle={setTitle} searchParams={searchParams}/>}
-                    </DetailContext.Consumer>
-                  </DetailContext.Provider>
+                    <DetailContext.Provider value={routerProps}>
+                      <DetailContext.Consumer>
+                        {value => <DetailPage value={value} tags={tags} setTitle={setTitle} searchParams={searchParams}/>}
+                      </DetailContext.Consumer>
+                    </DetailContext.Provider>
                   </Layout>
               
             }
