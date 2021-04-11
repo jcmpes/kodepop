@@ -139,9 +139,11 @@ function NewListingForm({ routerProps }) {
                     type="file"
                     onChange={e => setImage(e.target.files[0])}
                 />
+                {/* Submit with form validation */}
                 <Button 
                     style={{ fontSize: '1.6rem', marginTop: '10px' }}
                     type="submit"
+                    disabled={!formFields.name || !(formFields.tags.length >= 1) || !formFields.price}
                 >Submit</Button>
             </form>
         </div>
