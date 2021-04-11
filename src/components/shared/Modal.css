@@ -1,8 +1,16 @@
 .modal-wrapper {
-    opacity: .1;
-    
+    opacity: 0;
+    background: white;
+    padding: 3rem 2rem;
+    z-index: 10;
+    border: 1px solid grey;
+    border-radius: 1rem;
+    width: 40%;
+    position: absolute;
+    left: 25vw;
 }
 
 .modal-wrapper.open {
     opacity: 1;
+    transition: all .2s ease-in-out;
 }

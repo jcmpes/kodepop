@@ -20,7 +20,7 @@ const Modal = ({ modal, setModal, removeListing }) => {
             </div>
             <div className="modal-footer">
                 <Button children='No' onClick={() => setModal(false)} />
-                <Button children='Si' onClick={handleConfirmation} />
+                <Button style={{ marginLeft: '5px' }} children='Si' onClick={handleConfirmation} />
             </div>
 
         </div>
