@@ -9,14 +9,14 @@ const Button = styled.button`
     border-width: 1px;
     border-color: ${accentColor};
     justify-content: center;
-    min-width: 4.5rem;
+    /* min-width: 4.5rem; */
     /* outline-width: 0; */
-    padding: .3rem 2rem;
+    padding: .5rem 1rem;
     text-decoration: none;
     transition: background-color 0.25s;
     cursor: pointer;
     background-color: ${props => props.variant === 'primary' ? 'white' : accentColor };
-    font-weight: bold;
+    /* font-weight: bold; */
     white-space: nowrap;
 
     &:hover {

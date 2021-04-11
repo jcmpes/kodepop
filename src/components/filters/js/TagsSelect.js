@@ -18,7 +18,6 @@ const TagsSelect = ({ searchParams, setSearchParams, tags }) => {
                     value: tags[i]
                 })
             setTagsOptions(loadedTags)
-            console.log('categorias añadidas desde estado')
             }
         } else {
             const defaultTagsOptions = [
@@ -44,7 +43,6 @@ const TagsSelect = ({ searchParams, setSearchParams, tags }) => {
                 }
             ]
             setTagsOptions(defaultTagsOptions)
-            console.log('categorias añadidas por defecto')
         } 
     };
     

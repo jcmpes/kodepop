@@ -140,6 +140,7 @@ function NewListingForm({ routerProps }) {
                     onChange={e => setImage(e.target.files[0])}
                 />
                 <Button 
+                    style={{ fontSize: '1.6rem', marginTop: '10px' }}
                     type="submit"
                 >Submit</Button>
             </form>
