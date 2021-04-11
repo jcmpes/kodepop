@@ -1,6 +1,5 @@
 import React from 'react';
 import T from 'prop-types';
-import { Redirect } from 'react-router-dom';
 import { getDetail, deleteListing } from '../../../api/adverts';
 import RemoveListing from './RemoveListingBtn';
 
@@ -11,11 +10,10 @@ function DetailPage ({ setTitle, value }) {
     const [loading, setLoading] = React.useState(true);
     const [error, setError] = React.useState(null);
 
-    const removeListing = () => {
+    const removeListing = async () => {
         try {
-            deleteListing(value.match.params.id).then(
-                value.history.replace('/')
-            )
+            await deleteListing(value.match.params.id)
+            value.history.replace('/')
         } catch (error) {
             setError(error)
         }
@@ -43,6 +41,7 @@ function DetailPage ({ setTitle, value }) {
 
     return(
         <div className={detailPageStyle["grid"]}>
+            {error && <div className="delete-error" style={{ backgroundColor: 'coral', padding: '1rem' }}>{error.message}</div>}
             {/*=== Listing Image ===*/}
             <div className={detailPageStyle["column-image"]}>
                 <div className={detailPageStyle["image-container"]}>

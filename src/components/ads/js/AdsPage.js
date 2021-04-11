@@ -11,13 +11,19 @@ import adsPageStyle from '../css/AdsPage.module.css'
 const AdsPage = ({ setTitle, searchParams }) => {
     const [allAds, setAllAds] = React.useState([])
     const [listings, setListings] = React.useState([])
+    const [error, setError] = React.useState(null)
 
     React.useEffect(() => {
-        // Set the page title
-        setTitle('Anuncios')
         // Load ads
-        getAds().then(setAllAds);
-        setListings(allAds)
+        getAds().then(res => {
+            setAllAds(res);
+            setListings(allAds);
+            // Set the page title
+            setTitle('Anuncios')
+        }).catch(error => {
+            setError(error);
+            setTitle('');
+        })
     }, [])
 
     React.useEffect(() => {             
@@ -93,7 +99,8 @@ const AdsPage = ({ setTitle, searchParams }) => {
 
     return(
         <div className="ads-page">
-            { (listings.length === 0) ? <EmptyPage /> :
+            {error ? <div className="delete-error" style={{ backgroundColor: 'coral', padding: '1rem' }}>{error.message}</div> :
+            (listings.length === 0) ? <EmptyPage /> :
                 <div className="ads-wrapper"style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
                     {items}
                 </div>
