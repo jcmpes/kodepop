@@ -5,6 +5,9 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { configureClient } from './api/client';
 
+import { Provider } from 'react-redux';
+import configureStore from './store';
+
 import './index.css';
 
 // Log user initially
@@ -13,9 +16,13 @@ if(accessToken) {
   configureClient({ accessToken })
 } 
 
+const store = configureStore({ preloadedState: { auth: !!accessToken } })
+
 ReactDOM.render(
   <React.StrictMode>
-    <App existingToken={!!accessToken}/>
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

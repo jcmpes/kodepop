@@ -5,8 +5,10 @@ import Container from './Container';
 import { login } from '../../../api/auth';
 
 import '../css/LoginPage.css';
+import { useDispatch } from 'react-redux';
+import { authLogin, authLogout } from '../../../store/actions';
 
-function LoginPage({ onLogin }) {
+function LoginPage() {
     const [credentials, setCredentials] = React.useState({
         email: '',
         password: ''
@@ -16,11 +18,14 @@ function LoginPage({ onLogin }) {
     const [error, setError] = React.useState(null)
     const loggedRef = React.useRef(false)
 
+    const dispatch = useDispatch();
+    const onLogin = () => dispatch(authLogin());
+
     React.useEffect(() => {
         if(loggedRef.current === true) {
-            onLogin(credentials.email);
+            onLogin();
         }
-    }, [onLogin, loggedRef.current, credentials.email])
+    }, [loggedRef.current, credentials.email])
 
     const handleSubmit = async (credentials, remember) => {
         try {

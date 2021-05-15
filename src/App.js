@@ -10,9 +10,8 @@ import { getTags } from './api/adverts'
 
 import './App.css';
 
-function App({ existingToken }) {
+function App({ store }) {
   const [title, setTitle] = React.useState('Anuncios');
-  const [user, setUser] = React.useState(null);
   const [searchParams, setSearchParams] = React.useState({
     name: '',
     sale: null,
@@ -44,22 +43,6 @@ function App({ existingToken }) {
     }
   };
 
-  const handleLogin = userId => {
-    setUser(userId);
-    saveTags();
-  };
-
-  const handleLogout = () => {
-    setUser(null);
-    clearSession();
-  };
-
-  React.useEffect(() => {
-    if (existingToken) {
-      setUser(storage.get('user'))
-    }
-  }, []);
-
   const DetailContext = React.createContext();
 
   return (
@@ -67,13 +50,9 @@ function App({ existingToken }) {
       <Router>
         <Switch>
           <Route path="/login">
-            {() => 
-              user ? <Redirect to="/adverts" /> :
-              <LoginPage onLogin={handleLogin} />
-            }      
+            <LoginPage />     
           </Route>
           <PrivateRoute 
-            user={user}
             path="/advert/new"
             render={routerProps => 
                 <NewListingPage 
@@ -81,11 +60,10 @@ function App({ existingToken }) {
                   searchParams={searchParams}
                   setSearchParams={setSearchParams}
                   routerProps={routerProps}
-                  onLogout={handleLogout}
                 />
             }
           />
-          <PrivateRoute user={user} path="/advert/:id">
+          <PrivateRoute path="/advert/:id">
             {
               routerProps =>
                   <Layout
@@ -94,7 +72,6 @@ function App({ existingToken }) {
                     searchParams={searchParams}
                     setSearchParams={setSearchParams}
                     title={title}
-                    onLogout={handleLogout}
                   >
                     <DetailContext.Provider value={routerProps}>
                       <DetailContext.Consumer>
@@ -105,19 +82,17 @@ function App({ existingToken }) {
               
             }
           </PrivateRoute>
-          <PrivateRoute user={user} exact path="/adverts">
+          <PrivateRoute exact path="/adverts">
             {error !== '' && <div className="tags-error-msg" style={{ backgroundColor: 'coral', padding: '1rem' }}>{error}</div>}
             <Layout
               tags={tags}
               searchParams={searchParams}
               setSearchParams={setSearchParams}
               title={title}
-              onLogout={handleLogout}
             >
               <AdsPage 
                 searchParams={searchParams}
-                setTitle={setTitle}
-                onLogout={handleLogout}  
+                setTitle={setTitle} 
               />
             </Layout>
           </PrivateRoute>
