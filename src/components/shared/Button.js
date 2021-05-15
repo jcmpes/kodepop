@@ -1,3 +1,4 @@
+import { connect } from 'react-redux';
 import styled from 'styled-components'
 
 const accentColor = '#ffeb3c'
@@ -31,5 +32,4 @@ const Button = styled.button`
     }
 `;
 
-
-export default Button
+export default Button;

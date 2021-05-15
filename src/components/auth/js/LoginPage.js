@@ -7,6 +7,7 @@ import { login } from '../../../api/auth';
 import '../css/LoginPage.css';
 import { useDispatch } from 'react-redux';
 import { authLogin, authLogout } from '../../../store/actions';
+import { useHistory, useLocation } from 'react-router';
 
 function LoginPage() {
     const [credentials, setCredentials] = React.useState({
@@ -17,6 +18,8 @@ function LoginPage() {
     const [loading, setLoading] = React.useState(false)
     const [error, setError] = React.useState(null)
     const loggedRef = React.useRef(false)
+    const history = useHistory();
+    const location = useLocation();
 
     const dispatch = useDispatch();
     const onLogin = () => dispatch(authLogin());
@@ -25,6 +28,8 @@ function LoginPage() {
         if(loggedRef.current === true) {
             onLogin();
         }
+        const { from } = location.state || { from: { pathname: '/' } };
+        history.replace(from);
     }, [loggedRef.current, credentials.email])
 
     const handleSubmit = async (credentials, remember) => {
@@ -32,6 +37,7 @@ function LoginPage() {
             setLoading(true)
             await login(credentials, remember);
             loggedRef.current = true;
+
         } catch (error) {
             setError(error);
         } finally {

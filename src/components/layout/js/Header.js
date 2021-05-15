@@ -7,8 +7,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignOutAlt, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 import '../css/Header.css'
+import LogoutButton from '../../shared/LogoutButton';
 
-function Header({ onLogout, ...props }) {
+function Header({ ...props }) {
     return (
         <header className="header">
             <nav className="header-nav">
@@ -27,15 +28,8 @@ function Header({ onLogout, ...props }) {
                             <FontAwesomeIcon icon={faPlus} />
                         </Button>
                     </Link>
-                    <Button 
-                        style={{ padding: '.47rem' }}
-                        variant="" 
-                        className="header-btn" 
-                        onClick={onLogout}
-                    >
-                        <FontAwesomeIcon icon={faSignOutAlt} />
-                    </Button>
-
+            
+                    <LogoutButton></LogoutButton>
                 </div>
             </nav>
         </header>
