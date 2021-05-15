@@ -1,4 +1,4 @@
-import client, { configureClient } from './client';
+import client, { configureClient, deleteAuthToken } from './client';
 import storage from '../utils/storage';
 
 export const login = (credentials, remember) => {
@@ -12,6 +12,8 @@ export const login = (credentials, remember) => {
 }
 
 export const logout = () => {
-    configureClient();
-    storage.clear();
+    return Promise.resolve().then(() => {
+      deleteAuthToken();
+      storage.clear();
+    })
 }

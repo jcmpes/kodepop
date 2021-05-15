@@ -7,9 +7,9 @@ import { login } from '../../../api/auth';
 import '../css/LoginPage.css';
 import { useDispatch } from 'react-redux';
 import { authLogin, authLogout } from '../../../store/actions';
-import { useHistory, useLocation } from 'react-router';
+import { useHistory, useLocation } from 'react-router-dom';
 
-function LoginPage() {
+function LoginPage({ routerProps }) {
     const [credentials, setCredentials] = React.useState({
         email: '',
         password: ''
@@ -26,11 +26,11 @@ function LoginPage() {
 
     React.useEffect(() => {
         if(loggedRef.current === true) {
-            onLogin();
+            onLogin()
+            const { from } = location.state || { from: { pathname: '/' } };
+            history.replace(from);
         }
-        const { from } = location.state || { from: { pathname: '/' } };
-        history.replace(from);
-    }, [loggedRef.current, credentials.email])
+    }, [loggedRef.current])
 
     const handleSubmit = async (credentials, remember) => {
         try {
