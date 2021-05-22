@@ -6,8 +6,9 @@ export const login = (credentials, remember) => {
         .post('/api/auth/login', credentials)
         .then(data => {
             configureClient(data)
-            storage.set('auth', data.accessToken, remember);
-            storage.set('user', credentials.email, remember);
+            if (remember) {
+              storage.set('auth', data.accessToken, remember);
+            }
         })
 }
 
