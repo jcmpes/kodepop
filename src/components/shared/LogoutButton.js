@@ -3,16 +3,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { logout } from '../../api/auth'
 import { authLogout } from '../../store/actions';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 
 
-const LogoutButton = (onLogout) => {
+const LogoutButton = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
   
   const handleClick = () => {
-    logout().then(onLogout);
-    history.push('/login')
+    logout().then(() => dispatch(authLogout()));
+    history.push('/login');
   }
 
   return (
@@ -22,10 +23,4 @@ const LogoutButton = (onLogout) => {
   )
 }
 
-
-
-const mapDispatchToProps = dispatch => ({
-  onLogout: () => dispatch(authLogout())
-})
-
-export default connect(null, mapDispatchToProps)(LogoutButton);
+export default LogoutButton;
