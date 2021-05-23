@@ -93,7 +93,7 @@ const AdsPage = ({ setTitle, searchParams, onLogout }) => {
                         </div>
                         <div className="listing-tag">
                             {item.tags.map(tag => 
-                                <div style={{
+                                <div key={tag} style={{
                                     fontSize: '.8rem',
                                     display: 'inline-flex',
                                     padding: '.1rem .4rem',
