@@ -1,9 +1,19 @@
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import * as reducers from './reducers';
+import * as api from '../api';
+import thunk from 'redux-thunk';
 
 const configureStore = ({ preloadedState }) => {
-  const store = createStore(combineReducers(reducers), preloadedState, composeWithDevTools());
+  const middleware = [
+    thunk.withExtraArgument({ api })
+  ];
+
+  const store = createStore(
+    combineReducers(reducers),
+    preloadedState,
+    composeWithDevTools(applyMiddleware(...middleware)),
+  );
   return store;
 }
 

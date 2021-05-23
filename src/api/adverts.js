@@ -15,7 +15,7 @@ export const newListing = async details => {
     const url = `${process.env.REACT_APP_API_BASE_URL}/api/v1/adverts`;
     return client.post(url, details)
 }
-
+// getTags() will be deprecated
 export const getTags = async () => {
     const url = `${process.env.REACT_APP_API_BASE_URL}/api/v1/adverts/tags`;
     return client.get(url)
