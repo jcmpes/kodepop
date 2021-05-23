@@ -1,3 +1,4 @@
+// import { getTags } from './selectors';
 import { 
   AUTH_LOGIN,
   AUTH_LOGOUT,
@@ -44,9 +45,18 @@ export const tagsLoadSuccess = tags => {
 
 export const tagsLoadAction = () => {
   return async function(dispatch, getState, { api }) {
+    /**
+     * Use Redux as cache
+     */
+    // const tagsLoaded = getTags(getState());
+    // if (tagsLoaded) {
+    //   return;
+    // };
+
     dispatch(tagsLoadRequest());
     try {
-      const tags = await api.tags.getTags();
+      const tags = await api.getTags();
+      console.log('tags loaded: ', tags)
       dispatch(tagsLoadSuccess(tags))
       return tags
     } catch(error) {
