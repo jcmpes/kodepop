@@ -1,14 +1,17 @@
-// import { getTags } from './selectors';
+import { getTags } from './selectors';
 import { 
   AUTH_LOGIN,
   AUTH_LOGOUT,
   TAGS_LOAD_SUCCESS,
   TAGS_LOAD_REQUEST,
-  TAGS_LOAD_FAILURE
+  TAGS_LOAD_FAILURE,
+  LISTINGS_LOAD_SUCCESS,
+  LISTINGS_LOAD_REQUEST,
+  LISTINGS_LOAD_FAILURE
 } from './types';
 
 /**
- * ACTION CREATORS:
+ * ACTION CREATORS LOGIN:
  */
 export const authLogin = () => {
   return {
@@ -22,6 +25,9 @@ export const authLogout = () => {
   }
 }
 
+/**
+ * ACTION CREATORS TAGS:
+ */
 export const tagsLoadRequest = () => {
   return {
     type: TAGS_LOAD_REQUEST,
@@ -46,21 +52,66 @@ export const tagsLoadSuccess = tags => {
 export const tagsLoadAction = () => {
   return async function(dispatch, getState, { api }) {
     /**
-     * Use Redux as cache
+     * Use Redux as cache for the tags
      */
-    // const tagsLoaded = getTags(getState());
-    // if (tagsLoaded) {
+    // const { data } = getTags(getState());
+    // if (data) {
     //   return;
     // };
 
     dispatch(tagsLoadRequest());
     try {
       const tags = await api.getTags();
-      console.log('tags loaded: ', tags)
       dispatch(tagsLoadSuccess(tags))
       return tags
     } catch(error) {
       dispatch(tagsLoadFailure(error))
+    }
+  }
+}
+
+/**
+ * ACTION CREATORS LISTINGS:
+ */
+export const listingsLoadRequest = () => {
+  return {
+    type: LISTINGS_LOAD_REQUEST,
+  }
+}
+
+export const listingsLoadFailure = error => {
+  return {
+    type: LISTINGS_LOAD_FAILURE,
+    error: true,
+    payload: error
+  }
+}
+
+export const listingsLoadSuccess = listings => {
+  return {
+    type: LISTINGS_LOAD_SUCCESS,
+    payload: listings
+  }
+}
+
+export const listingsLoadAction = () => {
+  return async function (dispatch, getState, { api }) {
+    /**
+     * Use Redux as cache for the ads
+     */
+    // const { data } = getListings(getState());
+    // if (data) {
+    //   return;
+    // };
+
+    dispatch(listingsLoadRequest());
+    try {
+      const ads = await api.getAds();
+      console.log(ads) // [{...}, {...}, {...}, ...]
+      dispatch(listingsLoadSuccess(ads))
+      return ads
+    } catch (error) {
+      dispatch(listingsLoadFailure(error))
     }
   }
 }

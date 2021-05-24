@@ -6,59 +6,58 @@ import Card from 'react-bootstrap/Card';
 import EmptyPage from './EmptyPage';
 
 import adsPageStyle from '../css/AdsPage.module.css'
+import { useDispatch, useSelector } from 'react-redux';
+import { listingsLoadAction } from '../../../store/actions';
+import { getListings } from '../../../store/selectors'
 
 // Component to load ads
 const AdsPage = ({ setTitle, searchParams, onLogout }) => {
-    const [allAds, setAllAds] = React.useState([])
-    const [listings, setListings] = React.useState([])
+    // const [allAds, setAllAds] = React.useState([])
+    // const [listings, setListings] = React.useState([])
     const [error, setError] = React.useState(null)
 
+    const dispatch = useDispatch();
+    const allAds = useSelector(getListings)
+    console.log('allAds', allAds);
+
     React.useEffect(() => {
-        // Load ads
-        getAds().then(res => {
-            setAllAds(res);
-            setListings(allAds);
-            // Set the page title
-            setTitle('Anuncios')
-        }).catch(error => {
-            setError(error)}
-            )
+      dispatch(listingsLoadAction());
     }, [])
 
-    React.useEffect(() => {             
-        // Change lisings shown with filtering
-        if (searchParams.name !== '' || 
-            searchParams.sale !== null || 
-            searchParams.tags !== 'todas las categorías' ||
-            searchParams.priceMax !== process.env.REACT_APP_MAX_PRICE ||
-            searchParams.priceMin !== 0) {
-            setListings(allAds
-                // Filtering by sale type
-                .filter(item => searchParams.sale === null ? 
-                    item : item.sale === searchParams.sale ? 
-                    item : null)
-                // Filtering by tags
-                .filter(item => searchParams.tags === 'todas las categorías' ? 
-                    item : item.tags.includes(searchParams.tags) ? 
-                    item : null)
-                // Filtering by price range
-                .filter(item => searchParams.priceMin === 0 ? 
-                    item : item.price > searchParams.priceMin ?
-                    item : null)
-                .filter(item => searchParams.priceMax === process.env.REACT_APP_MAX_PRICE ?
-                    item : item.price < searchParams.priceMax ?
-                    item: null)
-                // Filtering by name
-                .filter(item => 
-                    item.name.toLowerCase().includes(searchParams.name.toLowerCase()) ? 
-                    item : null
-                ))            
-        } else {
-            setListings(allAds)
-        }
-    }, [allAds, searchParams])
+    // React.useEffect(() => {             
+    //     // Change lisings shown with filtering
+    //     if (searchParams.name !== '' || 
+    //         searchParams.sale !== null || 
+    //         searchParams.tags !== 'todas las categorías' ||
+    //         searchParams.priceMax !== process.env.REACT_APP_MAX_PRICE ||
+    //         searchParams.priceMin !== 0) {
+    //         setListings(allAds
+    //             // Filtering by sale type
+    //             .filter(item => searchParams.sale === null ? 
+    //                 item : item.sale === searchParams.sale ? 
+    //                 item : null)
+    //             // Filtering by tags
+    //             .filter(item => searchParams.tags === 'todas las categorías' ? 
+    //                 item : item.tags.includes(searchParams.tags) ? 
+    //                 item : null)
+    //             // Filtering by price range
+    //             .filter(item => searchParams.priceMin === 0 ? 
+    //                 item : item.price > searchParams.priceMin ?
+    //                 item : null)
+    //             .filter(item => searchParams.priceMax === process.env.REACT_APP_MAX_PRICE ?
+    //                 item : item.price < searchParams.priceMax ?
+    //                 item: null)
+    //             // Filtering by name
+    //             .filter(item => 
+    //                 item.name.toLowerCase().includes(searchParams.name.toLowerCase()) ? 
+    //                 item : null
+    //             ))            
+    //     } else {
+    //         setListings(allAds)
+    //     }
+    // }, [allAds, searchParams])
 
-    const items = listings.map(item => (
+    const items = allAds.map(item => (
         <article key={item.id} style={{ padding: '.75rem' }}>
             <Link to={`/advert/${item.id}`}>
                 <Card className={adsPageStyle['ad-card']}>
@@ -123,7 +122,7 @@ const AdsPage = ({ setTitle, searchParams, onLogout }) => {
                     <div><p>Try to <span style={{ textDecoration: 'underline', cursor: 'pointer', color: 'coral'}} onClick={onLogout}>log out</span> and log back in.</p></div>
                 </React.Fragment>
              :
-            (listings.length === 0) ? <EmptyPage /> :
+            (allAds.length === 0) ? <EmptyPage /> :
                 <div className="ads-wrapper"style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
                     {items}
                 </div>
