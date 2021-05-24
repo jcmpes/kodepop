@@ -12,11 +12,10 @@ import { getListings } from '../../../store/selectors'
 
 // Component to load ads
 const AdsPage = ({ setTitle, searchParams, onLogout }) => {
-    // const [allAds, setAllAds] = React.useState([])
-    // const [listings, setListings] = React.useState([])
     const [error, setError] = React.useState(null)
     const dispatch = useDispatch();
     const allAds = useSelector(getListings)
+    // Store filtered ads
     let shownAds = [...allAds]
 
     React.useEffect(() => {
@@ -51,7 +50,6 @@ const AdsPage = ({ setTitle, searchParams, onLogout }) => {
                 item.name.toLowerCase().includes(searchParams.name.toLowerCase()) ? 
                 item : null
             )     
-      console.log('shownAds:', shownAds)
     }
 
     const items = shownAds.map(item => (
