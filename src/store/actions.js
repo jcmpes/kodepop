@@ -107,7 +107,6 @@ export const listingsLoadAction = () => {
     dispatch(listingsLoadRequest());
     try {
       const ads = await api.getAds();
-      console.log(ads) // [{...}, {...}, {...}, ...]
       dispatch(listingsLoadSuccess(ads))
       return ads
     } catch (error) {

@@ -15,49 +15,46 @@ const AdsPage = ({ setTitle, searchParams, onLogout }) => {
     // const [allAds, setAllAds] = React.useState([])
     // const [listings, setListings] = React.useState([])
     const [error, setError] = React.useState(null)
-
     const dispatch = useDispatch();
     const allAds = useSelector(getListings)
-    console.log('allAds', allAds);
+    let shownAds = [...allAds]
 
     React.useEffect(() => {
       dispatch(listingsLoadAction());
     }, [])
+  
+    // Change lisings shown with filtering
+    if (searchParams.name !== '' || 
+        searchParams.sale !== null || 
+        searchParams.tags !== 'todas las categorías' ||
+        searchParams.priceMax !== process.env.REACT_APP_MAX_PRICE ||
+        searchParams.priceMin !== 0) {
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        shownAds = allAds
+            // Filtering by sale type
+            .filter(item => searchParams.sale === null ? 
+                item : item.sale === searchParams.sale ? 
+                item : null)
+            // Filtering by tags
+            .filter(item => searchParams.tags === 'todas las categorías' ? 
+                item : item.tags.includes(searchParams.tags) ? 
+                item : null)
+            // Filtering by price range
+            .filter(item => searchParams.priceMin === 0 ? 
+                item : item.price > searchParams.priceMin ?
+                item : null)
+            .filter(item => searchParams.priceMax === process.env.REACT_APP_MAX_PRICE ?
+                item : item.price < searchParams.priceMax ?
+                item: null)
+            // Filtering by name
+            .filter(item => 
+                item.name.toLowerCase().includes(searchParams.name.toLowerCase()) ? 
+                item : null
+            )     
+      console.log('shownAds:', shownAds)
+    }
 
-    // React.useEffect(() => {             
-    //     // Change lisings shown with filtering
-    //     if (searchParams.name !== '' || 
-    //         searchParams.sale !== null || 
-    //         searchParams.tags !== 'todas las categorías' ||
-    //         searchParams.priceMax !== process.env.REACT_APP_MAX_PRICE ||
-    //         searchParams.priceMin !== 0) {
-    //         setListings(allAds
-    //             // Filtering by sale type
-    //             .filter(item => searchParams.sale === null ? 
-    //                 item : item.sale === searchParams.sale ? 
-    //                 item : null)
-    //             // Filtering by tags
-    //             .filter(item => searchParams.tags === 'todas las categorías' ? 
-    //                 item : item.tags.includes(searchParams.tags) ? 
-    //                 item : null)
-    //             // Filtering by price range
-    //             .filter(item => searchParams.priceMin === 0 ? 
-    //                 item : item.price > searchParams.priceMin ?
-    //                 item : null)
-    //             .filter(item => searchParams.priceMax === process.env.REACT_APP_MAX_PRICE ?
-    //                 item : item.price < searchParams.priceMax ?
-    //                 item: null)
-    //             // Filtering by name
-    //             .filter(item => 
-    //                 item.name.toLowerCase().includes(searchParams.name.toLowerCase()) ? 
-    //                 item : null
-    //             ))            
-    //     } else {
-    //         setListings(allAds)
-    //     }
-    // }, [allAds, searchParams])
-
-    const items = allAds.map(item => (
+    const items = shownAds.map(item => (
         <article key={item.id} style={{ padding: '.75rem' }}>
             <Link to={`/advert/${item.id}`}>
                 <Card className={adsPageStyle['ad-card']}>
@@ -122,7 +119,7 @@ const AdsPage = ({ setTitle, searchParams, onLogout }) => {
                     <div><p>Try to <span style={{ textDecoration: 'underline', cursor: 'pointer', color: 'coral'}} onClick={onLogout}>log out</span> and log back in.</p></div>
                 </React.Fragment>
              :
-            (allAds.length === 0) ? <EmptyPage /> :
+            (shownAds.length === 0) ? <EmptyPage /> :
                 <div className="ads-wrapper"style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
                     {items}
                 </div>
