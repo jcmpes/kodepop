@@ -47,7 +47,7 @@ export function listings(state=initialState.listings, action) {
     case LISTINGS_LOAD_SUCCESS:
       return { ...state, loaded: true, data: action.payload }
     case DETAIL_LOAD_SUCCESS:
-      return { ...state, loaded: true, data: action.payload }
+      return { ...state, loaded: true, data: [...state.data, action.payload] }
     default:
       return state;
   }

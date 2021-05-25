@@ -1,4 +1,5 @@
 import { getTags } from './selectors';
+
 import { 
   AUTH_LOGIN,
   AUTH_LOGOUT,
@@ -152,7 +153,7 @@ export const detailLoadAction = listingId => {
     //   return;
     // };
 
-    dispatch(detailLoadRequest());
+    // dispatch(detailLoadRequest());
     try {
       const listing = await api.getDetail(listingId);
       dispatch(detailLoadSuccess(listing));

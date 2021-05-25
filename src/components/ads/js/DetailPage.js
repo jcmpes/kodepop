@@ -7,17 +7,17 @@ import Modal from '../../shared/Modal';
 
 import detailPageStyle from '../css/DetailPage.module.css';
 import { connect, useDispatch, useSelector } from 'react-redux';
-import { getDetail } from '../../../store/selectors';
+import { getDetail, getState } from '../../../store/selectors';
 import { detailLoadAction } from '../../../store/actions';
 
-function DetailPage ({ setTitle, value, ad }) {
-    // const [listing, setListing] = React.useState({photo: ''});
+function DetailPage ({ setTitle, value }) {
     const [loading, setLoading] = React.useState(true);
     const [error, setError] = React.useState(null);
-    const dispatch = useDispatch()
-    const listing = useSelector(getDetail);
 
-    console.log('ad via props:', ad)
+
+    const listing = useSelector(state => getDetail(state, value.match.params.id))
+
+    console.log('ad via selector:', listing)
 
     // Modal
     const [modal, setModal] = React.useState(false);
@@ -45,19 +45,6 @@ function DetailPage ({ setTitle, value, ad }) {
     //     }
     // }
 
-    React.useEffect(() => {
-        // Load listing
-        // handleListingLoad().then(obj => setListing(obj));
-
-        //TODO
-        // DISPATCH LOAD ACTION OF AD DETAIL
-        dispatch(detailLoadAction(value.match.params.id))
-        setLoading(false)
-        
-        // setListing(listing)
-        setTitle(`Detalle`);
-    }, [])
-
     return(
         <React.Fragment>
             <Modal 
@@ -72,7 +59,7 @@ function DetailPage ({ setTitle, value, ad }) {
                 <div className={detailPageStyle["column-image"]}>
                     <div className={detailPageStyle["image-container"]}>
                         {!loading ? 
-                            !listing.photo ?
+                            !listing ?
                                 <p style={{ fontSize: '8rem', marginTop: '10px' }}>🎁</p>
                                 : <img src={process.env.REACT_APP_API_BASE_URL + listing.photo} />
                             : <div className={detailPageStyle["image-loading"]}></div>
@@ -85,8 +72,8 @@ function DetailPage ({ setTitle, value, ad }) {
                 <div className={detailPageStyle["column-details"]}>
                     {!loading ?
                         <React.Fragment>
-                            <div className={detailPageStyle["price-container"]}>{listing.price} €</div>
-                            <div className={detailPageStyle["title-container"]}><h1>{listing.name}</h1></div>
+                            <div className={detailPageStyle["price-container"]}>{0} €</div>
+                            <div className={detailPageStyle["title-container"]}><h1>{'name'}</h1></div>
                         </React.Fragment>
                     : <React.Fragment>
                         <div className={detailPageStyle["price-loading"]}></div>
@@ -107,9 +94,4 @@ DetailPage.propTypes = {
     })
 }
 
-const mapStateToProps = (state, ownProps) => ({
-  ad: getDetail(state, ownProps.value.match.params.id)
-})
-
-
-export default connect(mapStateToProps)(DetailPage);
+export default DetailPage;
