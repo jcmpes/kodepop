@@ -6,7 +6,8 @@ import {
   TAGS_LOAD_SUCCESS,
   LISTINGS_LOAD_FAILURE,
   LISTINGS_LOAD_REQUEST,
-  LISTINGS_LOAD_SUCCESS
+  LISTINGS_LOAD_SUCCESS,
+  DETAIL_LOAD_SUCCESS
 } from './types';
 
 const initialState = {
@@ -44,6 +45,8 @@ export function tags(state=initialState.tags, action) {
 export function listings(state=initialState.listings, action) {
   switch (action.type) {
     case LISTINGS_LOAD_SUCCESS:
+      return { ...state, loaded: true, data: action.payload }
+    case DETAIL_LOAD_SUCCESS:
       return { ...state, loaded: true, data: action.payload }
     default:
       return state;

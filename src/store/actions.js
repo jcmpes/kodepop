@@ -7,7 +7,10 @@ import {
   TAGS_LOAD_FAILURE,
   LISTINGS_LOAD_SUCCESS,
   LISTINGS_LOAD_REQUEST,
-  LISTINGS_LOAD_FAILURE
+  LISTINGS_LOAD_FAILURE,
+  DETAIL_LOAD_SUCCESS,
+  DETAIL_LOAD_REQUEST,
+  DETAIL_LOAD_FAILURE,
 } from './types';
 
 /**
@@ -111,6 +114,51 @@ export const listingsLoadAction = () => {
       return ads
     } catch (error) {
       dispatch(listingsLoadFailure(error))
+    }
+  }
+}
+
+/**
+ * ACTION CREATORS DETAIL:
+ */
+export const detailLoadRequest = () => {
+  return {
+    type: DETAIL_LOAD_REQUEST,
+  }
+}
+
+export const detailLoadFailure = error => {
+  return {
+    type: DETAIL_LOAD_FAILURE,
+    error: true,
+    payload: error
+  }
+}
+
+export const detailLoadSuccess = detail => {
+  return {
+    type: DETAIL_LOAD_SUCCESS,
+    payload: detail
+  }
+}
+
+export const detailLoadAction = listingId => {
+  return async function (dispatch, getState, { api }) {
+    /**
+     * Use Redux as cache for the detail
+     */
+    // const { data } = getListings(getState(), listingId);
+    // if (data) {
+    //   return;
+    // };
+
+    dispatch(detailLoadRequest());
+    try {
+      const listing = await api.getDetail(listingId);
+      dispatch(detailLoadSuccess(listing));
+      return listing;
+    } catch (error) {
+      dispatch(detailLoadFailure(error))
     }
   }
 }

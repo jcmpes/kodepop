@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import T from 'prop-types';
-import { getAds } from '../../../api/adverts';
 import Card from 'react-bootstrap/Card';
 import EmptyPage from './EmptyPage';
 

@@ -1,16 +1,23 @@
 import React from 'react';
 import T from 'prop-types';
 import classNames from 'classnames';
-import { getDetail, deleteListing } from '../../../api/adverts';
+import { deleteListing } from '../../../api/adverts';
 import RemoveListing from './RemoveListingBtn';
 import Modal from '../../shared/Modal';
 
 import detailPageStyle from '../css/DetailPage.module.css';
+import { connect, useDispatch, useSelector } from 'react-redux';
+import { getDetail } from '../../../store/selectors';
+import { detailLoadAction } from '../../../store/actions';
 
-function DetailPage ({ setTitle, value }) {
-    const [listing, setListing] = React.useState({photo: ''});
+function DetailPage ({ setTitle, value, ad }) {
+    // const [listing, setListing] = React.useState({photo: ''});
     const [loading, setLoading] = React.useState(true);
     const [error, setError] = React.useState(null);
+    const dispatch = useDispatch()
+    const listing = useSelector(getDetail);
+
+    console.log('ad via props:', ad)
 
     // Modal
     const [modal, setModal] = React.useState(false);
@@ -24,23 +31,30 @@ function DetailPage ({ setTitle, value }) {
         }
     }
 
-    const handleListingLoad = async () => {
-        try {
-            setLoading(true);
-            const obj = await getDetail(value.match.params.id);
-            return(obj);
-        } catch (error) {
-            if (error.statusCode === 404) {
-                value.history.replace('/404');
-            }
-        } finally {
-            setLoading(false);
-        }
-    }
+    // const handleListingLoad = async () => {
+    //     try {
+    //         setLoading(true);
+    //         const obj = await getDetail(value.match.params.id);
+    //         return(obj);
+    //     } catch (error) {
+    //         if (error.statusCode === 404) {
+    //             value.history.replace('/404');
+    //         }
+    //     } finally {
+    //         setLoading(false);
+    //     }
+    // }
 
     React.useEffect(() => {
         // Load listing
-        handleListingLoad().then(obj => setListing(obj));
+        // handleListingLoad().then(obj => setListing(obj));
+
+        //TODO
+        // DISPATCH LOAD ACTION OF AD DETAIL
+        dispatch(detailLoadAction(value.match.params.id))
+        setLoading(false)
+        
+        // setListing(listing)
         setTitle(`Detalle`);
     }, [])
 
@@ -93,4 +107,9 @@ DetailPage.propTypes = {
     })
 }
 
-export default DetailPage;
+const mapStateToProps = (state, ownProps) => ({
+  ad: getDetail(state, ownProps.value.match.params.id)
+})
+
+
+export default connect(mapStateToProps)(DetailPage);
