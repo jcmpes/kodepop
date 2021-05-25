@@ -6,7 +6,7 @@ export const getAds = async () => {
     return client.get(url);
 }
 
-export const getDetail = async id => {
+export const getAdvertDetail = async id => {
     const url = `${process.env.REACT_APP_API_BASE_URL}/api/v1/adverts/${id}`;
     return client.get(url);
 }

@@ -1,4 +1,4 @@
-import { getTags } from './selectors';
+import { getTags, getDetail } from './selectors';
 
 import { 
   AUTH_LOGIN,
@@ -148,14 +148,14 @@ export const detailLoadAction = listingId => {
     /**
      * Use Redux as cache for the detail
      */
-    // const { data } = getListings(getState(), listingId);
-    // if (data) {
-    //   return;
-    // };
+    const ad = getDetail(getState(), listingId);
+    if (ad) {
+      return;
+    };
 
-    // dispatch(detailLoadRequest());
+    dispatch(detailLoadRequest());
     try {
-      const listing = await api.getDetail(listingId);
+      const listing = await api.getAdvertDetail(listingId);
       dispatch(detailLoadSuccess(listing));
       return listing;
     } catch (error) {

@@ -14,10 +14,11 @@ function DetailPage ({ setTitle, value }) {
     const [loading, setLoading] = React.useState(true);
     const [error, setError] = React.useState(null);
 
-
+    // const loading = 
     const listing = useSelector(state => getDetail(state, value.match.params.id))
-
-    console.log('ad via selector:', listing)
+    const dispatch = useDispatch()
+    dispatch(detailLoadAction(value.match.params.id))
+    // setLoading(false)
 
     // Modal
     const [modal, setModal] = React.useState(false);
