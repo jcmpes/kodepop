@@ -7,7 +7,8 @@ import {
   LISTINGS_LOAD_FAILURE,
   LISTINGS_LOAD_REQUEST,
   LISTINGS_LOAD_SUCCESS,
-  DETAIL_LOAD_SUCCESS
+  DETAIL_LOAD_SUCCESS,
+  DETAIL_LOAD_REQUEST
 } from './types';
 
 const initialState = {
@@ -19,6 +20,9 @@ const initialState = {
   listings: {
     data: [],
     loaded: false
+  },
+  ui: {
+    loading: false
   }
 }
 
@@ -48,6 +52,17 @@ export function listings(state=initialState.listings, action) {
       return { ...state, loaded: true, data: action.payload }
     case DETAIL_LOAD_SUCCESS:
       return { ...state, loaded: true, data: [...state.data, action.payload] }
+    default:
+      return state;
+  }
+}
+
+export function ui(state=initialState.ui, action) {
+  switch (action.type) {
+    case DETAIL_LOAD_REQUEST:
+      return { ...state, loading: true }
+    case DETAIL_LOAD_SUCCESS:
+      return { ...state, loading: false }
     default:
       return state;
   }

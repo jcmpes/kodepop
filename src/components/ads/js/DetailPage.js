@@ -7,18 +7,19 @@ import Modal from '../../shared/Modal';
 
 import detailPageStyle from '../css/DetailPage.module.css';
 import { connect, useDispatch, useSelector } from 'react-redux';
-import { getDetail, getState } from '../../../store/selectors';
+import { getDetail, getState, getUiLoading } from '../../../store/selectors';
 import { detailLoadAction } from '../../../store/actions';
 
 function DetailPage ({ setTitle, value }) {
-    const [loading, setLoading] = React.useState(true);
+    // const [loading, setLoading] = React.useState(true);
     const [error, setError] = React.useState(null);
 
-    // const loading = 
+    const loading = useSelector(getUiLoading)
     const listing = useSelector(state => getDetail(state, value.match.params.id))
+    console.log(value.match.params.id)
     const dispatch = useDispatch()
     dispatch(detailLoadAction(value.match.params.id))
-    // setLoading(false)
+
 
     // Modal
     const [modal, setModal] = React.useState(false);
@@ -72,10 +73,11 @@ function DetailPage ({ setTitle, value }) {
                 {/*=== Listing Details ===*/}
                 <div className={detailPageStyle["column-details"]}>
                     {!loading ?
+                      listing ?
                         <React.Fragment>
-                            <div className={detailPageStyle["price-container"]}>{0} €</div>
-                            <div className={detailPageStyle["title-container"]}><h1>{'name'}</h1></div>
-                        </React.Fragment>
+                            <div className={detailPageStyle["price-container"]}>{listing.price} €</div> 
+                            <div className={detailPageStyle["title-container"]}><h1>{listing.name}</h1></div>
+                        </React.Fragment> : <div></div>
                     : <React.Fragment>
                         <div className={detailPageStyle["price-loading"]}></div>
                         <div className={detailPageStyle["title-loading"]}></div>

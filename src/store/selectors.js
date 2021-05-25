@@ -8,4 +8,4 @@ export const getDetail = (state, listingId) => {
   return state.listings.data.find(item => item.id === listingId);
 }
 
-export const getState = state => state;
+export const getUiLoading = state => state.ui.loading;
