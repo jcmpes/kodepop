@@ -1,6 +1,6 @@
 import React from 'react';
 import T from 'prop-types';
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import { Router, Switch, Route, Redirect } from 'react-router-dom';
 import storage from './utils/storage'
 import { clearSession } from './api/client';
 import { AdsPage, DetailPage, NewListingPage } from './components/ads';
@@ -12,7 +12,7 @@ import { tagsLoadAction } from './store/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { getTags } from './store/selectors'
 
-function App({ store }) {
+function App({ store, history }) {
   const [title, setTitle] = React.useState('Anuncios');
   const [searchParams, setSearchParams] = React.useState({
     name: '',
@@ -35,7 +35,7 @@ function App({ store }) {
 
   return (
     <div className="App">
-      <Router>
+      <Router history={history}>
         <Switch>
           <Route path="/login">
             <LoginPage />     

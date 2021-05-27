@@ -26,7 +26,7 @@ function DetailPage ({ setTitle, value }) {
 
 
     const removeListing = () => {
-      dispatch(detailRemoveAction(value.match.params.id, value.history, value.location));
+      dispatch(detailRemoveAction(value.match.params.id, value.location));
       hasRemoved.current = true;
     }
 
