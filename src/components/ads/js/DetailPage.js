@@ -8,44 +8,25 @@ import Modal from '../../shared/Modal';
 import detailPageStyle from '../css/DetailPage.module.css';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import { getDetail, getState, getUiLoading } from '../../../store/selectors';
-import { detailLoadAction } from '../../../store/actions';
+import { detailLoadAction, detailRemoveAction } from '../../../store/actions';
 
 function DetailPage ({ setTitle, value }) {
-    // const [loading, setLoading] = React.useState(true);
     const [error, setError] = React.useState(null);
 
     const loading = useSelector(getUiLoading)
     const listing = useSelector(state => getDetail(state, value.match.params.id))
-    console.log(value.match.params.id)
+    
     const dispatch = useDispatch()
     dispatch(detailLoadAction(value.match.params.id))
-
 
     // Modal
     const [modal, setModal] = React.useState(false);
 
-    const removeListing = async () => {
-        try {
-            await deleteListing(value.match.params.id);
-            value.history.replace('/');
-        } catch (error) {
-            setError(error);
-        }
-    }
 
-    // const handleListingLoad = async () => {
-    //     try {
-    //         setLoading(true);
-    //         const obj = await getDetail(value.match.params.id);
-    //         return(obj);
-    //     } catch (error) {
-    //         if (error.statusCode === 404) {
-    //             value.history.replace('/404');
-    //         }
-    //     } finally {
-    //         setLoading(false);
-    //     }
-    // }
+    const removeListing = () => {
+      dispatch(detailRemoveAction(value.match.params.id));
+      value.history.replace('/');
+    }
 
     return(
         <React.Fragment>

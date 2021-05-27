@@ -12,6 +12,9 @@ import {
   DETAIL_LOAD_SUCCESS,
   DETAIL_LOAD_REQUEST,
   DETAIL_LOAD_FAILURE,
+  DETAIL_REMOVE_REQUEST,
+  DETAIL_REMOVE_FAILURE,
+  DETAIL_REMOVE_SUCCESS,
 } from './types';
 
 /**
@@ -120,7 +123,7 @@ export const listingsLoadAction = () => {
 }
 
 /**
- * ACTION CREATORS DETAIL:
+ * ACTION CREATORS DETAIL_LOAD:
  */
 export const detailLoadRequest = () => {
   return {
@@ -160,6 +163,42 @@ export const detailLoadAction = listingId => {
       return listing;
     } catch (error) {
       dispatch(detailLoadFailure(error))
+    }
+  }
+}
+
+/**
+ * ACTION CREATORS DETAIL_REMOVE:
+ */
+export const detailRemoveRequest = () => {
+  return {
+    type: DETAIL_REMOVE_REQUEST
+  }
+}
+
+export const detailRemoveFailure = error => {
+  return {
+    type: DETAIL_REMOVE_FAILURE,
+    error: true,
+    payload: error
+  }
+}
+
+export const detailRemoveSuccess = listingId => {
+  return {
+    type: DETAIL_REMOVE_SUCCESS,
+    payload: listingId
+  }
+}
+
+export const detailRemoveAction = listingId => {
+  return async function (dispatch, getState, { api }) {
+    dispatch(detailRemoveRequest())
+    try {
+      await api.deleteListing(listingId);
+      dispatch(detailRemoveSuccess(listingId));
+    } catch (error) {
+      dispatch(detailRemoveFailure(error))
     }
   }
 }

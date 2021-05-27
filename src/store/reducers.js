@@ -8,7 +8,8 @@ import {
   LISTINGS_LOAD_REQUEST,
   LISTINGS_LOAD_SUCCESS,
   DETAIL_LOAD_SUCCESS,
-  DETAIL_LOAD_REQUEST
+  DETAIL_LOAD_REQUEST,
+  DETAIL_REMOVE_SUCCESS
 } from './types';
 
 const initialState = {
@@ -52,6 +53,9 @@ export function listings(state=initialState.listings, action) {
       return { ...state, loaded: true, data: action.payload }
     case DETAIL_LOAD_SUCCESS:
       return { ...state, loaded: true, data: [...state.data, action.payload] }
+    case DETAIL_REMOVE_SUCCESS:
+      const listingsAfterRemoval = state.data.filter(item => item.id !== action.payload)
+      return { ...state, loaded: true, data: listingsAfterRemoval }
     default:
       return state;
   }
