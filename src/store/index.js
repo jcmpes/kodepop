@@ -3,9 +3,11 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import * as reducers from './reducers';
 import * as api from '../api';
 import thunk from 'redux-thunk';
+import { routerMiddleware } from 'connected-react-router'
 
-const configureStore = ({ preloadedState }) => {
+const configureStore = ({ preloadedState, history }) => {
   const middleware = [
+    routerMiddleware(history),
     thunk.withExtraArgument({ api })
   ];
 

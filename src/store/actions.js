@@ -191,12 +191,13 @@ export const detailRemoveSuccess = listingId => {
   }
 }
 
-export const detailRemoveAction = listingId => {
+export const detailRemoveAction = (listingId, history, location) => {
   return async function (dispatch, getState, { api }) {
     dispatch(detailRemoveRequest())
     try {
       await api.deleteListing(listingId);
       dispatch(detailRemoveSuccess(listingId));
+      history.push('/')
     } catch (error) {
       dispatch(detailRemoveFailure(error))
     }

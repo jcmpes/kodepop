@@ -26,13 +26,13 @@ function DetailPage ({ setTitle, value }) {
 
 
     const removeListing = () => {
-      dispatch(detailRemoveAction(value.match.params.id));
+      dispatch(detailRemoveAction(value.match.params.id, value.history, value.location));
       hasRemoved.current = true;
     }
 
-    if (hasRemoved.current === true) {
-      return <Redirect to={'/'} />
-    }
+    // if (hasRemoved.current === true) {
+    //   return <Redirect to={'/'} />
+    // }
 
     return(
         <React.Fragment>
