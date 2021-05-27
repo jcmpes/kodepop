@@ -9,13 +9,15 @@ import detailPageStyle from '../css/DetailPage.module.css';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import { getDetail, getState, getUiLoading } from '../../../store/selectors';
 import { detailLoadAction, detailRemoveAction } from '../../../store/actions';
+import { Redirect } from 'react-router';
 
 function DetailPage ({ setTitle, value }) {
     const [error, setError] = React.useState(null);
 
     const loading = useSelector(getUiLoading)
     const listing = useSelector(state => getDetail(state, value.match.params.id))
-    
+    const hasRemoved = React.useRef(false)
+
     const dispatch = useDispatch()
     dispatch(detailLoadAction(value.match.params.id))
 
@@ -25,7 +27,11 @@ function DetailPage ({ setTitle, value }) {
 
     const removeListing = () => {
       dispatch(detailRemoveAction(value.match.params.id));
-      value.history.replace('/');
+      hasRemoved.current = true;
+    }
+
+    if (hasRemoved.current === true) {
+      return <Redirect to={'/'} />
     }
 
     return(
