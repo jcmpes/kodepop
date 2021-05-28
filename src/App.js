@@ -21,14 +21,12 @@ function App({ store, history }) {
     priceMin: 0,
     priceMax: process.env.REACT_APP_MAX_PRICE
   });
-  // const [tags, setTags] = React.useState([]);
   const [error, setError] = React.useState('')
   const dispatch = useDispatch();
   const tags = useSelector(getTags);
 
   React.useEffect(() => {
-    dispatch(tagsLoadAction());
-    
+    dispatch(tagsLoadAction()); 
   }, []);
 
   const DetailContext = React.createContext();

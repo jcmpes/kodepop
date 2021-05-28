@@ -61,10 +61,10 @@ export const tagsLoadAction = () => {
     /**
      * Use Redux as cache for the tags
      */
-    // const { data } = getTags(getState());
-    // if (data) {
-    //   return;
-    // };
+    const tags = getTags(getState());
+    if (tags.length !== 0) {
+      return;
+    };
 
     dispatch(tagsLoadRequest());
     try {

@@ -3,8 +3,10 @@ import { Button, FormField, SelectField } from "../../shared";
 import { newListing } from '../../../api/adverts';
 
 import newListingFormStyle from '../css/NewListingForm.module.css';
+import { useSelector } from 'react-redux';
+import { getTags } from '../../../store/selectors';
 
-function NewListingForm({ routerProps }) {
+function NewListingForm({ routerProps, allTags }) {
     const [formFields, setFormFields] = React.useState({
         name: '',
         price: '',
@@ -111,10 +113,10 @@ function NewListingForm({ routerProps }) {
                     placeholder="Category"
                     type="select"
                     id={newListingFormStyle["select-category"]}
-                    className={newListingFormStyle["new-listing-form-field"]}
+                    className={`${newListingFormStyle["new-listing-form-field"]} ${ newListingFormStyle["tags-form-field"]}`}
                     value={formFields.tags}
                     onChange={handleMultiselectChange}
-                    options={categoryOptions}
+                    options={allTags}
                     multiple
                 />
                 <FormField 

@@ -15,10 +15,9 @@ function SelectField({ placeholder, options, multiple, ...props }) {
                     multiple={multiple}
                     {...props}
                 >
-                    {options.map(element => {
-                        return (<option key={element.name} value={element.value}>{element.name}</option>)
-                        
-                    })}
+                      {options.map(element => {
+                        return (<option class={'option'} key={element.name ? element.name : element} value={element.value ? element.value : element}>{element.name ? element.name : element}</option>)
+                      })}
                 </select>
 
             </label>
