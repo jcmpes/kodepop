@@ -14,7 +14,6 @@ import { useHistory } from 'react-router';
 
 // Component to load ads
 const AdsPage = ({ setTitle, searchParams }) => {
-    // const [error, setError] = React.useState(null)
     const history = useHistory();
     const dispatch = useDispatch();
     const handleLogout = () => {
