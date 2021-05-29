@@ -24,7 +24,8 @@ const initialState = {
     loaded: false
   },
   ui: {
-    loading: false
+    loading: false,
+    error: null
   }
 }
 
@@ -65,11 +66,14 @@ export function listings(state=initialState.listings, action) {
 }
 
 export function ui(state=initialState.ui, action) {
+  if (action.error) {
+    return { ...state, loading: false, error: action.payload };
+  }
   switch (action.type) {
     case DETAIL_LOAD_REQUEST:
-      return { ...state, loading: true }
+      return { ...state, loading: true };
     case DETAIL_LOAD_SUCCESS:
-      return { ...state, loading: false }
+      return { ...state, loading: false };
     default:
       return state;
   }

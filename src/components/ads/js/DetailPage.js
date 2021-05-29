@@ -16,8 +16,6 @@ function DetailPage ({ setTitle, value }) {
 
     const loading = useSelector(getUiLoading)
     const listing = useSelector(state => getDetail(state, value.match.params.id))
-    const hasRemoved = React.useRef(false)
-
     const dispatch = useDispatch()
     dispatch(detailLoadAction(value.match.params.id))
 
@@ -27,12 +25,8 @@ function DetailPage ({ setTitle, value }) {
 
     const removeListing = () => {
       dispatch(detailRemoveAction(value.match.params.id, value.location));
-      hasRemoved.current = true;
     }
 
-    // if (hasRemoved.current === true) {
-    //   return <Redirect to={'/'} />
-    // }
 
     return(
         <React.Fragment>
