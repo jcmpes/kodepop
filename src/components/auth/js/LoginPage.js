@@ -6,7 +6,7 @@ import { login } from '../../../api/auth';
 
 import '../css/LoginPage.css';
 import { useDispatch } from 'react-redux';
-import { authLogin, authLogout } from '../../../store/actions';
+import { authLogin, authLoginAction, authLogout } from '../../../store/actions';
 import { useHistory, useLocation } from 'react-router-dom';
 
 function LoginPage({ routerProps }) {
@@ -18,31 +18,20 @@ function LoginPage({ routerProps }) {
     const [loading, setLoading] = React.useState(false)
     const [error, setError] = React.useState(null)
     const loggedRef = React.useRef(false)
-    const history = useHistory();
     const location = useLocation();
 
     const dispatch = useDispatch();
-    const onLogin = () => dispatch(authLogin());
+    const onLogin = () => dispatch(authLoginAction());
 
     React.useEffect(() => {
+      dispatch(resetError())
         if(loggedRef.current === true) {
-            onLogin()
-            const { from } = location.state || { from: { pathname: '/' } };
-            history.replace(from);
+            onLogin()        
         }
     }, [loggedRef.current])
 
-    const handleSubmit = async (credentials, remember) => {
-        try {
-            setLoading(true)
-            await login(credentials, remember);
-            loggedRef.current = true;
-
-        } catch (error) {
-            setError(error);
-        } finally {
-            setLoading(false);
-        }
+    const handleSubmit = () => {
+       dispatch(authLoginAction(credentials, remember, location))
     }
 
     return (

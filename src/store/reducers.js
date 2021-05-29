@@ -1,5 +1,5 @@
 import {
-  AUTH_LOGIN,
+  AUTH_LOGIN_SUCCESS,
   AUTH_LOGOUT,
   TAGS_LOAD_FAILURE,
   TAGS_LOAD_REQUEST,
@@ -10,7 +10,8 @@ import {
   DETAIL_LOAD_SUCCESS,
   DETAIL_LOAD_REQUEST,
   DETAIL_REMOVE_SUCCESS,
-  LISTINGS_CREATE_SUCCESS
+  LISTINGS_CREATE_SUCCESS,
+  UI_RESET_ERROR
 } from './types';
 
 const initialState = {
@@ -31,7 +32,7 @@ const initialState = {
 
 export function auth(state=initialState.auth, action) {
   switch (action.type) {
-    case AUTH_LOGIN:
+    case AUTH_LOGIN_SUCCESS:
       return true;
     case AUTH_LOGOUT:
       return false;
@@ -73,7 +74,10 @@ export function ui(state=initialState.ui, action) {
     case DETAIL_LOAD_REQUEST:
       return { ...state, loading: true };
     case DETAIL_LOAD_SUCCESS:
+    case AUTH_LOGIN_SUCCESS:
       return { ...state, loading: false };
+    case UI_RESET_ERROR:
+      return { ...state, error: null }
     default:
       return state;
   }

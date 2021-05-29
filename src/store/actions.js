@@ -1,7 +1,8 @@
 import { getTags, getDetail } from './selectors';
 
 import { 
-  AUTH_LOGIN,
+  AUTH_LOGIN_SUCCESS,
+  AUTH_LOGIN_FAILURE,
   AUTH_LOGOUT,
   TAGS_LOAD_SUCCESS,
   TAGS_LOAD_REQUEST,
@@ -18,14 +19,34 @@ import {
   LISTINGS_CREATE_REQUEST,
   LISTINGS_CREATE_FAILURE,
   LISTINGS_CREATE_SUCCESS,
+  UI_RESET_ERROR,
 } from './types';
 
 /**
  * ACTION CREATORS LOGIN:
  */
-export const authLogin = () => {
+export const authLoginFailure = () => {
   return {
-    type: AUTH_LOGIN
+    type: AUTH_LOGIN_FAILURE
+  }
+}
+
+export const authLoginSuccess = () => {
+  return {
+    type: AUTH_LOGIN_SUCCESS
+  }
+}
+
+export const authLoginAction = (credentials, remember, location) => {
+  return async function(dispatch, getState, { api, history }) {
+    try {
+      await api.login(credentials, remember)
+      dispatch(authLoginSuccess())
+      const { from } = location.state || { from: { pathname: '/' } };
+      history.replace(from);
+    } catch(error) {
+      dispatch(authLoginFailure(error))
+    }
   }
 }
 
@@ -241,5 +262,11 @@ export const listingsCreateAction = (listing) => {
     } catch (error) {
       dispatch(listingsCreateFailure(error))
     }
+  }
+}
+
+export const UiResetError = () => {
+  return {
+    type: UI_RESET_ERROR
   }
 }
