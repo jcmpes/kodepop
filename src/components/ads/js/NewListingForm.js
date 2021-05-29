@@ -3,8 +3,9 @@ import { Button, FormField, SelectField } from "../../shared";
 import { newListing } from '../../../api/adverts';
 
 import newListingFormStyle from '../css/NewListingForm.module.css';
-import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { getTags } from '../../../store/selectors';
+import { listingsCreateAction } from '../../../store/actions';
 
 function NewListingForm({ routerProps, allTags }) {
     const [formFields, setFormFields] = React.useState({
@@ -51,6 +52,7 @@ function NewListingForm({ routerProps, allTags }) {
             }
         })
     }
+    const dispatch = useDispatch();
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -60,9 +62,11 @@ function NewListingForm({ routerProps, allTags }) {
         formData.append('sale', formFields.sale);
         formData.append('tags', formFields.tags);
         if (image) formData.append('photo', image);
-        newListing(formData)
-            .then(res => routerProps.history.push(`/advert/${res.id}`))
-            .catch(err => console.log(err))
+        // newListing(formData)
+        //     .then(res => routerProps.history.push(`/advert/${res.id}`))
+        //     .catch(err => console.log(err))
+        
+        dispatch(listingsCreateAction(formData))
     }
 
     const saleOptions = [
@@ -73,25 +77,6 @@ function NewListingForm({ routerProps, allTags }) {
         {
             name: "Compra",
             value: false
-        }
-    ]
-
-    const categoryOptions = [
-        {
-            name: "Lifestyle",
-            value: "lifestyle"
-        },
-        {
-            name: "Mobile",
-            value: "mobile"
-        },
-        {
-            name: "Motor",
-            value: "motor"
-        },
-        {
-            name: "Work",
-            value: "work"
         }
     ]
 

@@ -9,7 +9,8 @@ import {
   LISTINGS_LOAD_SUCCESS,
   DETAIL_LOAD_SUCCESS,
   DETAIL_LOAD_REQUEST,
-  DETAIL_REMOVE_SUCCESS
+  DETAIL_REMOVE_SUCCESS,
+  LISTINGS_CREATE_SUCCESS
 } from './types';
 
 const initialState = {
@@ -56,6 +57,8 @@ export function listings(state=initialState.listings, action) {
     case DETAIL_REMOVE_SUCCESS:
       const listingsAfterRemoval = state.data.filter(item => item.id !== action.payload)
       return { ...state, loaded: true, data: listingsAfterRemoval }
+    case LISTINGS_CREATE_SUCCESS:
+      return { ...state, loaded: true, data: [...state.data, action.payload] }
     default:
       return state;
   }

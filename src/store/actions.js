@@ -15,6 +15,9 @@ import {
   DETAIL_REMOVE_REQUEST,
   DETAIL_REMOVE_FAILURE,
   DETAIL_REMOVE_SUCCESS,
+  LISTINGS_CREATE_REQUEST,
+  LISTINGS_CREATE_FAILURE,
+  LISTINGS_CREATE_SUCCESS,
 } from './types';
 
 /**
@@ -200,6 +203,43 @@ export const detailRemoveAction = (listingId, location) => {
       history.push('/')
     } catch (error) {
       dispatch(detailRemoveFailure(error))
+    }
+  }
+}
+
+/**
+ * ACTION CREATORS LISTINGS_CREATE:
+ */
+export const listingsCreateRequest = () => {
+  return {
+    type: LISTINGS_CREATE_REQUEST
+  }
+}
+
+export const listingsCreateFailure = error => {
+  return {
+    type: LISTINGS_CREATE_FAILURE,
+    error: true,
+    payload: error
+  }
+}
+
+export const listingsCreateSuccess = newListing => {
+  return {
+    type: LISTINGS_CREATE_SUCCESS,
+    payload: newListing
+  }
+}
+
+export const listingsCreateAction = (listing) => {
+  return async function (dispatch, getState, { api, history }) {
+    dispatch(listingsCreateRequest())
+    try {
+      const response = await api.newListing(listing);
+      dispatch(listingsCreateSuccess(response));
+      history.push(`/advert/${response.id}`)
+    } catch (error) {
+      dispatch(listingsCreateFailure(error))
     }
   }
 }
