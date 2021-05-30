@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoginForm snapshot testing snapshot testing 1`] = `
+<Fragment>
+  <h1
+    className="form-title"
+  >
+    Log In
+  </h1>
+  <div>
+    <form
+      className="login-form"
+      onSubmit={[Function]}
+    >
+      <FormField
+        className="login-form-field"
+        name="email"
+        onChange={[Function]}
+        placeholder="Email"
+        type="text"
+        value="JC"
+      />
+      <FormField
+        className="login-form-field"
+        name="password"
+        onChange={[Function]}
+        placeholder="Password"
+        type="password"
+        value="password"
+      />
+      <FormField
+        checked={false}
+        id="remember"
+        label="Remember Me"
+        name="remember"
+        onChange={[Function]}
+        type="checkbox"
+      />
+      <styled.button
+        className="login-form-submit"
+        disabled={false}
+        style={
+          Object {
+            "fontSize": "1.2rem",
+          }
+        }
+        type="submit"
+        variant="highlight"
+      >
+        Submit
+      </styled.button>
+    </form>
+  </div>
+</Fragment>
+`;

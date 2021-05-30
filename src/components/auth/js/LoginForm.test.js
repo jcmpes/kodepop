@@ -40,3 +40,21 @@ describe('LoginForm', () => {
   })
 
 })
+
+describe('LoginForm snapshot testing', () => {
+  const props = {
+    onSubmit: jest.fn(),
+    loading: false,
+    credentials: { email: 'JC', password: 'password' },
+    setCredentials: jest.fn(),
+    remember: false,
+    setRemember: jest.fn()
+  }
+
+  const render = () => shallow(<LoginForm {...props} />);
+
+  it('snapshot testing', () => {
+    const wrapper = render()
+    expect(wrapper).toMatchSnapshot();
+  })
+})

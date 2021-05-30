@@ -13,7 +13,7 @@ import { authLogout } from '../../../store/actions';
 import { useHistory } from 'react-router';
 
 // Component to load ads
-const AdsPage = ({ setTitle, searchParams }) => {
+const AdsPage = ({ searchParams }) => {
     const history = useHistory();
     const dispatch = useDispatch();
     const handleLogout = () => {
@@ -21,7 +21,7 @@ const AdsPage = ({ setTitle, searchParams }) => {
       history.push('/login');
     }
     const error = useSelector(getUiError);
-    const allAds = useSelector(getListings)
+    const allAds = useSelector(getListings);
     // Store filtered ads
     let shownAds = [...allAds]
 
@@ -134,9 +134,7 @@ const AdsPage = ({ setTitle, searchParams }) => {
 }
 
 AdsPage.propTypes = {
-    setTitle: T.func.isRequired,
     searchParams: T.object.isRequired,
-    onLogout: T.func.isRequired
 }
 
 export default AdsPage

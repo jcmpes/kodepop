@@ -1,23 +1,21 @@
 import React from 'react';
 import T from 'prop-types';
 import classNames from 'classnames';
-import { deleteListing } from '../../../api/adverts';
 import RemoveListing from './RemoveListingBtn';
 import Modal from '../../shared/Modal';
 
 import detailPageStyle from '../css/DetailPage.module.css';
-import { connect, useDispatch, useSelector } from 'react-redux';
-import { getDetail, getState, getUiLoading } from '../../../store/selectors';
+import { useDispatch, useSelector } from 'react-redux';
+import { getDetail, getUiLoading } from '../../../store/selectors';
 import { detailLoadAction, detailRemoveAction } from '../../../store/actions';
-import { Redirect } from 'react-router';
 
 function DetailPage ({ setTitle, value }) {
     const [error, setError] = React.useState(null);
-
     const loading = useSelector(getUiLoading)
     const listing = useSelector(state => getDetail(state, value.match.params.id))
     const dispatch = useDispatch()
     dispatch(detailLoadAction(value.match.params.id))
+    setTitle(listing.sale ? 'Venta' : 'Compra')
 
     // Modal
     const [modal, setModal] = React.useState(false);
