@@ -1,6 +1,7 @@
-import { authLoginAction, authLoginFailure, authLoginSuccess, tagsLoadFailure, tagsLoadSuccess } from './actions'
-import { AUTH_LOGIN_FAILURE, AUTH_LOGIN_SUCCESS, AUTH_LOGIN_REQUEST, TAGS_LOAD_FAILURE, TAGS_LOAD_SUCCESS } from './types';
-
+import { authLoginAction, authLoginFailure, authLoginSuccess, tagsLoadAction, tagsLoadFailure, tagsLoadSuccess } from './actions'
+import { AUTH_LOGIN_FAILURE, AUTH_LOGIN_SUCCESS, AUTH_LOGIN_REQUEST, TAGS_LOAD_FAILURE, TAGS_LOAD_SUCCESS, TAGS_LOAD_REQUEST } from './types';
+import configureStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
 /**
  * Testing syncronous action creators
  */
@@ -69,7 +70,7 @@ describe('authLoginAction', () => {
       location: {},
       replace: jest.fn()
     };
-    
+
     it('should dispatch an AUTH_LOGIN_REQUEST action', () => {
       thunkAction(dispatch, getState, { api, history })
       expect(dispatch).toHaveBeenCalledWith({ type: AUTH_LOGIN_REQUEST });
@@ -84,8 +85,63 @@ describe('authLoginAction', () => {
       await thunkAction(dispatch, getState, { api, history })
       expect(dispatch).toHaveBeenNthCalledWith(2, { type: AUTH_LOGIN_SUCCESS });
     })
+
+    it('should redirect to /', async () => {
+      await thunkAction(dispatch, getState, { api, history })
+      expect(history.replace).toHaveBeenCalledWith({ pathname: '/' });
+    })
   })
   describe('when login method in api throws error', () => {
+    const credentials = 'credentials'
+    const remember = true
+    const thunkAction = authLoginAction(credentials, remember)
+    const dispatch = jest.fn();
+    const getState = () => {};
+    const error = 'Error'
+    const api = {
+      login: jest.fn()
+    }
 
+    it('should dispatch an AUTH_LOGIN_FAILURE action', async () => {
+      api.login.mockRejectedValue(error)
+      await thunkAction(dispatch, getState, { api })
+      expect(dispatch).toHaveBeenNthCalledWith(2, { type: AUTH_LOGIN_FAILURE });
+    })
   })
 })
+
+/**
+ * Testing tags load thubk action with redux-mock-store
+ */
+const createStore = extraArgument => state => {
+  const middleware = [thunk.withExtraArgument(extraArgument)]
+  const mockStore = configureStore(middleware)
+  const store = mockStore(state);
+  return store;
+}
+
+describe('tagsLoadAction', () => {
+  describe('when tags load api resolves', () => {
+    const api = {
+      getTags: jest.fn().mockResolvedValue()
+    }
+    
+    it('should dispatch a TAGS_LOAD_REQUEST and TAGS_LOAD_SUCCESS actions', async () => {
+      const state = { tags: { data: [] } }
+      const store = createStore({ api })(state);
+      await store.dispatch(tagsLoadAction());
+      const actions = store.getActions();
+      expect(actions).toEqual([
+        { type: TAGS_LOAD_REQUEST },
+        { type: TAGS_LOAD_SUCCESS }
+      ])
+    })
+
+    it('should not call api if store already contains tags', async () => {
+      const state = { tags: { data: ['foo', 'bar'] } }
+      const store = createStore({ api })(state);
+      await store.dispatch(tagsLoadAction());
+      expect(api.getTags).not.toBeCalled();
+    })
+  })
+}) 
