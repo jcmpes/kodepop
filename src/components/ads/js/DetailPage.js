@@ -8,7 +8,6 @@ import detailPageStyle from '../css/DetailPage.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { getDetail, getUiLoading } from '../../../store/selectors';
 import { detailLoadAction, detailRemoveAction } from '../../../store/actions';
-import { useHistory } from 'react-router';
 
 function DetailPage ({ setTitle, value }) {
     const [error, setError] = React.useState(null);

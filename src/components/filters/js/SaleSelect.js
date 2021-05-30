@@ -19,17 +19,20 @@ const SaleSelect = ({ searchParams, setSearchParams }) => {
     ]
 
     const handleSaleChange = (e) => {
-        setSearchParams(oldValues => ({
+        setSearchParams(oldValues => {
+          console.log(e.target.value)
+          return {
             ...oldValues,
             sale: e.target.value === 'true' ? true : 
                 e.target.value === 'false' ? false :
                 null
-        }))
+          }
+        })
     }
 
     return (
         <SelectField 
-            options={saleOptions}
+            options={[true, false]}
             value={searchParams.sale}
             onChange={handleSaleChange}
         />

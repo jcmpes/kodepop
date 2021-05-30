@@ -93,8 +93,4 @@ function App({ store, history }) {
   );
 };
 
-App.propTypes = {
-  existingToken: T.bool.isRequired  
-}
-
 export default App;

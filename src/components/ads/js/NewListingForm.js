@@ -67,17 +67,6 @@ function NewListingForm({ routerProps, allTags }) {
         dispatch(listingsCreateAction(formData))
     }
 
-    const saleOptions = [
-        {
-            name: "Venta",
-            value: true
-        },
-        {
-            name: "Compra",
-            value: false
-        }
-    ]
-
     return (
         <div className={newListingFormStyle["container"]}>
             <form className={newListingFormStyle["new-listing-form"]} onSubmit={handleSubmit}>
@@ -89,7 +78,7 @@ function NewListingForm({ routerProps, allTags }) {
                     className={newListingFormStyle["new-listing-form-field"]}
                     value={formFields.sale}
                     onChange={handleInputChange}
-                    options={saleOptions}
+                    options={[true, false]}
                 />
                 <SelectField 
                     name="tags"
