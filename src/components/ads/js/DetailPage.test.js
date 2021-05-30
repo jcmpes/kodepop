@@ -1,7 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
-import { mount, shallow } from 'enzyme';
+import { shallow } from 'enzyme';
 import DetailPage from './DetailPage';
 
 const mockStore = configureMockStore()

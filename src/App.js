@@ -1,8 +1,6 @@
 import React from 'react';
 import T from 'prop-types';
 import { Router, Switch, Route, Redirect } from 'react-router-dom';
-import storage from './utils/storage'
-import { clearSession } from './api/client';
 import { AdsPage, DetailPage, NewListingPage } from './components/ads';
 import Layout from './components/layout';
 import { LoginPage, PrivateRoute } from './components/auth';

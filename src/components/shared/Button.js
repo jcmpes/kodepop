@@ -1,8 +1,6 @@
-import { connect } from 'react-redux';
 import styled from 'styled-components'
 
 const accentColor = '#ffeb3c'
-const secondaryColor = '#c8b902'
 
 const Button = styled.button`
     align-items: center;

@@ -5,7 +5,7 @@ import Container from './Container';
 
 import '../css/LoginPage.css';
 import { useDispatch } from 'react-redux';
-import { authLoginAction, authLogout, UiResetError } from '../../../store/actions';
+import { authLoginAction, UiResetError } from '../../../store/actions';
 
 function LoginPage({ routerProps }) {
     const [credentials, setCredentials] = React.useState({

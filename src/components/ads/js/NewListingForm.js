@@ -1,10 +1,8 @@
 import React from 'react';
 import { Button, FormField, SelectField } from "../../shared";
-import { newListing } from '../../../api/adverts';
 
 import newListingFormStyle from '../css/NewListingForm.module.css';
 import { useDispatch } from 'react-redux';
-import { getTags } from '../../../store/selectors';
 import { listingsCreateAction } from '../../../store/actions';
 
 function NewListingForm({ routerProps, allTags }) {
