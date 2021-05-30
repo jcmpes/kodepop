@@ -18,8 +18,8 @@ describe('listings', () => {
       loaded: true,
       data: listingsData
     }
-    const response = listings(state, action)
-    expect(response).toEqual(expectedState)
+    const result = listings(state, action)
+    expect(result).toEqual(expectedState)
   })
 
   it('should manage DETAIL_LOAD_SUCCESS action', () => {
@@ -30,7 +30,7 @@ describe('listings', () => {
       loaded: true,
       data: [...initialState.listings.data, action.payload]
     }
-    const response = listings(state, action)
-    expect(response).toEqual(expectedState)
+    const result = listings(state, action)
+    expect(result).toEqual(expectedState)
   })
 })
