@@ -1,6 +1,7 @@
 import { getTags, getDetail } from './selectors';
 
 import { 
+  AUTH_LOGIN_REQUEST,
   AUTH_LOGIN_SUCCESS,
   AUTH_LOGIN_FAILURE,
   AUTH_LOGOUT,
@@ -25,6 +26,12 @@ import {
 /**
  * ACTION CREATORS LOGIN:
  */
+export const authLoginRequest = () => {
+  return {
+    type: AUTH_LOGIN_REQUEST
+  }
+}
+
 export const authLoginFailure = () => {
   return {
     type: AUTH_LOGIN_FAILURE
@@ -37,12 +44,13 @@ export const authLoginSuccess = () => {
   }
 }
 
-export const authLoginAction = (credentials, remember, location) => {
+export const authLoginAction = (credentials, remember) => {
   return async function(dispatch, getState, { api, history }) {
+    dispatch(authLoginRequest());
     try {
       await api.login(credentials, remember)
       dispatch(authLoginSuccess())
-      const { from } = location.state || { from: { pathname: '/' } };
+      const { from } = history.location.state || { from: { pathname: '/' } };
       history.replace(from);
     } catch(error) {
       dispatch(authLoginFailure(error))
