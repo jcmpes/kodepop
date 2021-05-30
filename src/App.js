@@ -8,9 +8,9 @@ import { LoginPage, PrivateRoute } from './components/auth';
 import './App.css';
 import { tagsLoadAction } from './store/actions';
 import { useDispatch, useSelector } from 'react-redux';
-import { getTags } from './store/selectors'
+import { getTags, getUiError } from './store/selectors'
 
-function App({ store, history }) {
+function App({ history }) {
   const [title, setTitle] = React.useState('Anuncios');
   const [searchParams, setSearchParams] = React.useState({
     name: '',
@@ -19,7 +19,7 @@ function App({ store, history }) {
     priceMin: 0,
     priceMax: process.env.REACT_APP_MAX_PRICE
   });
-  const [error, setError] = React.useState('')
+  const error = useSelector(getUiError)
   const dispatch = useDispatch();
   const tags = useSelector(getTags);
 
@@ -60,7 +60,7 @@ function App({ store, history }) {
             }
           </PrivateRoute>
           <PrivateRoute exact path="/adverts">
-            {error !== '' && <div className="tags-error-msg" style={{ backgroundColor: 'coral', padding: '1rem' }}>{error}</div>}
+            {error !== null && <div className="tags-error-msg" style={{ backgroundColor: 'coral', padding: '1rem' }}>{error}</div>}
             <Layout
               tags={tags}
               searchParams={searchParams}
