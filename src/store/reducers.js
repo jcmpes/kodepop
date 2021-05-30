@@ -14,7 +14,7 @@ import {
   UI_RESET_ERROR
 } from './types';
 
-const initialState = {
+export const initialState = {
   auth: false,
   tags: {
     data: [],
