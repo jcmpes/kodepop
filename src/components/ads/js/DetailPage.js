@@ -6,11 +6,11 @@ import Modal from '../../shared/Modal';
 
 import detailPageStyle from '../css/DetailPage.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { getDetail, getUiLoading } from '../../../store/selectors';
+import { getDetail, getUiError, getUiLoading } from '../../../store/selectors';
 import { detailLoadAction, detailRemoveAction } from '../../../store/actions';
 
 function DetailPage ({ setTitle, value }) {
-    const [error, setError] = React.useState(null);
+    const error = useSelector(getUiError)
     const loading = useSelector(getUiLoading)
     const listing = useSelector(state => getDetail(state, value.match.params.id))
     const dispatch = useDispatch()

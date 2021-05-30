@@ -32,9 +32,11 @@ export const authLoginRequest = () => {
   }
 }
 
-export const authLoginFailure = () => {
+export const authLoginFailure = error => {
   return {
-    type: AUTH_LOGIN_FAILURE
+    type: AUTH_LOGIN_FAILURE,
+    error: true,
+    payload: error
   }
 }
 

@@ -19,6 +19,7 @@ function App({ history }) {
     priceMin: 0,
     priceMax: process.env.REACT_APP_MAX_PRICE
   });
+  // const [error, setError] = React.useState('')
   const error = useSelector(getUiError)
   const dispatch = useDispatch();
   const tags = useSelector(getTags);
@@ -60,7 +61,6 @@ function App({ history }) {
             }
           </PrivateRoute>
           <PrivateRoute exact path="/adverts">
-            {error !== null && <div className="tags-error-msg" style={{ backgroundColor: 'coral', padding: '1rem' }}>{error}</div>}
             <Layout
               tags={tags}
               searchParams={searchParams}

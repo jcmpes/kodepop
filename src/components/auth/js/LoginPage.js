@@ -4,8 +4,9 @@ import LoginForm from './LoginForm';
 import Container from './Container';
 
 import '../css/LoginPage.css';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { authLoginAction, UiResetError } from '../../../store/actions';
+import { getUiError } from '../../../store/selectors';
 
 function LoginPage({ routerProps }) {
     const [credentials, setCredentials] = React.useState({
@@ -14,7 +15,8 @@ function LoginPage({ routerProps }) {
     })
     const [remember, setRemember] = React.useState(true)
     const [loading, setLoading] = React.useState(false)
-    const [error, setError] = React.useState(null)
+    // const [error, setError] = React.useState(null)
+    const error = useSelector(getUiError)
     const loggedRef = React.useRef(false)
 
     const dispatch = useDispatch();
