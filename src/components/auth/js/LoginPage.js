@@ -2,12 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import LoginForm from './LoginForm';
 import Container from './Container';
-import { login } from '../../../api/auth';
 
 import '../css/LoginPage.css';
 import { useDispatch } from 'react-redux';
-import { authLogin, authLoginAction, authLogout } from '../../../store/actions';
-import { useHistory, useLocation } from 'react-router-dom';
+import { authLoginAction, authLogout, UiResetError } from '../../../store/actions';
 
 function LoginPage({ routerProps }) {
     const [credentials, setCredentials] = React.useState({
@@ -18,20 +16,19 @@ function LoginPage({ routerProps }) {
     const [loading, setLoading] = React.useState(false)
     const [error, setError] = React.useState(null)
     const loggedRef = React.useRef(false)
-    const location = useLocation();
 
     const dispatch = useDispatch();
     const onLogin = () => dispatch(authLoginAction());
 
     React.useEffect(() => {
-      dispatch(resetError())
+      dispatch(UiResetError())
         if(loggedRef.current === true) {
             onLogin()        
         }
     }, [loggedRef.current])
 
     const handleSubmit = () => {
-       dispatch(authLoginAction(credentials, remember, location))
+       dispatch(authLoginAction(credentials, remember))
     }
 
     return (
