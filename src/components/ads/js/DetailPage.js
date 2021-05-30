@@ -7,7 +7,7 @@ import Modal from '../../shared/Modal';
 import detailPageStyle from '../css/DetailPage.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { getDetail, getUiError, getUiLoading } from '../../../store/selectors';
-import { detailLoadAction, detailRemoveAction } from '../../../store/actions';
+import { detailLoadAction, detailRemoveAction, UiResetError } from '../../../store/actions';
 
 function DetailPage ({ setTitle, value }) {
     const error = useSelector(getUiError)
@@ -15,7 +15,11 @@ function DetailPage ({ setTitle, value }) {
     const listing = useSelector(state => getDetail(state, value.match.params.id))
     const dispatch = useDispatch()
     dispatch(detailLoadAction(value.match.params.id))
-    setTitle(listing.sale ? 'Venta' : 'Compra')
+    dispatch(UiResetError())
+    
+    if (listing) {
+     setTitle(listing.sale ? 'Venta' : 'Compra')
+    }
 
     // Modal
     const [modal, setModal] = React.useState(false);
