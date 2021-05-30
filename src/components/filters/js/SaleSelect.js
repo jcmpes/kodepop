@@ -3,21 +3,6 @@ import { SelectField } from "../../shared";
 
 const SaleSelect = ({ searchParams, setSearchParams }) => {    
 
-    const saleOptions = [
-        {
-            name: "Compra o Venta",
-            value: null
-        },
-        {
-            name: "Venta",
-            value: true
-        },
-        {
-            name: "Compra",
-            value: false
-        }
-    ]
-
     const handleSaleChange = (e) => {
         setSearchParams(oldValues => {
           console.log(e.target.value)
@@ -32,7 +17,7 @@ const SaleSelect = ({ searchParams, setSearchParams }) => {
 
     return (
         <SelectField 
-            options={[true, false]}
+            options={[null, true, false]}
             value={searchParams.sale}
             onChange={handleSaleChange}
         />

@@ -16,7 +16,7 @@ function SelectField({ placeholder, options, multiple, ...props }) {
                     {...props}
                 >
                       {options.map(element => {
-                        return (<option className={'option'} key={element} value={element}>{element === true ? 'Venta' : element === false ? 'Compra' : element}</option>)
+                        return (<option className={'option'} key={element} value={element}>{element === true ? 'Venta' : element === false ? 'Compra' : element === null ? 'Compra y Venta' : element}</option>)
                       })}
                 </select>
 
