@@ -27,8 +27,6 @@ function App({ store, history }) {
     dispatch(tagsLoadAction()); 
   }, []);
 
-  const DetailContext = React.createContext();
-
   return (
     <div className="App">
       <Router history={history}>
@@ -57,13 +55,8 @@ function App({ store, history }) {
                     setSearchParams={setSearchParams}
                     title={title}
                   >
-                    <DetailContext.Provider value={routerProps}>
-                      <DetailContext.Consumer>
-                        {value => <DetailPage value={value} tags={tags} setTitle={setTitle} searchParams={searchParams}/>}
-                      </DetailContext.Consumer>
-                    </DetailContext.Provider>
-                  </Layout>
-              
+                    <DetailPage value={routerProps} tags={tags} setTitle={setTitle} searchParams={searchParams}/>        
+                  </Layout>            
             }
           </PrivateRoute>
           <PrivateRoute exact path="/adverts">
@@ -86,7 +79,9 @@ function App({ store, history }) {
           <Route path="/404">
             <div>404 Not Found</div>
           </Route>
-          <Route><Redirect to="/404" /></Route>
+          <Route>
+            <Redirect to="/404" />
+          </Route>
         </Switch>
       </Router>     
     </div>
