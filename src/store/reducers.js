@@ -1,6 +1,7 @@
 import {
   AUTH_LOGIN_SUCCESS,
   AUTH_LOGOUT,
+  AUTH_LOGOUT_SUCCESS,
   TAGS_LOAD_FAILURE,
   TAGS_LOAD_REQUEST,
   TAGS_LOAD_SUCCESS,
@@ -34,7 +35,7 @@ export function auth(state=initialState.auth, action) {
   switch (action.type) {
     case AUTH_LOGIN_SUCCESS:
       return true;
-    case AUTH_LOGOUT:
+    case AUTH_LOGOUT_SUCCESS:
       return false;
     default:
       return state;

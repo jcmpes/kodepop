@@ -1,9 +1,14 @@
+import { deleteAuthToken } from '../api/client';
+import storage from '../utils/storage';
 import { getTags, getDetail } from './selectors';
 
 import { 
   AUTH_LOGIN_REQUEST,
   AUTH_LOGIN_SUCCESS,
   AUTH_LOGIN_FAILURE,
+  AUTH_LOGOUT_REQUEST,
+  AUTH_LOGOUT_SUCCESS,
+  AUTH_LOGOUT_FAILURE,
   AUTH_LOGOUT,
   TAGS_LOAD_SUCCESS,
   TAGS_LOAD_REQUEST,
@@ -60,9 +65,46 @@ export const authLoginAction = (credentials, remember) => {
   }
 }
 
+/**
+ * ACTION CREATORS LOGOUT:
+ */
 export const authLogout = () => {
   return {
     type: AUTH_LOGOUT
+  }
+}
+
+export const authLogoutRequest = () => {
+  return {
+    type: AUTH_LOGOUT_REQUEST
+  }
+}
+
+export const authLogoutFailure = error => {
+  return {
+    type: AUTH_LOGOUT_FAILURE,
+    error: true,
+    payload: error
+  }
+}
+
+export const authLogoutSuccess = () => {
+  return {
+    type: AUTH_LOGOUT_SUCCESS
+  }
+}
+
+export const authLogoutAction = () => {
+  return function (dispatch, getState, { api, history }) {
+    dispatch(authLogoutRequest());
+    try {
+        dispatch(authLogoutSuccess())
+        deleteAuthToken();
+        storage.clear();
+        history.push('/')
+    } catch(error) {
+      dispatch(authLogoutFailure(error))
+    }
   }
 }
 
