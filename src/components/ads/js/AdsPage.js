@@ -8,18 +8,12 @@ import adsPageStyle from '../css/AdsPage.module.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { listingsLoadAction } from '../../../store/actions';
 import { getListings, getUiError } from '../../../store/selectors'
-import { logout } from '../../../api/auth'
-import { authLogout } from '../../../store/actions';
-import { useHistory } from 'react-router';
+import LogoutButton from '../../shared/LogoutButton';
 
 // Component to load ads
 const AdsPage = ({ searchParams }) => {
-    const history = useHistory();
     const dispatch = useDispatch();
-    const handleLogout = () => {
-      logout().then(() => dispatch(authLogout()));
-      history.push('/login');
-    }
+
     const error = useSelector(getUiError);
     const allAds = useSelector(getListings);
     // Store filtered ads
@@ -121,7 +115,8 @@ const AdsPage = ({ searchParams }) => {
             {error ? 
                 <React.Fragment>
                     <div className="delete-error" style={{ backgroundColor: 'coral', padding: '1rem' }}>{error.message}</div>
-                    <div><p>Try to <span style={{ textDecoration: 'underline', cursor: 'pointer', color: 'coral'}} onClick={handleLogout}>log out</span> and log back in.</p></div>
+                    <div><p>Try to and log back in.</p></div>
+                    <div>Log out: <LogoutButton /></div>
                 </React.Fragment>
              :
             (shownAds.length === 0) ? <EmptyPage /> :
