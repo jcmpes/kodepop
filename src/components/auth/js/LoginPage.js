@@ -24,9 +24,9 @@ function LoginPage({ routerProps }) {
 
     React.useEffect(() => {
       dispatch(UiResetError())
-        if(loggedRef.current === true) {
-            onLogin()        
-        }
+      if(loggedRef.current === true) {
+          onLogin()        
+      }
     }, [loggedRef.current])
 
     const handleSubmit = () => {
