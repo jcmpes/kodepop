@@ -105,11 +105,7 @@ describe('authLoginAction', () => {
     it('should dispatch an AUTH_LOGIN_FAILURE action', async () => {
       api.login.mockRejectedValue(error)
       await thunkAction(dispatch, getState, { api })
-      expect(dispatch).toHaveBeenNthCalledWith(2, {
-        "error": true,
-        "payload": "Error",
-        "type": "AUTH_LOGIN_FAILURE",
-      });
+      expect(dispatch).toHaveBeenNthCalledWith(2, expect.objectContaining({ type: AUTH_LOGIN_FAILURE }));
     })
   })
 })
