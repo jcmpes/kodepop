@@ -14,8 +14,11 @@ function DetailPage ({ setTitle, value }) {
     const loading = useSelector(getUiLoading)
     const listing = useSelector(state => getDetail(state, value.match.params.id))
     const dispatch = useDispatch()
-    dispatch(detailLoadAction(value.match.params.id))
-    dispatch(UiResetError())
+    
+    React.useEffect(() => {
+      dispatch(detailLoadAction(value.match.params.id))
+      dispatch(UiResetError())
+    }, [])
     
     if (listing) {
      setTitle(listing.sale ? 'Venta' : 'Compra')
@@ -27,7 +30,6 @@ function DetailPage ({ setTitle, value }) {
 
     const removeListing = () => {
       dispatch(detailRemoveAction(value.match.params.id, value.location));
-      value.history.push('/')
     }
 
 
