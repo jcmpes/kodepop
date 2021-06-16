@@ -12,6 +12,7 @@ import { getTags, getUiError } from './store/selectors'
 
 function App({ history }) {
   const [title, setTitle] = React.useState('Anuncios');
+  const error = useSelector(getUiError)
   const [searchParams, setSearchParams] = React.useState({
     name: '',
     sale: null,
@@ -19,14 +20,6 @@ function App({ history }) {
     priceMin: 0,
     priceMax: process.env.REACT_APP_MAX_PRICE
   });
-  // const [error, setError] = React.useState('')
-  const error = useSelector(getUiError)
-  const dispatch = useDispatch();
-  const tags = useSelector(getTags);
-
-  React.useEffect(() => {
-    dispatch(tagsLoadAction()); 
-  }, []);
 
   return (
     <div className="App">
@@ -39,7 +32,6 @@ function App({ history }) {
             path="/advert/new"
             render={routerProps => 
                 <NewListingPage 
-                  tags={tags}
                   searchParams={searchParams}
                   setSearchParams={setSearchParams}
                   routerProps={routerProps}
@@ -50,19 +42,17 @@ function App({ history }) {
             {
               routerProps =>
                   <Layout
-                    tags={tags}
                     routerProps={routerProps}
                     searchParams={searchParams}
                     setSearchParams={setSearchParams}
                     title={title}
                   >
-                    <DetailPage value={routerProps} tags={tags} setTitle={setTitle} searchParams={searchParams}/>        
+                    <DetailPage value={routerProps} setTitle={setTitle} searchParams={searchParams}/>        
                   </Layout>            
             }
           </PrivateRoute>
           <PrivateRoute exact path="/adverts">
             <Layout
-              tags={tags}
               searchParams={searchParams}
               setSearchParams={setSearchParams}
               title={title}

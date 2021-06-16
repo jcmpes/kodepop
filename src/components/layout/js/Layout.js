@@ -5,10 +5,13 @@ import Footer from './Footer';
 import { Section } from '../../shared';
 
 import '../css/Layout.css';
+import { getTags } from '../../../store/selectors';
+import { tagsLoadAction } from '../../../store/actions';
 
 
 function Layout({ title, children, ...props }) {
-    // const detailContext = React.useContext(DetailContext)
+
+    
     return (
         <div className="layout">
             <Header className="header" {...props} />

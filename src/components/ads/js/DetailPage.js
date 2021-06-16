@@ -32,7 +32,6 @@ function DetailPage ({ setTitle, value }) {
       dispatch(detailRemoveAction(value.match.params.id, value.location));
     }
 
-
     return(
         <React.Fragment>
             <Modal 

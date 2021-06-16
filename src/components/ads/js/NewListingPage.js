@@ -14,7 +14,6 @@ const NewListingPage = ({ routerProps, ...props }) => {
     dispatch(tagsLoadAction())
   }, [])
 
-
     return (
         <Layout title={'New Listing'} routerProps={routerProps} {...props}>
           {error && <div className="delete-error" style={{ backgroundColor: 'coral', padding: '1rem' }}>{error.message}</div>}

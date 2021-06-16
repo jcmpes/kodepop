@@ -10,6 +10,7 @@ const FilterBox = ({ showFilterBox, ...props }) => {
     const Range = createSliderWithTooltip(Slider.Range);
     const priceArrayRef = React.useRef([0, 1000]);
     
+    
     const handleRangeChange = range => {
         priceArrayRef.current = [range[0], range[1]];
     };
