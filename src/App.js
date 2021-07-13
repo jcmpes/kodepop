@@ -51,7 +51,7 @@ function App({ history }) {
                   </Layout>            
             }
           </PrivateRoute>
-          <PrivateRoute exact path="/adverts">
+          <Route exact path="/adverts">
             <Layout
               searchParams={searchParams}
               setSearchParams={setSearchParams}
@@ -62,10 +62,10 @@ function App({ history }) {
                 setTitle={setTitle} 
               />
             </Layout>
-          </PrivateRoute>
-          <PrivateRoute exact path="/">
+          </Route>
+          <Route exact path="/">
             <Redirect to="/adverts" />
-          </PrivateRoute>
+          </Route>
           <Route path="/404">
             <div>404 Not Found</div>
           </Route>

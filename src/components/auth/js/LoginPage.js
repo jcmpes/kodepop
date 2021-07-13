@@ -20,14 +20,10 @@ function LoginPage({ routerProps }) {
     const loggedRef = React.useRef(false)
 
     const dispatch = useDispatch();
-    const onLogin = () => dispatch(authLoginAction());
 
     React.useEffect(() => {
       dispatch(UiResetError())
-      if(loggedRef.current === true) {
-          onLogin()        
-      }
-    }, [loggedRef.current])
+    }, [])
 
     const handleSubmit = () => {
        dispatch(authLoginAction(credentials, remember))

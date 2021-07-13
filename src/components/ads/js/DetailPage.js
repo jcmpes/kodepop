@@ -18,11 +18,11 @@ function DetailPage ({ setTitle, value }) {
     React.useEffect(() => {
       dispatch(detailLoadAction(value.match.params.id))
       dispatch(UiResetError())
+      if (listing) {
+       setTitle(listing.sale ? 'Venta' : 'Compra')
+      }
     }, [])
     
-    if (listing) {
-     setTitle(listing.sale ? 'Venta' : 'Compra')
-    }
 
     // Modal
     const [modal, setModal] = React.useState(false);
